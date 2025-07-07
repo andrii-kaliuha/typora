@@ -1,0 +1,39 @@
+.text {
+  color: aliceblue;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buttons-wrapper {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+}
+
+.button {
+  background-color: transparent;
+  padding: 12px 24px;
+  color: aliceblue;
+  border: 2px solid #cfe741;
+}
+
+.button:active {
+  background-color: #cfe741;
+  color: black;
+}
+
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.frequently-asked-questions {
+  display: flex;
+  justify-content: start;
+}

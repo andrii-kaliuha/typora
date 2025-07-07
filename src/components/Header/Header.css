@@ -1,0 +1,42 @@
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+}
+
+.logotype-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.logotype-text {
+  color: aliceblue;
+  text-transform: uppercase;
+  font-size: 32px;
+}
+
+.theme-toggle-button {
+  color: #cfe741;
+  transition: color 0.3s ease;
+  background-color: transparent;
+  border-color: transparent;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  outline-width: 4px;
+  height: 48px;
+  width: 48px;
+}
+
+.theme-toggle-button:hover {
+  background-color: color-mix(in srgb, aliceblue 10%, #0b0e11 100%);
+}
+
+.theme-toggle-button:active {
+  color: aliceblue;
+}
