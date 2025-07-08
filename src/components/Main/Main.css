@@ -3,6 +3,7 @@
 }
 
 main {
+  width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -33,7 +34,11 @@ main {
   align-items: center;
 }
 
-.frequently-asked-questions {
-  display: flex;
-  justify-content: start;
+.FAQSVG {
+  padding: 0 24px 24px 24px;
+}
+
+.FAQList {
+  list-style-type: none;
+  padding: 0 24px;
 }
