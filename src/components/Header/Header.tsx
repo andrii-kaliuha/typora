@@ -1,4 +1,5 @@
 import "./Header.css";
+import { Navigation } from "./Navigation";
 
 export const Header = () => {
   return (
@@ -9,12 +10,7 @@ export const Header = () => {
         </svg>
         <p className="logotype-text">Typora</p>
       </div>
-      {/* <ul className="navigation-list">
-        <li>Home</li>
-        <li>Test</li>
-        <li>Learning</li>
-        <li>History</li>
-      </ul> */}
+      <Navigation></Navigation>
       <button type="button" className="theme-toggle-button">
         <svg id="theme-icon">
           <use href="/icons.svg#theme-icon" />

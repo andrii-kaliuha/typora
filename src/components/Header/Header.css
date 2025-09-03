@@ -22,11 +22,31 @@ header {
   color: aliceblue;
   text-transform: uppercase;
   font-size: 32px;
+  letter-spacing: 4px;
+  font-weight: bold;
 }
 
-/* .navigation-list {
+.navigation-list {
   color: aliceblue;
-} */
+  display: flex;
+  gap: 24px;
+  list-style-type: none;
+  text-decoration: none;
+}
+
+.navigation-item {
+  color: aliceblue;
+  text-decoration: none;
+}
+
+.navigation-item:hover {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+}
+
+.navigation-item.active {
+  color: #cfe741;
+}
 
 .theme-toggle-button {
   transition: color 0.3s ease;
