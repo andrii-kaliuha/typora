@@ -1,23 +1,34 @@
 import { useState } from "react";
 
 export const TextConfig = () => {
-  const [openMenu, setOpenMenu] = useState("text"); // "text" або "language" або "duration"
-  const [textType, setTextType] = useState("random"); // "random" або "custom"
-  const [language, setLanguage] = useState("en"); // "uk" або "en"
-  const [duration, setDuration] = useState(90); // 30, 60, 90, 120
+  type MenuOptions = "text" | "language" | "duration" | "mode";
+  type TextType = "random" | "custom";
+  type Language = "ukrainian" | "english";
+  type Mode = "normal" | "speed" | "accuracy";
 
-  const handleTextTypeClick = (type: string) => {
+  const [openMenu, setOpenMenu] = useState<MenuOptions>("text");
+  const [textType, setTextType] = useState<TextType>("random");
+  const [language, setLanguage] = useState<Language>("english");
+  const [duration, setDuration] = useState<number>(90);
+  const [mode, setMode] = useState<Mode>("normal");
+
+  const handleTextTypeClick = (type: TextType) => {
     setTextType(type);
   };
 
-  const handleLanguageClick = (lang: string) => {
+  const handleLanguageClick = (lang: Language) => {
     setLanguage(lang);
   };
+
   const handleDurationClick = (time: number) => {
     setDuration(time);
   };
 
-  const handleOptionClick = (option: string) => {
+  const handleModeClick = (newMode: Mode) => {
+    setMode(newMode);
+  };
+
+  const handleOptionClick = (option: MenuOptions) => {
     setOpenMenu(option);
   };
 
@@ -33,6 +44,9 @@ export const TextConfig = () => {
         <li onClick={() => handleOptionClick("duration")} className={`text-config-item ${openMenu === "duration" ? "active" : ""}`}>
           Тривалість
         </li>
+        <li onClick={() => handleOptionClick("mode")} className={`text-config-item ${openMenu === "mode" ? "active" : ""}`}>
+          Режим
+        </li>
       </ul>
       {openMenu === "text" && (
         <ul className="text-config-list">
@@ -46,10 +60,10 @@ export const TextConfig = () => {
       )}
       {openMenu === "language" && (
         <ul className="text-config-list">
-          <li onClick={() => handleLanguageClick("uk")} className={`text-config-item ${language === "uk" ? "active" : ""}`}>
+          <li onClick={() => handleLanguageClick("ukrainian")} className={`text-config-item ${language === "ukrainian" ? "active" : ""}`}>
             Українська
           </li>
-          <li onClick={() => handleLanguageClick("en")} className={`text-config-item ${language === "en" ? "active" : ""}`}>
+          <li onClick={() => handleLanguageClick("english")} className={`text-config-item ${language === "english" ? "active" : ""}`}>
             English
           </li>
         </ul>
@@ -67,6 +81,19 @@ export const TextConfig = () => {
           </li>
           <li onClick={() => handleDurationClick(120)} className={`text-config-item ${duration === 120 ? "active" : ""}`}>
             120
+          </li>
+        </ul>
+      )}
+      {openMenu === "mode" && (
+        <ul className="text-config-list">
+          <li onClick={() => handleModeClick("normal")} className={`text-config-item ${mode === "normal" ? "active" : ""}`}>
+            Звичайний
+          </li>
+          <li onClick={() => handleModeClick("speed")} className={`text-config-item ${mode === "speed" ? "active" : ""}`}>
+            Швидкість
+          </li>
+          <li onClick={() => handleModeClick("accuracy")} className={`text-config-item ${mode === "accuracy" ? "active" : ""}`}>
+            Точність
           </li>
         </ul>
       )}

@@ -1,8 +1,16 @@
+.test-page {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
 .text-config {
   user-select: none;
   display: flex;
   justify-content: center;
   gap: 12px;
+  margin: 24px;
 }
 
 .text-config-list {
@@ -35,12 +43,51 @@
 }
 
 .text-container {
-  width: 768px;
-  height: 50vh;
+  max-height: 6em;
   font-size: 32px;
+  margin: 24px 24px 24px 0;
+  overflow: auto;
+  padding: 24px;
 }
 
 .text {
   display: inline;
   color: #646669;
+  height: 40px;
+  line-height: 1;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #646669;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #cfe741;
+}
+
+.restart-test-button {
+  color: #646669;
+  background-color: transparent;
+  border: transparent;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  user-select: none;
+}
+
+.restart-test-button:hover {
+  background-color: color-mix(in srgb, #646669 90%, #000);
+}
+
+.restart-test-button:active {
+  background-color: color-mix(in srgb, #646669 60%, #000);
 }
