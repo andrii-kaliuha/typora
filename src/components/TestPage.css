@@ -3,6 +3,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  padding: 24px;
 }
 
 .text-config {
@@ -45,9 +46,9 @@
 .text-container {
   max-height: 6em;
   font-size: 32px;
-  margin: 24px 24px 24px 0;
+  margin: 0 24px 24px 0;
   overflow: auto;
-  padding: 24px;
+  padding: 24px 24px 0 0;
 }
 
 .text {
@@ -85,9 +86,9 @@
 }
 
 .restart-test-button:hover {
-  background-color: color-mix(in srgb, #646669 90%, #000);
+  color: #d1d0c5;
 }
 
 .restart-test-button:active {
-  background-color: color-mix(in srgb, #646669 60%, #000);
+  color: #646669;
 }

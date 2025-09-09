@@ -1,0 +1,19 @@
+.learning-page {
+  padding: 24px;
+}
+
+.learning-page h1,
+.learning-page h2 {
+  text-align: center;
+  color: aliceblue;
+}
+
+.learning-page p {
+  color: aliceblue;
+}
+
+.advice-block {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

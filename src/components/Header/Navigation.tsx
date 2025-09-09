@@ -6,17 +6,17 @@ export const Navigation = () => {
       <ul className="navigation-list">
         <li>
           <NavLink className="navigation-item" to="/test">
-            Test
+            Тест
           </NavLink>
         </li>
         <li>
           <NavLink className="navigation-item" to="/learning">
-            Learning
+            Навчання
           </NavLink>
         </li>
         <li>
           <NavLink className="navigation-item" to="/history">
-            History
+            Історія
           </NavLink>
         </li>
       </ul>

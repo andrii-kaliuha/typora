@@ -8,7 +8,7 @@ export const TextConfig = () => {
 
   const [openMenu, setOpenMenu] = useState<MenuOptions>("text");
   const [textType, setTextType] = useState<TextType>("random");
-  const [language, setLanguage] = useState<Language>("english");
+  const [language, setLanguage] = useState<Language>("ukrainian");
   const [duration, setDuration] = useState<number>(90);
   const [mode, setMode] = useState<Mode>("normal");
 
