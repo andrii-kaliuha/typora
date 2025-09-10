@@ -1,0 +1,19 @@
+.history-page .text {
+  padding: 24px;
+}
+
+.history-page .stats {
+  padding: 24px;
+  /* border-left: 1px solid #e0e0e0; */
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.history-page .stats p {
+  color: #646669;
+}
+
+.history-page .stats span {
+  color: #cfe741;
+}
