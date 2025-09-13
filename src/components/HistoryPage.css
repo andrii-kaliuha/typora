@@ -1,19 +1,32 @@
-.history-page .text {
-  padding: 24px;
+.history-list {
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-.history-page .stats {
+.history-list > li {
   padding: 24px;
-  /* border-left: 1px solid #e0e0e0; */
+  background-color: #2c2e31;
+  border-radius: 24px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   gap: 12px;
 }
 
-.history-page .stats p {
+.history-list .text {
+  color: aliceblue;
+}
+
+.history-list .stats {
+  display: flex;
+  justify-content: space-between;
+}
+
+.history-list .stats p {
   color: #646669;
 }
 
-.history-page .stats span {
+.history-list .stats span {
   color: #cfe741;
 }

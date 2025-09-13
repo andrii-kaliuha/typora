@@ -1,17 +1,14 @@
 .test-page {
+  padding: 0 24px;
   display: flex;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
-  padding: 24px;
 }
 
 .text-config {
-  user-select: none;
   display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin: 24px;
+  gap: 24px;
+  user-select: none;
 }
 
 .text-config-list {
@@ -44,30 +41,16 @@
 }
 
 .text-container {
-  max-height: 6em;
-  font-size: 32px;
-  margin: 0 24px 24px 0;
-  overflow: auto;
-  padding: 24px 24px 0 0;
+  border-radius: 24px;
+  background-color: #2c2e31;
+  font-size: 24px;
+  padding: 24px;
+  margin: 24px 0;
 }
 
-.test-page .text {
+.text-container .text {
   display: inline;
   color: #646669;
-  height: 40px;
-  line-height: 1;
-}
-
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: #646669;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #cfe741;
 }
 
 .restart-test-button {
