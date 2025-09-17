@@ -5,8 +5,8 @@ export const Header = () => {
   return (
     <header>
       <div className="logotype-container">
-        <svg id="logotype">
-          <use href="/icons.svg#logotype" />
+        <svg id="logotype-icon">
+          <use href="/icons.svg#logotype-icon" />
         </svg>
         <p className="logotype-text">Typora</p>
       </div>

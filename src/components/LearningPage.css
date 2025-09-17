@@ -1,5 +1,4 @@
 .learning-page {
-  padding: 0 24px 24px;
   color: aliceblue;
   display: flex;
   flex-direction: column;
@@ -13,12 +12,22 @@
 }
 
 .learning-page .list {
+  display: contents;
+}
+
+.advice-block .list li {
   display: flex;
-  flex-direction: column;
   gap: 12px;
 }
 
+.advice-block .list li span {
+  color: #cfe741;
+}
+
 .advice-block {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
   background-color: #2c2e31;
   padding: 24px;
   border-radius: 24px;
@@ -27,4 +36,9 @@
 .learning-subtitle {
   font-size: 18px;
   text-align: center;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
 }
