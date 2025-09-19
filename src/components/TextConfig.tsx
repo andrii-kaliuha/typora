@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export const TextConfig = () => {
   type MenuOptions = "text" | "language" | "duration" | "mode";
   type TextType = "random" | "custom";
   type Language = "ukrainian" | "english";
   type Mode = "normal" | "speed" | "accuracy";
+
+  const { t } = useTranslation();
 
   const [openMenu, setOpenMenu] = useState<MenuOptions>("text");
   const [textType, setTextType] = useState<TextType>("random");
@@ -24,8 +27,8 @@ export const TextConfig = () => {
     setDuration(time);
   };
 
-  const handleModeClick = (newMode: Mode) => {
-    setMode(newMode);
+  const handleModeClick = (mode: Mode) => {
+    setMode(mode);
   };
 
   const handleOptionClick = (option: MenuOptions) => {
@@ -36,35 +39,35 @@ export const TextConfig = () => {
     <div className="text-config">
       <ul className="text-config-list">
         <li onClick={() => handleOptionClick("text")} className={`text-config-item ${openMenu === "text" ? "active" : ""}`}>
-          Текст
+          {t("config.text")}
         </li>
         <li onClick={() => handleOptionClick("language")} className={`text-config-item ${openMenu === "language" ? "active" : ""}`}>
-          Мова
+          {t("config.language")}
         </li>
         <li onClick={() => handleOptionClick("duration")} className={`text-config-item ${openMenu === "duration" ? "active" : ""}`}>
-          Тривалість
+          {t("config.duration")}
         </li>
         <li onClick={() => handleOptionClick("mode")} className={`text-config-item ${openMenu === "mode" ? "active" : ""}`}>
-          Режим
+          {t("config.mode")}
         </li>
       </ul>
       {openMenu === "text" && (
         <ul className="text-config-list">
           <li onClick={() => handleTextTypeClick("random")} className={`text-config-item ${textType === "random" ? "active" : ""}`}>
-            Випадковий текст
+            {t("config.random_text")}
           </li>
           <li onClick={() => handleTextTypeClick("custom")} className={`text-config-item ${textType === "custom" ? "active" : ""}`}>
-            Власний текст
+            {t("config.custom_text")}
           </li>
         </ul>
       )}
       {openMenu === "language" && (
         <ul className="text-config-list">
           <li onClick={() => handleLanguageClick("ukrainian")} className={`text-config-item ${language === "ukrainian" ? "active" : ""}`}>
-            Українська
+            {t("config.ukrainian")}
           </li>
           <li onClick={() => handleLanguageClick("english")} className={`text-config-item ${language === "english" ? "active" : ""}`}>
-            English
+            {t("config.english")}
           </li>
         </ul>
       )}
@@ -87,13 +90,13 @@ export const TextConfig = () => {
       {openMenu === "mode" && (
         <ul className="text-config-list">
           <li onClick={() => handleModeClick("normal")} className={`text-config-item ${mode === "normal" ? "active" : ""}`}>
-            Звичайний
+            {t("config.normal")}
           </li>
           <li onClick={() => handleModeClick("speed")} className={`text-config-item ${mode === "speed" ? "active" : ""}`}>
-            Швидкість
+            {t("config.speed")}
           </li>
           <li onClick={() => handleModeClick("accuracy")} className={`text-config-item ${mode === "accuracy" ? "active" : ""}`}>
-            Точність
+            {t("config.accuracy")}
           </li>
         </ul>
       )}

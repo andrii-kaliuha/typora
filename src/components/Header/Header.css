@@ -53,6 +53,13 @@ header {
   border-radius: 0 12px 12px 0;
 }
 
+.buttons-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.language-icon,
 .theme-toggle-button {
   transition: color 0.3s ease;
   background-color: transparent;
@@ -67,16 +74,19 @@ header {
   width: 48px;
 }
 
+#language-icon:hover,
 .theme-toggle-button:hover {
   background-color: #232527;
 }
 
+#language-icon,
 #theme-icon {
   color: #cfe741;
   width: 32px;
   height: 32px;
 }
 
+#language-icon:active,
 #theme-icon:active {
   color: aliceblue;
 }

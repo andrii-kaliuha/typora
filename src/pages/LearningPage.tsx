@@ -1,105 +1,105 @@
+import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
 import "../components/LearningPage.css";
 
 export const LearningPage = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="learning-page">
-      <h1>Дізнайся, як друкувати наосліп</h1>
-      <p className="learning-subtitle">
-        Головна ідея друку наосліп у тому, що за кожним пальцем закріплено свою зону клавіш. Це дозволяє друкувати не дивлячись на клавіатуру.
-        Регулярно тренуйся та завдяки м'язовій пам'яті твої пальці знатимуть, куди натиснути.
-      </p>
-      <List
-        image="/postureForPrintingText.svg"
-        title="Поза для друку тексту"
-        items={[
-          "Не намагайся одразу ж друкувати зі швидкістю світла. Починай прискорюватися, тільки коли пальці звикнуть натискати правильні клавіші.",
-          "Не поспішай, коли друкуєш, щоб запобігти помилкам. Швидкість буде збільшуватися поступово.",
-          "Завжди переглядай текст на одне-два слова наперед.",
-          "Сядь рівно та тримай спину прямою.",
-          "Лікті тримай під прямим кутом.",
-          "Голова має бути трохи нахилена вперед.",
-          "Відстань від очей до монітора повинна складати 45-70 см.",
-          "Розслаб м'язи плечей, рук і кистей. Кисті можуть трохи торкатися стола у нижній частині клавіатури, але не перенось вагу тіла на руки, щоб не перенапружувати кисті.",
-        ]}
-      />
+      <h1>{t("learning.title")}</h1>
+      <p className="learning-subtitle">{t("learning.subtitle")}</p>
+
+      <section className="advice-block">
+        <div className="image-container">
+          <img src="/postureForPrintingText.svg" alt="" width={300} />
+        </div>
+        <h2>{t("learning.posture_for_print")}</h2>
+        <List
+          items={[
+            t("learning.first_advice_for_posture_for_printing"),
+            t("learning.second_advice_for_posture_for_printing"),
+            t("learning.third_advice_for_posture_for_printing"),
+            t("learning.fourth_advice_for_posture_for_printing"),
+            t("learning.fifth_advice_for_posture_for_printing"),
+            t("learning.sixth_advice_for_posture_for_printing"),
+            t("learning.seventh_advice_for_posture_for_printing"),
+            t("learning.eighth_advice_for_posture_for_printing"),
+          ]}
+        />
+      </section>
+
       <FingerPosition />
-      <List
-        title="Швидкість друку"
-        items={[
-          "Не намагайся одразу ж друкувати зі швидкістю світла. Починай прискорюватися, тільки коли пальці звикнуть натискати правильні клавіші.",
-          "Не поспішай, коли друкуєш, щоб запобігти помилкам. Швидкість буде збільшуватися поступово.",
-          "Завжди переглядай текст на одне-два слова наперед.",
-        ]}
-      />
-      <List
-        title="Рух пальців"
-        items={[
-          "Не підглядай на клавіатуру під час друку. Просто ковзай пальцями по клавішах, доки не знайдеш основний ряд.",
-          "Обмеж рух кистей та пальців до мінімуму, тільки щоб натискати потрібні клавіші. Тримай руки та пальці якомога ближче до вихідної позиції. Це збільшить швидкість набору тексту та зменшить навантаження на кисті.",
-          "Стеж за безіменними пальцями та мізинцями, оскільки вони часто залишаються незадіяними.",
-        ]}
-      />
+
+      <section className="advice-block">
+        <h2>{t("learning.print_speed")}</h2>
+        <List
+          items={[
+            t("learning.first_advice_for_print_speed"),
+            t("learning.second_advice_for_print_speed"),
+            t("learning.third_advice_for_print_speed"),
+          ]}
+        />
+      </section>
+
+      <section className="advice-block">
+        <h2>{t("learning.finger_movement")}</h2>
+        <List
+          items={[
+            t("learning.first_advice_for_finger_movement"),
+            t("learning.second_advice_for_finger_movement"),
+            t("learning.third_advice_for_finger_movement"),
+          ]}
+        />
+      </section>
     </div>
   );
 };
 
 const FingerPosition = () => {
+  const { t, i18n } = useTranslation();
+  const [language, setLanguage] = useState(i18n.language);
+
+  useEffect(() => {
+    const handleLanguageChanged = (lng: string) => setLanguage(lng);
+    i18n.on("languageChanged", handleLanguageChanged);
+    return () => i18n.off("languageChanged", handleLanguageChanged);
+  }, [i18n]);
+
   return (
-    <div className="advice-block">
-      <h2>Позиція пальців на клавіатурі</h2>
-      <p>
-        Трохи зігни пальці та поклади їх на клавіші ФІВА і ОЛДЖ, що знаходяться у середньому ряду. Цей ряд називається ОСНОВНИМ РЯДОМ, тому що
-        ти завжди будеш починати з цих клавіш і повертатися до них.
-      </p>
-      <p>На клавішах А та О, під вказівними пальцями, знаходяться невеликі виступи. Вони дозволяють орієнтуватися на клавіатурі наосліп.</p>
+    <section className="advice-block">
+      <h2>{t("learning.finger_position")}</h2>
+      <p>{t("learning.first_advice_for_finger_position")}</p>
+      <p>{t("learning.second_advice_for_finger_position")}</p>
+
       <div className="image-container">
-        <img src="/keyboard.svg" alt="" width={720} />
+        {language === "uk" ? <img src="/keyboard.svg" alt="" width={720} /> : <img src="/english-keyboard.svg" alt="" width={720} />}
       </div>
-      <p>Колір клавіш на цій клавіатурі допоможе тобі зрозуміти та запам'ятати, котрим пальцем на яку клавішу натискати.</p>
-      <ul className="list">
-        <li>
-          <span>1</span>—<p>Тисни клавіші тільки тим пальцем, який для них призначений.</p>
-        </li>
-        <li>
-          <span>2</span>—<p>Завжди повертай пальці до вихідної позиції «ФІВА – ОЛДЖ».</p>
-        </li>
-        <li>
-          <span>3</span>—<p>Встанови ритм та дотримуйся його, доки друкуєш. Натискай на клавіші з однаковим інтервалом.</p>
-        </li>
-        <li>
-          <span>4</span>—<p>Набираючи текст, уявляй розташування клавіш.</p>
-        </li>
-        <li>
-          <span>5</span>—<p>Клавішу SHIFT завжди натискає мізинець з протилежної сторони від потрібної літери.</p>
-        </li>
-        <li>
-          <span>6</span>—<p>Пробіл відбивай пальцем лівої або правої руки, як тобі зручніше.</p>
-        </li>
-      </ul>
-      <p>
-        Спочатку цей метод може видатися незручним. Але не зупиняйся. З часом усе виходитиме швидко, легко та зручно. Щоб досягти максимального
-        результату, вибирай курс сліпого друку для твоєї розкладки клавіатури і потрібною мовою.
-      </p>
-    </div>
+
+      <p>{t("learning.third_advice_for_finger_position")}</p>
+      <List
+        items={[
+          t("learning.list_item_1"),
+          t("learning.list_item_2"),
+          t("learning.list_item_3"),
+          t("learning.list_item_4"),
+          t("learning.list_item_5"),
+          t("learning.list_item_6"),
+        ]}
+      />
+      <p>{t("learning.fourth_advice_for_finger_position")}</p>
+    </section>
   );
 };
 
-const List = ({ image, title, items }: { image?: string; title: string; items: string[] }) => {
+const List = ({ items }: { items: string[] }) => {
   return (
-    <section className="advice-block">
-      {image && (
-        <div className="image-container">
-          <img src={image} alt={title} width={300} />
-        </div>
-      )}
-      <h2>{title}</h2>
-      <ul className="list">
-        {items.map((item, index) => (
-          <li key={index}>
-            <span>{index + 1}</span>—<p>{item}</p>
-          </li>
-        ))}
-      </ul>
-    </section>
+    <ul className="list">
+      {items.map((item, index) => (
+        <li key={index}>
+          <span>{index + 1}</span>—<p>{item}</p>
+        </li>
+      ))}
+    </ul>
   );
 };
