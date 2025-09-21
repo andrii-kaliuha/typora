@@ -1,5 +1,5 @@
 .learning-page {
-  color: aliceblue;
+  color: var(--text-color);
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -7,7 +7,7 @@
 
 .learning-page h1,
 .learning-page h2 {
-  color: #cfe741;
+  color: var(--primary-color);
   text-align: center;
 }
 
@@ -21,14 +21,14 @@
 }
 
 .advice-block .list li span {
-  color: #cfe741;
+  color: var(--primary-color);
 }
 
 .advice-block {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  background-color: #2c2e31;
+  background-color: var(--surface-color);
   padding: 24px;
   border-radius: 24px;
 }

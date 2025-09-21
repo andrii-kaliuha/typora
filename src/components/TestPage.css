@@ -12,21 +12,21 @@
 
 .text-config-list {
   display: flex;
-  background-color: #2c2e31;
+  background-color: var(--surface-color);
   border-radius: 12px;
 }
 
 .text-config-item {
   padding: 12px 20px;
-  color: aliceblue;
+  color: var(--text-color);
 }
 
 .text-config-item.active {
-  color: #cfe741;
+  color: var(--primary-color);
 }
 
 .text-config-item:hover {
-  background-color: color-mix(in srgb, #2c2e31 80%, #000);
+  background-color: var(--surface-hover-color);
   cursor: pointer;
 }
 
@@ -40,19 +40,14 @@
 
 .text-container {
   border-radius: 24px;
-  background-color: #2c2e31;
+  background-color: var(--surface-color);
   font-size: 24px;
   padding: 24px;
   margin: 24px 0;
 }
 
-.text-container .text {
-  display: inline;
-  color: #646669;
-}
-
 .restart-test-button {
-  color: #646669;
+  color: var(--secondary-color);
   background-color: transparent;
   border: transparent;
   border-radius: 50%;
@@ -67,9 +62,26 @@
 }
 
 .restart-test-button:hover {
-  color: #d1d0c5;
+  color: var(--text-hover-color);
 }
 
 .restart-test-button:active {
-  color: #646669;
+  color: var(--secondary-color);
+}
+
+.untyped {
+  color: var(--untyped-text-color);
+}
+
+.correct {
+  color: var(--correct-text-color);
+}
+
+.incorrect {
+  color: var(--incorrect-text-color);
+}
+
+.cursor {
+  color: var(--secondary-color);
+  border-bottom: 2px solid var(--primary-color);
 }

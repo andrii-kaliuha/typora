@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: #323437;
+  background-color: var(--background-color);
   font-family: "Roboto Mono", monospace;
 }
 
@@ -19,4 +19,36 @@ body {
 .app {
   max-width: 1280px;
   padding: 24px;
+}
+
+:root {
+  --primary-color: #cfe741;
+  --secondary-color: #929598;
+  --background-color: #ededed;
+
+  --surface-color: #f7f7f7;
+  --surface-hover-color: #e3e3e3;
+
+  --text-color: #212121;
+  --text-hover-color: #3f3f3f;
+
+  --untyped-text-color: var(--secondary-color);
+  --correct-text-color: var(--primary-color);
+  --incorrect-text-color: #c1121f;
+}
+
+.dark {
+  --primary-color: #cfe741;
+  --secondary-color: #646669;
+  --background-color: #323437;
+
+  --surface-color: #2c2e31;
+  --surface-hover-color: #232527;
+
+  --text-color: aliceblue;
+  --text-hover-color: #d1d0c5;
+
+  --untyped-text-color: var(--secondary-color);
+  --correct-text-color: var(--primary-color);
+  --incorrect-text-color: #c1121f;
 }

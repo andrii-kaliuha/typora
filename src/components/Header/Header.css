@@ -12,13 +12,13 @@ header {
 }
 
 #logotype-icon {
-  color: #cfe741;
+  color: var(--primary-color);
   width: 48px;
   height: 40px;
 }
 
 .logotype-text {
-  color: aliceblue;
+  color: var(--text-color);
   text-transform: uppercase;
   letter-spacing: 4px;
   font-size: 32px;
@@ -30,19 +30,18 @@ header {
 }
 
 .navigation-item {
-  color: aliceblue;
-  background-color: #2c2e31;
+  color: var(--text-color);
+  background-color: var(--surface-color);
   padding: 12px 20px;
 }
 
 .navigation-item:hover {
-  color: rgba(255, 255, 255, 0.75);
-  background-color: #232527;
+  background-color: var(--surface-hover-color);
   cursor: pointer;
 }
 
 .navigation-item.active {
-  color: #cfe741;
+  color: var(--primary-color);
 }
 
 .navigation-item:first-child {
@@ -68,25 +67,23 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 4px;
-  outline-width: 4px;
   height: 48px;
   width: 48px;
 }
 
 #language-icon:hover,
 .theme-toggle-button:hover {
-  background-color: #232527;
+  background-color: var(--surface-hover-color);
 }
 
 #language-icon,
 #theme-icon {
-  color: #cfe741;
+  color: var(--primary-color);
   width: 32px;
   height: 32px;
 }
 
 #language-icon:active,
 #theme-icon:active {
-  color: aliceblue;
+  color: var(--text-color);
 }
