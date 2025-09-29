@@ -18,8 +18,16 @@
 }
 
 .history-list .stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.history-list .stats li {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .history-list .stats p {
@@ -28,4 +36,15 @@
 
 .history-list .stats span {
   color: var(--primary-color);
+}
+
+.history-list .stats .button-play-container {
+  display: flex;
+  flex-direction: row;
+  color: var(--secondary-color);
+  gap: 12px;
+}
+
+.play-icon {
+  cursor: pointer;
 }

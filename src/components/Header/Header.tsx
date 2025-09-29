@@ -22,7 +22,7 @@ export const Header = () => {
       <Navigation />
       <div className="buttons-container">
         <button onClick={toggleLanguage} type="button" className="theme-toggle-button">
-          <svg id="language-icon">
+          <svg id="language-icon" width={32} height={29}>
             <use href="/icons.svg#language-icon" />
           </svg>
         </button>
@@ -54,7 +54,7 @@ const ThemeToggle = () => {
 
   return (
     <button type="button" onClick={handleThemeToggle} className="theme-toggle-button">
-      <svg id="theme-icon">
+      <svg id="theme-icon" width={32} height={32}>
         <use href="/icons.svg#theme-icon" />
       </svg>
     </button>

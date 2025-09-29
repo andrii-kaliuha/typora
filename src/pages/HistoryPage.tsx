@@ -11,8 +11,8 @@ export const HistoryPage = () => {
         { label: "characters", value: "127/2/11" },
         { label: "text", value: "random_text" },
         { label: "language", value: "english" },
-        { label: "time", value: "18 second" },
-        { label: "mode", value: "speed" },
+        { label: "duration", value: "15" },
+        { label: "mode", value: "strict" },
       ],
     },
     {
@@ -23,7 +23,7 @@ export const HistoryPage = () => {
         { label: "characters", value: "144/3/15" },
         { label: "text", value: "custom_text" },
         { label: "language", value: "ukrainian" },
-        { label: "time", value: "14 second" },
+        { label: "duration", value: "30" },
         { label: "mode", value: "normal" },
       ],
     },
@@ -49,6 +49,12 @@ const HistoryItem = ({ text, stats }: HistoryProps) => {
     <li className="history-item">
       <div className="text">{text}</div>
       <ul className="stats">
+        <li className="button-play-container">
+          <p>{t("watch_replay")}</p>
+          <svg className="play-icon" width={16} height={20}>
+            <use href="/icons.svg#play-icon" />
+          </svg>
+        </li>
         {stats.map((stat, index) => (
           <li key={index}>
             <p>{t(stat.label)}</p>

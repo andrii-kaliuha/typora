@@ -33,23 +33,23 @@ header {
   color: var(--text-color);
   background-color: var(--surface-color);
   padding: 12px 20px;
-}
 
-.navigation-item:hover {
-  background-color: var(--surface-hover-color);
-  cursor: pointer;
+  &:hover {
+    background-color: var(--surface-hover-color);
+    cursor: pointer;
+  }
+
+  &:first-child {
+    border-radius: 12px 0 0 12px;
+  }
+
+  &:last-child {
+    border-radius: 0 12px 12px 0;
+  }
 }
 
 .navigation-item.active {
   color: var(--primary-color);
-}
-
-.navigation-item:first-child {
-  border-radius: 12px 0 0 12px;
-}
-
-.navigation-item:last-child {
-  border-radius: 0 12px 12px 0;
 }
 
 .buttons-container {
@@ -60,7 +60,6 @@ header {
 
 .language-icon,
 .theme-toggle-button {
-  transition: color 0.3s ease;
   background-color: transparent;
   border-color: transparent;
   border-radius: 50%;
@@ -69,21 +68,14 @@ header {
   align-items: center;
   height: 48px;
   width: 48px;
-}
-
-#language-icon:hover,
-.theme-toggle-button:hover {
-  background-color: var(--surface-hover-color);
-}
-
-#language-icon,
-#theme-icon {
+  font-size: 24px;
   color: var(--primary-color);
-  width: 32px;
-  height: 32px;
-}
 
-#language-icon:active,
-#theme-icon:active {
-  color: var(--text-color);
+  &:hover {
+    background-color: var(--surface-hover-color);
+  }
+
+  &:active {
+    color: var(--text-color);
+  }
 }

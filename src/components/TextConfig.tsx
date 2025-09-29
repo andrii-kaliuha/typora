@@ -5,7 +5,7 @@ export const TextConfig = () => {
   type MenuOptions = "text" | "language" | "duration" | "mode";
   type TextType = "random" | "custom";
   type Language = "ukrainian" | "english";
-  type Mode = "normal" | "speed" | "accuracy";
+  type Mode = "normal" | "accuracy" | "strict";
 
   const { t } = useTranslation();
 
@@ -92,11 +92,11 @@ export const TextConfig = () => {
           <li onClick={() => handleModeClick("normal")} className={`text-config-item ${mode === "normal" ? "active" : ""}`}>
             {t("config.normal")}
           </li>
-          <li onClick={() => handleModeClick("speed")} className={`text-config-item ${mode === "speed" ? "active" : ""}`}>
-            {t("config.speed")}
-          </li>
           <li onClick={() => handleModeClick("accuracy")} className={`text-config-item ${mode === "accuracy" ? "active" : ""}`}>
             {t("config.accuracy")}
+          </li>
+          <li onClick={() => handleModeClick("strict")} className={`text-config-item ${mode === "strict" ? "active" : ""}`}>
+            {t("config.strict")}
           </li>
         </ul>
       )}

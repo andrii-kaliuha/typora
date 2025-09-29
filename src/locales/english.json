@@ -16,16 +16,16 @@
     "english": "English",
 
     "normal": "Normal",
-    "speed": "Speed",
-    "accuracy": "Accuracy"
+    "accuracy": "Accuracy",
+    "strict": "Strict"
   },
 
-  "accuracy": "Accuracy",
+  "watch_replay": "Watch replay",
   "words": "Words",
   "characters": "Сharacters",
   "text": "Text",
   "language": "Language",
-  "time": "Time",
+  "duration": "Duration",
   "mode": "Mode",
 
   "random_text": "Random Text",
@@ -35,7 +35,8 @@
   "english": "English",
 
   "normal": "Normal",
-  "speed": "Speed",
+  "accuracy": "Accuracy",
+  "strict": "Strict",
 
   "learning": {
     "title": "Learn how to touch type",

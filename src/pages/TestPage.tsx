@@ -9,9 +9,14 @@ export const TestPage = () => {
     <div className="test-page">
       <TextConfig />
       <TextContainer text={text} />
-      <button className="restart-test-button">
-        <span className="material-symbols-outlined">replay</span>
-      </button>
+      <div className="buttons-container">
+        <button className="restart-test-button">
+          <svg className="replay-icon" width={21} height={24}>
+            <use href="/icons.svg#replay-icon" />
+          </svg>
+        </button>
+        <span className="timer">00:15</span>
+      </div>
     </div>
   );
 };
