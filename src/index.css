@@ -21,8 +21,13 @@ body {
   padding: 24px;
 }
 
+::selection {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+}
+
 :root {
-  --primary-color: #cfe741;
+  --primary-color: #49a078;
   --secondary-color: #929598;
   --background-color: #ededed;
 
@@ -38,14 +43,14 @@ body {
 }
 
 .dark {
-  --primary-color: #cfe741;
+  --primary-color: #49a078;
   --secondary-color: #646669;
   --background-color: #323437;
 
   --surface-color: #2c2e31;
   --surface-hover-color: #232527;
 
-  --text-color: aliceblue;
+  --text-color: #fafafa;
   --text-hover-color: #d1d0c5;
 
   --untyped-text-color: var(--secondary-color);

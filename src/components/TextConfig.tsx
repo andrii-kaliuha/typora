@@ -12,7 +12,7 @@ export const TextConfig = () => {
   const [openMenu, setOpenMenu] = useState<MenuOptions>("text");
   const [textType, setTextType] = useState<TextType>("random");
   const [language, setLanguage] = useState<Language>("ukrainian");
-  const [duration, setDuration] = useState<number>(30);
+  const [duration, setDuration] = useState<string>("30");
   const [mode, setMode] = useState<Mode>("normal");
 
   const handleTextTypeClick = (type: TextType) => {
@@ -23,7 +23,7 @@ export const TextConfig = () => {
     setLanguage(lang);
   };
 
-  const handleDurationClick = (time: number) => {
+  const handleDurationClick = (time: string) => {
     setDuration(time);
   };
 
@@ -38,68 +38,48 @@ export const TextConfig = () => {
   return (
     <div className="text-config">
       <ul className="text-config-list">
-        <li onClick={() => handleOptionClick("text")} className={`text-config-item ${openMenu === "text" ? "active" : ""}`}>
-          {t("config.text")}
-        </li>
-        <li onClick={() => handleOptionClick("language")} className={`text-config-item ${openMenu === "language" ? "active" : ""}`}>
-          {t("config.language")}
-        </li>
-        <li onClick={() => handleOptionClick("duration")} className={`text-config-item ${openMenu === "duration" ? "active" : ""}`}>
-          {t("config.duration")}
-        </li>
-        <li onClick={() => handleOptionClick("mode")} className={`text-config-item ${openMenu === "mode" ? "active" : ""}`}>
-          {t("config.mode")}
-        </li>
+        <ConfigMenuItem id="text" activeKey={openMenu} label={t("config.text")} onSelect={() => handleOptionClick("text")} />
+        <ConfigMenuItem id="language" activeKey={openMenu} label={t("config.language")} onSelect={() => handleOptionClick("language")} />
+        <ConfigMenuItem id="duration" activeKey={openMenu} label={t("config.duration")} onSelect={() => handleOptionClick("duration")} />
+        <ConfigMenuItem id="mode" activeKey={openMenu} label={t("config.mode")} onSelect={() => handleOptionClick("mode")} />
       </ul>
       {openMenu === "text" && (
         <ul className="text-config-list">
-          <li onClick={() => handleTextTypeClick("random")} className={`text-config-item ${textType === "random" ? "active" : ""}`}>
-            {t("config.random_text")}
-          </li>
-          <li onClick={() => handleTextTypeClick("custom")} className={`text-config-item ${textType === "custom" ? "active" : ""}`}>
-            {t("config.custom_text")}
-          </li>
+          <ConfigMenuItem id="random" activeKey={textType} label={t("config.random_text")} onSelect={() => handleTextTypeClick("random")} />
+          <ConfigMenuItem id="custom" activeKey={textType} label={t("config.custom_text")} onSelect={() => handleTextTypeClick("custom")} />
         </ul>
       )}
       {openMenu === "language" && (
         <ul className="text-config-list">
-          <li onClick={() => handleLanguageClick("ukrainian")} className={`text-config-item ${language === "ukrainian" ? "active" : ""}`}>
-            {t("config.ukrainian")}
-          </li>
-          <li onClick={() => handleLanguageClick("english")} className={`text-config-item ${language === "english" ? "active" : ""}`}>
-            {t("config.english")}
-          </li>
+          <ConfigMenuItem id="ukrainian" activeKey={language} label={t("config.ukrainian")} onSelect={() => handleLanguageClick("ukrainian")} />
+          <ConfigMenuItem id="english" activeKey={language} label={t("config.english")} onSelect={() => handleLanguageClick("english")} />
         </ul>
       )}
       {openMenu === "duration" && (
         <ul className="text-config-list">
-          <li onClick={() => handleDurationClick(30)} className={`text-config-item ${duration === 30 ? "active" : ""}`}>
-            30
-          </li>
-          <li onClick={() => handleDurationClick(60)} className={`text-config-item ${duration === 60 ? "active" : ""}`}>
-            60
-          </li>
-          <li onClick={() => handleDurationClick(90)} className={`text-config-item ${duration === 90 ? "active" : ""}`}>
-            90
-          </li>
-          <li onClick={() => handleDurationClick(120)} className={`text-config-item ${duration === 120 ? "active" : ""}`}>
-            120
-          </li>
+          <ConfigMenuItem id="30" activeKey={duration} label="30" onSelect={() => handleDurationClick("30")} />
+          <ConfigMenuItem id="60" activeKey={duration} label="60" onSelect={() => handleDurationClick("60")} />
+          <ConfigMenuItem id="90" activeKey={duration} label="90" onSelect={() => handleDurationClick("90")} />
+          <ConfigMenuItem id="120" activeKey={duration} label="120" onSelect={() => handleDurationClick("120")} />
         </ul>
       )}
       {openMenu === "mode" && (
         <ul className="text-config-list">
-          <li onClick={() => handleModeClick("normal")} className={`text-config-item ${mode === "normal" ? "active" : ""}`}>
-            {t("config.normal")}
-          </li>
-          <li onClick={() => handleModeClick("accuracy")} className={`text-config-item ${mode === "accuracy" ? "active" : ""}`}>
-            {t("config.accuracy")}
-          </li>
-          <li onClick={() => handleModeClick("strict")} className={`text-config-item ${mode === "strict" ? "active" : ""}`}>
-            {t("config.strict")}
-          </li>
+          <ConfigMenuItem id="normal" activeKey={mode} label={t("config.normal")} onSelect={() => handleModeClick("normal")} />
+          <ConfigMenuItem id="accuracy" activeKey={mode} label={t("config.accuracy")} onSelect={() => handleModeClick("accuracy")} />
+          <ConfigMenuItem id="strict" activeKey={mode} label={t("config.strict")} onSelect={() => handleModeClick("strict")} />
         </ul>
       )}
     </div>
+  );
+};
+
+type ConfigMenuItemProps = { id: string; activeKey: string; label: string; onSelect: (id: string) => void };
+
+const ConfigMenuItem = ({ id, activeKey, label, onSelect }: ConfigMenuItemProps) => {
+  return (
+    <li key={id} onClick={() => onSelect(id)} className={`text-config-item ${activeKey === id ? "active" : ""}`}>
+      {label}
+    </li>
   );
 };

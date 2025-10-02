@@ -12,7 +12,7 @@ export const LearningPage = () => {
 
       <section className="advice-block">
         <div className="image-container">
-          <svg width={390} height={300}>
+          <svg width={515} height={300}>
             <use href="/posture-for-printing-text.svg" />
           </svg>
         </div>
@@ -76,15 +76,9 @@ const FingerPosition = () => {
       <p>{t("learning.second_advice_for_finger_position")}</p>
 
       <div className="image-container">
-        {language === "uk" ? (
-          <svg width={712} height={250}>
-            <use href="/ukrainian-keyboard.svg"></use>
-          </svg>
-        ) : (
-          <svg width={712} height={250}>
-            <use href="/english-keyboard.svg"></use>
-          </svg>
-        )}
+        <svg width={712} height={244}>
+          {language === "uk" ? <use href="/ukrainian-keyboard.svg"></use> : <use href="/english-keyboard.svg"></use>}
+        </svg>
       </div>
 
       <p>{t("learning.third_advice_for_finger_position")}</p>
