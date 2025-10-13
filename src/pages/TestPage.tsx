@@ -11,8 +11,8 @@ export const TestPage = () => {
       <TextContainer text={text} />
       <div className="buttons-container">
         <button className="restart-test-button">
-          <svg className="replay-icon" width={21} height={24}>
-            <use href="/icons.svg#replay-icon" />
+          <svg className="replay-icon" width={24} height={24}>
+            <use href="./src/assets/icons.svg#replay-icon" />
           </svg>
         </button>
         <span className="timer">00:15</span>

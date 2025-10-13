@@ -18,12 +18,17 @@
 }
 
 .text-config-item {
-  padding: 12px 20px;
   color: var(--text-color);
+  background-color: transparent;
+  border-width: 0;
+  padding: 12px 20px;
 
   &:hover {
     background-color: var(--surface-hover-color);
-    cursor: pointer;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--primary-color);
   }
 
   &:first-child {
@@ -44,40 +49,14 @@
   background-color: var(--surface-color);
   font-size: 24px;
   padding: 24px;
-}
 
-.buttons-container {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.restart-test-button {
-  color: var(--secondary-color);
-  background-color: transparent;
-  border: transparent;
-  border-radius: 50%;
-  width: 48px;
-  height: 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  user-select: none;
-
-  &:hover {
-    color: var(--text-hover-color);
+  &:focus {
+    outline: 2px solid var(--primary-color);
   }
 
-  &:active {
-    color: var(--secondary-color);
+  &:focus-visible {
+    outline: 2px solid var(--primary-color);
   }
-}
-
-.timer {
-  font-size: 20px;
-  color: var(--primary-color);
 }
 
 .untyped {
@@ -95,4 +74,35 @@
 .cursor {
   color: var(--secondary-color);
   border-bottom: 2px solid var(--primary-color);
+}
+
+.buttons-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.restart-test-button {
+  color: var(--secondary-color);
+  background-color: transparent;
+  border-radius: 50%;
+  border-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+
+  &:hover {
+    background-color: var(--surface-hover-color);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--secondary-color);
+  }
+}
+
+.timer {
+  font-size: 20px;
+  color: var(--primary-color);
 }

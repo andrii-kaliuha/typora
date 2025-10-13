@@ -1,5 +1,5 @@
-import { Header } from "./components/Header/Header";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Header } from "./components/Header/Header";
 import { TestPage } from "./pages/TestPage";
 import { LearningPage } from "./pages/LearningPage";
 import { HistoryPage } from "./pages/HistoryPage";
@@ -7,7 +7,7 @@ import { HistoryPage } from "./pages/HistoryPage";
 export const App = () => {
   return (
     <div className="app">
-      <BrowserRouter>
+      <BrowserRouter basename="typora">
         <Header />
         <main>
           <Routes>

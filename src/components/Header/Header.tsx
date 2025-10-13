@@ -7,7 +7,7 @@ export const Header = () => {
   const { i18n } = useTranslation();
 
   const toggleLanguage = () => {
-    const language = i18n.language === "en" ? "uk" : "en";
+    const language = i18n.language === "english" ? "ukrainian" : "english";
     i18n.changeLanguage(language);
   };
 
@@ -15,15 +15,15 @@ export const Header = () => {
     <header>
       <div className="logotype-container">
         <svg id="logotype-icon">
-          <use href="/icons.svg#logotype-icon" />
+          <use href="./src/assets/icons.svg#logotype-icon" />
         </svg>
         <p className="logotype-text">Typora</p>
       </div>
       <Navigation />
       <div className="buttons-container">
-        <button onClick={toggleLanguage} type="button" className="theme-toggle-button">
-          <svg id="language-icon" width={32} height={29}>
-            <use href="/icons.svg#language-icon" />
+        <button onClick={toggleLanguage} type="button" className="language-select-button">
+          <svg id="language-icon" width={32} height={32}>
+            <use href="./src/assets/icons.svg#language-icon" />
           </svg>
         </button>
 
@@ -55,7 +55,7 @@ const ThemeToggle = () => {
   return (
     <button type="button" onClick={handleThemeToggle} className="theme-toggle-button">
       <svg id="theme-icon" width={32} height={32}>
-        <use href="/icons.svg#theme-icon" />
+        <use href="./src/assets/icons.svg#theme-icon" />
       </svg>
     </button>
   );

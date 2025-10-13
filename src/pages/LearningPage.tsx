@@ -1,57 +1,47 @@
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
 import "../components/LearningPage.css";
 
 export const LearningPage = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   return (
     <div className="learning-page">
-      <h1>{t("learning.title")}</h1>
+      <h1 className="learning-title">{t("learning.title")}</h1>
       <p className="learning-subtitle">{t("learning.subtitle")}</p>
 
       <section className="advice-block">
-        <div className="image-container">
-          <svg width={515} height={300}>
-            <use href="/posture-for-printing-text.svg" />
-          </svg>
-        </div>
-
-        <h2>{t("learning.posture_for_print")}</h2>
+        <LearningImage width={515} height={300} source="posture-for-print.svg" />
+        <h2 className="learning-title">{t("learning.posture-for-print.title")}</h2>
         <List
           items={[
-            t("learning.first_advice_for_posture_for_printing"),
-            t("learning.second_advice_for_posture_for_printing"),
-            t("learning.third_advice_for_posture_for_printing"),
-            t("learning.fourth_advice_for_posture_for_printing"),
-            t("learning.fifth_advice_for_posture_for_printing"),
-            t("learning.sixth_advice_for_posture_for_printing"),
-            t("learning.seventh_advice_for_posture_for_printing"),
-            t("learning.eighth_advice_for_posture_for_printing"),
+            t("learning.posture-for-print.first-advice"),
+            t("learning.posture-for-print.second-advice"),
+            t("learning.posture-for-print.third-advice"),
+            t("learning.posture-for-print.fourth-advice"),
+            t("learning.posture-for-print.fifth-advice"),
+            t("learning.posture-for-print.sixth-advice"),
+            t("learning.posture-for-print.seventh-advice"),
+            t("learning.posture-for-print.eighth-advice"),
           ]}
         />
       </section>
 
-      <FingerPosition />
+      <FingerPosition language={i18n.language} />
 
       <section className="advice-block">
-        <h2>{t("learning.print_speed")}</h2>
+        <h2 className="learning-title">{t("learning.print-speed.title")}</h2>
         <List
-          items={[
-            t("learning.first_advice_for_print_speed"),
-            t("learning.second_advice_for_print_speed"),
-            t("learning.third_advice_for_print_speed"),
-          ]}
+          items={[t("learning.print-speed.first-advice"), t("learning.print-speed.second-advice"), t("learning.print-speed.third-advice")]}
         />
       </section>
 
       <section className="advice-block">
-        <h2>{t("learning.finger_movement")}</h2>
+        <h2 className="learning-title">{t("learning.finger-movement.title")}</h2>
         <List
           items={[
-            t("learning.first_advice_for_finger_movement"),
-            t("learning.second_advice_for_finger_movement"),
-            t("learning.third_advice_for_finger_movement"),
+            t("learning.finger-movement.first-advice"),
+            t("learning.finger-movement.second-advice"),
+            t("learning.finger-movement.third-advice"),
           ]}
         />
       </section>
@@ -59,52 +49,51 @@ export const LearningPage = () => {
   );
 };
 
-const FingerPosition = () => {
-  const { t, i18n } = useTranslation();
-  const [language, setLanguage] = useState(i18n.language);
-
-  useEffect(() => {
-    const handleLanguageChanged = (lng: string) => setLanguage(lng);
-    i18n.on("languageChanged", handleLanguageChanged);
-    return () => i18n.off("languageChanged", handleLanguageChanged);
-  }, [i18n]);
+const FingerPosition = ({ language }: { language: string }) => {
+  const { t } = useTranslation();
 
   return (
     <section className="advice-block">
-      <h2>{t("learning.finger_position")}</h2>
-      <p>{t("learning.first_advice_for_finger_position")}</p>
-      <p>{t("learning.second_advice_for_finger_position")}</p>
+      <h2 className="learning-title">{t("learning.finger-position.title")}</h2>
+      <p>{t("learning.finger-position.first-advice")}</p>
+      <p>{t("learning.finger-position.second-advice")}</p>
 
-      <div className="image-container">
-        <svg width={712} height={244}>
-          {language === "uk" ? <use href="/ukrainian-keyboard.svg"></use> : <use href="/english-keyboard.svg"></use>}
-        </svg>
-      </div>
+      <LearningImage width={712} height={244} source={`keyboard.svg#${language === "ukrainian" ? "ukrainian" : "english"}`} />
 
-      <p>{t("learning.third_advice_for_finger_position")}</p>
+      <p>{t("learning.finger-position.third-advice")}</p>
       <List
         items={[
-          t("learning.list_item_1"),
-          t("learning.list_item_2"),
-          t("learning.list_item_3"),
-          t("learning.list_item_4"),
-          t("learning.list_item_5"),
-          t("learning.list_item_6"),
+          t("learning.list.item-1"),
+          t("learning.list.item-2"),
+          t("learning.list.item-3"),
+          t("learning.list.item-4"),
+          t("learning.list.item-5"),
+          t("learning.list.item-6"),
         ]}
       />
-      <p>{t("learning.fourth_advice_for_finger_position")}</p>
+      <p>{t("learning.finger-position.fourth-advice")}</p>
     </section>
   );
 };
 
 const List = ({ items }: { items: string[] }) => {
   return (
-    <ul className="list">
+    <ul className="advice-list">
       {items.map((item, index) => (
         <li key={index}>
           <span>{index + 1}</span>—<p>{item}</p>
         </li>
       ))}
     </ul>
+  );
+};
+
+const LearningImage = ({ width, height, source }: { width: number; height: number; source: string }) => {
+  return (
+    <div className="image-container">
+      <svg width={width} height={height}>
+        <use href={`./src/assets/${source}`}></use>
+      </svg>
+    </div>
   );
 };

@@ -37,38 +37,38 @@ export const TextConfig = () => {
 
   return (
     <div className="text-config">
-      <ul className="text-config-list">
+      <div className="text-config-list">
         <ConfigMenuItem id="text" activeKey={openMenu} label={t("config.text")} onSelect={() => handleOptionClick("text")} />
         <ConfigMenuItem id="language" activeKey={openMenu} label={t("config.language")} onSelect={() => handleOptionClick("language")} />
         <ConfigMenuItem id="duration" activeKey={openMenu} label={t("config.duration")} onSelect={() => handleOptionClick("duration")} />
         <ConfigMenuItem id="mode" activeKey={openMenu} label={t("config.mode")} onSelect={() => handleOptionClick("mode")} />
-      </ul>
+      </div>
       {openMenu === "text" && (
-        <ul className="text-config-list">
-          <ConfigMenuItem id="random" activeKey={textType} label={t("config.random_text")} onSelect={() => handleTextTypeClick("random")} />
-          <ConfigMenuItem id="custom" activeKey={textType} label={t("config.custom_text")} onSelect={() => handleTextTypeClick("custom")} />
-        </ul>
+        <div className="text-config-list">
+          <ConfigMenuItem id="random" activeKey={textType} label={t("config.random-text")} onSelect={() => handleTextTypeClick("random")} />
+          <ConfigMenuItem id="custom" activeKey={textType} label={t("config.custom-text")} onSelect={() => handleTextTypeClick("custom")} />
+        </div>
       )}
       {openMenu === "language" && (
-        <ul className="text-config-list">
+        <div className="text-config-list">
           <ConfigMenuItem id="ukrainian" activeKey={language} label={t("config.ukrainian")} onSelect={() => handleLanguageClick("ukrainian")} />
           <ConfigMenuItem id="english" activeKey={language} label={t("config.english")} onSelect={() => handleLanguageClick("english")} />
-        </ul>
+        </div>
       )}
       {openMenu === "duration" && (
-        <ul className="text-config-list">
+        <div className="text-config-list">
           <ConfigMenuItem id="30" activeKey={duration} label="30" onSelect={() => handleDurationClick("30")} />
           <ConfigMenuItem id="60" activeKey={duration} label="60" onSelect={() => handleDurationClick("60")} />
           <ConfigMenuItem id="90" activeKey={duration} label="90" onSelect={() => handleDurationClick("90")} />
           <ConfigMenuItem id="120" activeKey={duration} label="120" onSelect={() => handleDurationClick("120")} />
-        </ul>
+        </div>
       )}
       {openMenu === "mode" && (
-        <ul className="text-config-list">
+        <div className="text-config-list">
           <ConfigMenuItem id="normal" activeKey={mode} label={t("config.normal")} onSelect={() => handleModeClick("normal")} />
           <ConfigMenuItem id="accuracy" activeKey={mode} label={t("config.accuracy")} onSelect={() => handleModeClick("accuracy")} />
           <ConfigMenuItem id="strict" activeKey={mode} label={t("config.strict")} onSelect={() => handleModeClick("strict")} />
-        </ul>
+        </div>
       )}
     </div>
   );
@@ -78,8 +78,8 @@ type ConfigMenuItemProps = { id: string; activeKey: string; label: string; onSel
 
 const ConfigMenuItem = ({ id, activeKey, label, onSelect }: ConfigMenuItemProps) => {
   return (
-    <li key={id} onClick={() => onSelect(id)} className={`text-config-item ${activeKey === id ? "active" : ""}`}>
+    <button key={id} onClick={() => onSelect(id)} className={`text-config-item ${activeKey === id ? "active" : ""}`}>
       {label}
-    </li>
+    </button>
   );
 };

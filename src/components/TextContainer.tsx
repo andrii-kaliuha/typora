@@ -1,33 +1,40 @@
 import "./TestPage.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export const TextContainer = ({ text }: { text: string }) => {
   const [targetText] = useState(text);
   const [typedText, setTypedText] = useState("");
 
+  const textContainerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      // Обробка тільки символів
       if (event.key.length === 1) {
         setTypedText((prevTypedText) => {
-          const nextChar = targetText[prevTypedText.length];
-          const isCorrect = event.key === nextChar;
-          // Тут можна зберігати історію натискань з датою
-          const timestamp = new Date();
-          console.log(`Key: ${event.key}, Статус: ${isCorrect}, Timestamp: ${timestamp}`);
+          event.preventDefault();
+
           return prevTypedText + event.key;
         });
+      } else if (event.key === "Backspace") {
+        event.preventDefault();
+        setTypedText((prevTypedText) => prevTypedText.slice(0, -1));
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
+    const textContainer = textContainerRef.current;
+
+    if (textContainer) {
+      textContainer.addEventListener("keydown", handleKeyDown);
+      textContainer.focus();
+
+      return () => {
+        textContainer.removeEventListener("keydown", handleKeyDown);
+      };
+    }
   }, [targetText]);
 
   return (
-    <div className="text-container">
+    <div className="text-container" ref={textContainerRef} tabIndex={1}>
       {targetText.split("").map((char, index) => {
         let charStatus: string;
 

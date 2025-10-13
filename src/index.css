@@ -6,6 +6,17 @@
   text-decoration: none;
 }
 
+button {
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  user-select: none;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   background-color: var(--background-color);
   font-family: "Roboto Mono", monospace;
@@ -19,6 +30,16 @@ body {
 .app {
   max-width: 1280px;
   padding: 24px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background-color: var(--surface-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
 }
 
 ::selection {

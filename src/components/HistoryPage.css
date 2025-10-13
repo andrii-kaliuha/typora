@@ -23,28 +23,31 @@
   gap: 12px;
 }
 
-.history-list .stats li {
+.history-list .stats dl {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.history-list .stats p {
+.history-list .stats dd {
   color: var(--secondary-color);
 }
 
-.history-list .stats span {
+.history-list .stats dt {
   color: var(--primary-color);
 }
 
-.history-list .stats .button-play-container {
-  display: flex;
-  flex-direction: row;
+.watch-replay-container {
   color: var(--secondary-color);
+  background-color: transparent;
+  border-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 12px;
-}
 
-.play-icon {
-  cursor: pointer;
+  &:focus-visible {
+    outline: 2px solid var(--primary-color);
+  }
 }
