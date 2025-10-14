@@ -106,3 +106,7 @@
   font-size: 20px;
   color: var(--primary-color);
 }
+
+.screenshot-only-styles {
+  border-radius: 0 !important;
+}

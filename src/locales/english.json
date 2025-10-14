@@ -23,12 +23,15 @@
 
   "history": {
     "watch_replay": "Watch replay",
+    "screenshot": "Save",
+
     "words": "Words",
     "characters": "Сharacters",
     "text": "Text",
     "language": "Language",
     "duration": "Duration",
     "mode": "Mode",
+    "date": "Date",
 
     "random-text": "Random Text",
     "custom-text": "Custom Text",

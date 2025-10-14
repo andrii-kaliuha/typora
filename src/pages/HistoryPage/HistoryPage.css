@@ -38,6 +38,7 @@
   color: var(--primary-color);
 }
 
+.screenshot-container,
 .watch-replay-container {
   color: var(--secondary-color);
   background-color: transparent;

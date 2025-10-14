@@ -23,12 +23,15 @@
 
   "history": {
     "watch_replay": "Переглянути повтор",
+    "screenshot": "Зберегти",
+
     "words": "Слова",
     "characters": "Символи",
     "text": "Текст",
     "language": "Мова",
     "duration": "Тривалість",
     "mode": "Режим",
+    "date": "Дата",
 
     "random-text": "Випадковий текст",
     "custom-text": "Власний текст",

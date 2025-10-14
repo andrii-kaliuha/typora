@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import "../components/LearningPage.css";
+import "./LearningPage.css";
 
 export const LearningPage = () => {
   const { t, i18n } = useTranslation();

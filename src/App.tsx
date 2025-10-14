@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Header } from "./components/Header/Header";
-import { TestPage } from "./pages/TestPage";
-import { LearningPage } from "./pages/LearningPage";
-import { HistoryPage } from "./pages/HistoryPage";
+import { TestPage } from "./pages/TestPage/TestPage";
+import { LearningPage } from "./pages/LearningPage/LearningPage";
+import { HistoryPage } from "./pages/HistoryPage/HistoryPage";
 
 export const App = () => {
   return (
