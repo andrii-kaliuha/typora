@@ -24,6 +24,8 @@
   "history": {
     "watch_replay": "Переглянути повтор",
     "screenshot": "Зберегти",
+    "repeat": "Повторити тест",
+    "next": "Наступний тест",
 
     "words": "Слова",
     "characters": "Символи",

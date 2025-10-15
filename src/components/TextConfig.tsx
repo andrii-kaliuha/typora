@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Modal } from "./Modal";
 
 export const TextConfig = () => {
   type MenuOptions = "text" | "language" | "duration" | "mode";
@@ -46,7 +47,7 @@ export const TextConfig = () => {
       {openMenu === "text" && (
         <div className="text-config-list">
           <ConfigMenuItem id="random" activeKey={textType} label={t("config.random-text")} onSelect={() => handleTextTypeClick("random")} />
-          <ConfigMenuItem id="custom" activeKey={textType} label={t("config.custom-text")} onSelect={() => handleTextTypeClick("custom")} />
+          <ConfigMenuItem2 id="custom" activeKey={textType} label={t("config.custom-text")} onSelect={() => handleTextTypeClick("custom")} />
         </div>
       )}
       {openMenu === "language" && (
@@ -81,5 +82,28 @@ const ConfigMenuItem = ({ id, activeKey, label, onSelect }: ConfigMenuItemProps)
     <button key={id} onClick={() => onSelect(id)} className={`text-config-item ${activeKey === id ? "active" : ""}`}>
       {label}
     </button>
+  );
+};
+
+const ConfigMenuItem2 = ({ id, activeKey, label, onSelect }: ConfigMenuItemProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const closeModal = () => setIsModalOpen(false);
+  const openModal = () => setIsModalOpen(true);
+
+  return (
+    <>
+      <button
+        key={id}
+        onClick={() => {
+          onSelect(id);
+          openModal();
+        }}
+        className={`text-config-item ${activeKey === id ? "active" : ""}`}
+      >
+        {label}
+      </button>
+      <Modal isOpen={isModalOpen} onClose={closeModal} title="Власний текст" />
+    </>
   );
 };

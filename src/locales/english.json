@@ -24,6 +24,8 @@
   "history": {
     "watch_replay": "Watch replay",
     "screenshot": "Save",
+    "repeat": "Repeat test",
+    "next": "Next test",
 
     "words": "Words",
     "characters": "Сharacters",

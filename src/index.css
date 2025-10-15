@@ -13,6 +13,11 @@ button {
   user-select: none;
 }
 
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
 html {
   scrollbar-gutter: stable;
 }

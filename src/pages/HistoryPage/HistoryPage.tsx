@@ -36,20 +36,6 @@ const HistoryItem = ({ text, stats }: HistoryItemProps) => {
     <li className="history-item" ref={LiRef}>
       <Text text={text} />
       <div className="stats">
-        <button type="button" className="watch-replay-container" onClick={handleTogglePlay}>
-          <p>{t("history.watch_replay")}</p>
-          <svg width={16} height={16}>
-            <use href={`./src/assets/icons.svg#${isPlaying === false ? "play-icon" : "pause-icon"}`} />
-          </svg>
-        </button>
-
-        <button type="button" className="screenshot-container" disabled={isLoading} onClick={handleCapture}>
-          <p>{t("history.screenshot")}</p>
-          <svg width={24} height={24}>
-            <use href="./src/assets/icons.svg#screenshot-icon" />
-          </svg>
-        </button>
-
         {stats.map((stat, index) => (
           <dl key={index}>
             <dt>{t(stat.label)}</dt>
@@ -63,6 +49,21 @@ const HistoryItem = ({ text, stats }: HistoryItemProps) => {
           </dl>
         ))}
       </div>
+      <div className="history-buttons-container">
+        <button type="button" className="watch-replay-container" onClick={handleTogglePlay}>
+          <p>{t("history.watch_replay")}</p>
+          <svg width={16} height={16}>
+            <use href={`./src/assets/icons.svg#${isPlaying === false ? "play-icon" : "pause-icon"}`} />
+          </svg>
+        </button>
+
+        <button type="button" className="screenshot-container" disabled={isLoading} onClick={handleCapture}>
+          <p>{t("history.screenshot")}</p>
+          <svg width={24} height={24}>
+            <use href="./src/assets/icons.svg#screenshot-icon" />
+          </svg>
+        </button>
+      </div>
     </li>
   );
 };
@@ -71,7 +72,7 @@ type TextProps = { text: { letters: { letter: string; status: string; typedAt: n
 
 const Text = ({ text }: TextProps) => {
   return (
-    <div>
+    <div className="text">
       {text.map((word, index) => (
         <span key={index}>
           {word.letters.map((item, index) => (

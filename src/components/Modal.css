@@ -1,0 +1,70 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-container {
+  background-color: var(--background-color);
+  border-radius: 12px;
+  padding: 24px;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  z-index: 100;
+
+  max-width: 800px;
+  width: 80%;
+}
+
+.modal-title {
+  color: var(--primary-color);
+  padding-left: 12px;
+}
+
+.modal-container form {
+  display: contents;
+}
+
+.modal-container textarea {
+  color: var(--text-color);
+  background-color: var(--surface-color);
+  border-width: 0;
+  border-radius: 6px;
+  padding: 12px;
+  resize: none;
+
+  &:focus-visible {
+    outline: 2px solid var(--primary-color);
+  }
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: end;
+  gap: 12px;
+}
+
+.modal-cancel-btn,
+.modal-submit-btn {
+  border-width: 0;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.modal-cancel-btn {
+  background-color: var(--surface-color);
+  color: var(--secondary-color);
+}
+
+.modal-submit-btn {
+  background-color: var(--primary-color);
+  color: var(--surface-color);
+}
