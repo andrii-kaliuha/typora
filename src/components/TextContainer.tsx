@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
+import { Button } from "./TestResult";
 
 type LetterData = { letter: string; status: "cursor" | "untyped" | "correct" | "incorrect"; typedAt: number | null };
 
@@ -22,6 +24,9 @@ export const TextContainer = ({ targetText }: { targetText: string }) => {
 
   const [typedHistory, setTypedHistory] = useState<[string, number][]>([]);
   const textContainerRef = useRef<HTMLDivElement>(null);
+
+  const { t } = useTranslation();
+  const handleRestart = () => console.log("restart test");
 
   useEffect(() => {
     setTypedText("");
@@ -86,16 +91,23 @@ export const TextContainer = ({ targetText }: { targetText: string }) => {
 
   // --- Крок 3: Рендеринг ---
   return (
-    <div className="text-container" ref={textContainerRef} tabIndex={0}>
-      {textData.map((word, index) => (
-        <span key={index}>
-          {word.letters.map((item, index) => (
-            <span key={index} className={item.status}>
-              {item.letter}
-            </span>
-          ))}
-        </span>
-      ))}
+    <div className="text-container">
+      <div className="text" ref={textContainerRef} tabIndex={0}>
+        {textData.map((word, index) => (
+          <span key={index}>
+            {word.letters.map((item, index) => (
+              <span key={index} className={item.status}>
+                {item.letter}
+              </span>
+            ))}
+          </span>
+        ))}
+      </div>
+
+      <div className="buttons-container">
+        <Button click={handleRestart} name={t("result.restart-test")} icon="repeat-icon" />
+        <span className="timer">00:15</span>
+      </div>
     </div>
   );
 };

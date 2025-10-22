@@ -103,7 +103,7 @@ const ConfigMenuItem2 = ({ id, activeKey, label, onSelect }: ConfigMenuItemProps
       >
         {label}
       </button>
-      <Modal isOpen={isModalOpen} onClose={closeModal} title="Власний текст" />
+      <Modal isOpen={isModalOpen} onClose={closeModal} />
     </>
   );
 };

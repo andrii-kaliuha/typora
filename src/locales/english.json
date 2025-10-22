@@ -21,11 +21,19 @@
     "strict": "Strict"
   },
 
-  "history": {
-    "watch_replay": "Watch replay",
+  "modal": {
+    "title": "Custom text",
+    "placeholder": "Enter your own text here...",
+    "cancel": "Cancel",
+    "confirm": "Сonfirm"
+  },
+
+  "result": {
+    "watch-replay": "Watch replay",
     "screenshot": "Save",
-    "repeat": "Repeat test",
-    "next": "Next test",
+    "repeat-test": "Repeat test",
+    "next-test": "Next test",
+    "restart-test": "Restart Test",
 
     "words": "Words",
     "characters": "Сharacters",

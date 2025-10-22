@@ -1,26 +1,32 @@
-import { TextContainer } from "../../components/TextContainer";
+import { historyList } from "../../utils/historyList";
+import { useState } from "react";
 import { TextConfig } from "../../components/TextConfig";
+import { TextContainer } from "../../components/TextContainer";
+import { TestResult } from "../../components/TestResult";
 import "./TestPage.css";
 
 export const TestPage = () => {
-  // const text =
-  //   "Швидкість друку є важливою навичкою у сучасному світі, де більшість комунікацій та роботи відбувається через клавіатуру. Вміння швидко та безпомилково набирати текст значно підвищує продуктивність, дозволяючи зосередитися на змісті, а не на механіці процесу. Регулярна практика допомагає розвинути м’язову пам’ять, що з часом робить друк майже автоматичним. Інструменти, що вимірюють кількість слів за хвилину, є чудовим способом відстежувати прогрес і ставити нові цілі. Це не просто змагання, а інвестиція у власний професійний розвиток.";
-
   const text =
-    "Вона повільно йшла по вулиці, освітленій лише ліхтарями. Повітря було наповнене ароматом дощу і свіжої землі. У її руках була стара, потерта книга, яку вона читала вже втретє. Кожна сторінка повертала її в інший світ, де проблеми здавалися дрібними, а час — нескінченним. Вона зупинилась біля вітрини антикварного магазину, де у світлі місяця блищала срібна брошка. У цей момент вона відчула легкий дотик до своєї руки. Повернувшись, вона побачила старого, який посміхався, ніби вони знали одне одного все життя. Він нічого не сказав, просто передав їй маленьку квітку і зник у темряві.";
+    "Вона повільно йшла по вулиці, освітленій лише ліхтарями. Повітря було наповнене ароматом дощу і свіжої землі. У її руках була стара, потерта книга, яку вона читала вже втретє. Кожна сторінка повертала її в інший світ, де проблеми";
+
+  const [isTestRunning, setIsTestRunning] = useState(false);
+
+  const handleToggleTestState = () => setIsTestRunning(!isTestRunning);
 
   return (
     <div className="test-page">
-      <TextConfig />
-      <TextContainer targetText={text} />
-      <div className="buttons-container">
-        <button className="restart-test-button">
-          <svg className="replay-icon" width={24} height={24}>
-            <use href="./src/assets/icons.svg#replay-icon" />
-          </svg>
-        </button>
-        <span className="timer">00:15</span>
-      </div>
+      <button type="button" style={{ position: "fixed", bottom: 50, left: 50 }} onClick={handleToggleTestState}>
+        переключити
+      </button>
+
+      {isTestRunning === true ? (
+        <TestResult text={historyList[0].text} stats={historyList[0].stats} showFullButtons={true} />
+      ) : (
+        <>
+          <TextConfig />
+          <TextContainer targetText={text} />
+        </>
+      )}
     </div>
   );
 };

@@ -9,22 +9,20 @@
 
 .modal-container {
   background-color: var(--background-color);
-  border-radius: 12px;
+  border-radius: 24px;
   padding: 24px;
-  position: relative;
 
   display: flex;
   flex-direction: column;
   gap: 12px;
 
-  z-index: 100;
-
-  max-width: 800px;
-  width: 80%;
+  max-width: 1024px;
+  width: 75%;
 }
 
 .modal-title {
   color: var(--primary-color);
+  font-size: 20px;
   padding-left: 12px;
 }
 
@@ -36,9 +34,11 @@
   color: var(--text-color);
   background-color: var(--surface-color);
   border-width: 0;
-  border-radius: 6px;
+  border-radius: 16px;
   padding: 12px;
   resize: none;
+
+  caret-color: var(--primary-color);
 
   &:focus-visible {
     outline: 2px solid var(--primary-color);
@@ -48,23 +48,30 @@
 .modal-footer {
   display: flex;
   justify-content: end;
-  gap: 12px;
 }
 
-.modal-cancel-btn,
-.modal-submit-btn {
-  border-width: 0;
-  border-radius: 6px;
-  padding: 8px 16px;
-  cursor: pointer;
-}
-
-.modal-cancel-btn {
+.cancel-button,
+.confirm-button {
   background-color: var(--surface-color);
-  color: var(--secondary-color);
+  border-width: 0;
+  padding: 12px 20px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background-color: var(--surface-hover-color);
+  }
 }
 
-.modal-submit-btn {
-  background-color: var(--primary-color);
-  color: var(--surface-color);
+.cancel-button {
+  color: var(--text-color);
+  border-radius: 12px 0 0 12px;
+}
+
+.confirm-button {
+  color: var(--primary-color);
+  border-radius: 0 12px 12px 0;
 }

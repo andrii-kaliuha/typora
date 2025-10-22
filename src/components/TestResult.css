@@ -1,0 +1,63 @@
+.test-result {
+  background-color: var(--surface-color);
+  border-radius: 24px;
+}
+
+.test-result .text {
+  padding: 24px 24px 12px;
+  line-height: 1.5;
+}
+
+.test-result .stats {
+  padding: 12px 24px;
+  border-top: 4px solid var(--background-color);
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.test-result .stats dl {
+  text-align: center;
+  line-height: 1.5;
+}
+
+.test-result .stats dd {
+  color: var(--secondary-color);
+}
+
+.test-result .stats dt {
+  color: var(--primary-color);
+}
+
+.test-result .buttons-container {
+  padding: 12px 24px 24px;
+  border-top: 4px solid var(--background-color);
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.result-button {
+  color: var(--secondary-color);
+  background-color: transparent;
+  border-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  height: 32px;
+
+  &:hover {
+    color: var(--text-color);
+  }
+
+  &:active {
+    color: var(--primary-color);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--primary-color);
+  }
+}

@@ -12,7 +12,6 @@
 }
 
 .text-config-list {
-  display: flex;
   background-color: var(--surface-color);
   border-radius: 12px;
 }
@@ -47,8 +46,15 @@
 .text-container {
   border-radius: 24px;
   background-color: var(--surface-color);
-  font-size: 24px;
-  padding: 24px;
+}
+
+.text-container .text {
+  border-radius: 24px 24px 0 0;
+  background-color: var(--surface-color);
+
+  font-size: 32px;
+  line-height: 1.5;
+  padding: 24px 24px 12px;
 
   &:focus {
     outline: 2px solid var(--primary-color);
@@ -76,30 +82,15 @@
   border-bottom: 2px solid var(--primary-color);
 }
 
-.buttons-container {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+.text-container .buttons-container {
+  border-top: 4px solid var(--background-color);
 
-.restart-test-button {
-  color: var(--secondary-color);
-  background-color: transparent;
-  border-radius: 50%;
-  border-width: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 48px;
-  height: 48px;
+  gap: 12px;
 
-  &:hover {
-    background-color: var(--surface-hover-color);
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--secondary-color);
-  }
+  padding: 12px 24px 24px;
 }
 
 .timer {

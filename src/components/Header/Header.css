@@ -56,9 +56,8 @@ header {
   color: var(--primary-color);
 }
 
-.buttons-container {
+header .buttons-container {
   display: flex;
-  align-items: center;
   gap: 12px;
 }
 
