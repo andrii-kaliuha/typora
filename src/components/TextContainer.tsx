@@ -1,51 +1,25 @@
-import { useState, useEffect, useRef } from "react";
-import { useTranslation } from "react-i18next";
-import { Button } from "./TestResult";
+import { useRef, useEffect } from "react";
+import { useTypingTest } from "../hooks/useTypingTest";
+import { TestControls } from "../shared/TestControls";
+import { getCharStatus, getWordStatus } from "../utils/utils";
 
 type LetterData = { letter: string; status: "cursor" | "untyped" | "correct" | "incorrect"; typedAt: number | null };
-
 type WordData = { letters: LetterData[]; status: "correct" | "untyped" | "incorrect" };
+type TestMetrics = { wpm: number; accuracy: number };
+type TextContainerProps = { targetText: string; timeLimit: number; onTestComplete: (data: WordData[], metrics: TestMetrics) => void };
 
-const getCharStatus = (char: string, index: number, typedText: string): string => {
-  if (index === typedText.length) return "cursor";
-  const typedChar = typedText[index];
-  if (typedChar === undefined) return "untyped";
-  return typedChar === char ? "correct" : "incorrect";
-};
+export const TextContainer = ({ targetText, timeLimit, onTestComplete }: TextContainerProps) => {
+  // 1. Використовуємо хук для всієї логіки стану та введення
+  const { typedText, typedHistory, testStatus, timeLeft, handleRestart, handleKeyDown, finishTest } = useTypingTest(
+    targetText,
+    timeLimit,
+    onTestComplete
+  );
 
-const getWordStatus = (letters: { status: string }[]): string => {
-  if (letters.some((letter) => letter.status === "incorrect")) return "incorrect";
-  if (letters.some((letter) => letter.status === "cursor" || letter.status === "untyped")) return "untyped";
-  return "correct";
-};
-
-export const TextContainer = ({ targetText }: { targetText: string }) => {
-  const [typedText, setTypedText] = useState("");
-
-  const [typedHistory, setTypedHistory] = useState<[string, number][]>([]);
   const textContainerRef = useRef<HTMLDivElement>(null);
 
-  const { t } = useTranslation();
-  const handleRestart = () => console.log("restart test");
-
+  // 2. Логіка для приєднання/від'єднання слухача
   useEffect(() => {
-    setTypedText("");
-    setTypedHistory([]);
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      const now = Date.now();
-
-      if (event.key.length === 1) {
-        event.preventDefault();
-        setTypedText((prevTypedText) => prevTypedText + event.key);
-        setTypedHistory((prevHistory) => [...prevHistory, [event.key, now]]);
-      } else if (event.key === "Backspace") {
-        event.preventDefault();
-        setTypedText((prevTypedText) => prevTypedText.slice(0, -1));
-        setTypedHistory((prevHistory) => prevHistory.slice(0, -1));
-      }
-    };
-
     const textContainer = textContainerRef.current;
 
     if (textContainer) {
@@ -56,9 +30,9 @@ export const TextContainer = ({ targetText }: { targetText: string }) => {
         textContainer.removeEventListener("keydown", handleKeyDown);
       };
     }
-  }, [targetText]);
+  }, [testStatus, handleKeyDown]);
 
-  // --- Крок 1: Обробка даних ---
+  // 3. Обробка тексту
 
   const wordsWithSpaces = targetText.match(/(\S+|\s)/g) || [];
 
@@ -86,17 +60,22 @@ export const TextContainer = ({ targetText }: { targetText: string }) => {
     };
   });
 
-  // --- Крок 2: Виведення даних для історії ---
-  console.log("Масив даних:", textData);
+  // 4. Умова Завершення: Набрано весь текст
 
-  // --- Крок 3: Рендеринг ---
+  const isTextFullyTyped = typedText.length === targetText.length && textData.every((word) => word.status === "correct");
+
+  useEffect(() => {
+    if (testStatus === "running" && (timeLeft === 0 || isTextFullyTyped)) finishTest(textData);
+  }, [timeLeft, isTextFullyTyped, testStatus, textData, finishTest]);
+
+  // 5. Рендеринг
   return (
     <div className="text-container">
       <div className="text" ref={textContainerRef} tabIndex={0}>
         {textData.map((word, index) => (
-          <span key={index}>
+          <span key={index} className="word">
             {word.letters.map((item, index) => (
-              <span key={index} className={item.status}>
+              <span key={index} className={`letter ${item.status}`}>
                 {item.letter}
               </span>
             ))}
@@ -104,10 +83,7 @@ export const TextContainer = ({ targetText }: { targetText: string }) => {
         ))}
       </div>
 
-      <div className="buttons-container">
-        <Button click={handleRestart} name={t("result.restart-test")} icon="repeat-icon" />
-        <span className="timer">00:15</span>
-      </div>
+      <TestControls timeLeft={timeLeft} onRestart={handleRestart} />
     </div>
   );
 };

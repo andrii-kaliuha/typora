@@ -1,88 +1,37 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import "./TestResult.css";
 import { useScreenshot } from "../hooks/useScreenshot";
-import { formatDate } from "../utils/formatDate";
-
-export const renderStatValue = ({ label, value }: { label: string; value: any }) => {
-  const { t, i18n } = useTranslation();
-
-  if (label === "result.date") return formatDate(value, i18n.language);
-  else if (typeof value === "string" && value.startsWith("result.")) return t(value);
-  else return value;
-};
+import { useTestReplay } from "../hooks/useWatchReplay";
+import { TextResult } from "../shared/TextResult";
+import { ResultButton } from "../shared/ResultButton";
+import { TestStatistics } from "../shared/TestStatistics";
 
 type TestResultProps = {
   text: { letters: { letter: string; status: string; typedAt: number | null }[]; status: string }[];
-  stats: { label: string; value: string | number }[];
-  showFullButtons: boolean;
+  stats: { label: string; value: string | number | Date }[];
+  onRepeat: () => void;
+  onNext: () => void;
 };
 
-export const TestResult = ({ text, stats, showFullButtons }: TestResultProps) => {
+export const TestResult = ({ text, stats, onRepeat, onNext }: TestResultProps) => {
   const { t } = useTranslation();
-  const [isPlaying, togglePlaying] = useState(false);
-  const DivRef = useRef<HTMLDivElement>(null);
-
-  const handleTogglePlay = () => togglePlaying((prevIsPlaying) => !prevIsPlaying);
-  const handleCapture = () => captureAndDownload(DivRef.current);
-  const handleRepeat = () => console.log("repeat test");
-  const handleNext = () => console.log("next test");
+  const { isPlaying, replayCharIndex, handleTogglePlay } = useTestReplay(text);
 
   const { captureAndDownload } = useScreenshot("test-result");
+  const DivRef = useRef<HTMLDivElement>(null);
+  const handleCapture = () => captureAndDownload(DivRef.current);
 
   return (
     <div className="test-result" ref={DivRef}>
-      <Text text={text} />
-      <div className="stats">
-        {stats.map((stat, index) => (
-          <dl key={index}>
-            <dt>{t(stat.label)}</dt>
-            <dd>{renderStatValue(stat)}</dd>
-          </dl>
-        ))}
-      </div>
+      <TextResult text={text} isReplaying={isPlaying} replayCharIndex={replayCharIndex} />
+      <TestStatistics stats={stats} />
       <div className="buttons-container">
-        <Button click={handleTogglePlay} name={t("result.watch-replay")} icon={isPlaying === false ? "play-icon" : "pause-icon"} />
-        <Button click={handleCapture} name={t("result.screenshot")} icon="screenshot-icon" />
-
-        {showFullButtons && (
-          <>
-            <Button click={handleRepeat} name={t("result.repeat-test")} icon="repeat-icon" />
-            <Button click={handleNext} name={t("result.next-test")} icon="next-icon" />
-          </>
-        )}
+        <ResultButton click={handleTogglePlay} name={t("result.watch-replay")} icon={isPlaying === false ? "play-icon" : "pause-icon"} />
+        <ResultButton click={handleCapture} name={t("result.screenshot")} icon="screenshot-icon" />
+        <ResultButton click={onRepeat} name={t("result.repeat-test")} icon="repeat-icon" />
+        <ResultButton click={onNext} name={t("result.next-test")} icon="next-icon" />
       </div>
     </div>
-  );
-};
-
-type TextProps = { text: { letters: { letter: string; status: string; typedAt: number | null }[]; status: string }[] };
-
-const Text = ({ text }: TextProps) => {
-  return (
-    <div className="text">
-      {text.map((word, index) => (
-        <span key={index}>
-          {word.letters.map((item, index) => (
-            <span key={index} className={item.status}>
-              {item.letter}
-            </span>
-          ))}
-        </span>
-      ))}
-    </div>
-  );
-};
-
-type ButtonProps = { click: () => void; name: string; icon: string };
-
-export const Button = ({ click, name, icon }: ButtonProps) => {
-  return (
-    <button type="button" className="result-button" onClick={click}>
-      <p>{name}</p>
-      <svg width={24} height={24}>
-        <use href={`./src/assets/icons.svg#${icon}`} />
-      </svg>
-    </button>
   );
 };
