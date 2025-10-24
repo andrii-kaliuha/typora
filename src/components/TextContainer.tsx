@@ -18,6 +18,10 @@ export const TextContainer = ({ targetText, timeLimit, onTestComplete }: TextCon
 
   const textContainerRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    if (testStatus !== "finished") handleRestart();
+  }, [timeLimit]);
+
   // 2. Логіка для приєднання/від'єднання слухача
   useEffect(() => {
     const textContainer = textContainerRef.current;
@@ -71,16 +75,18 @@ export const TextContainer = ({ targetText, timeLimit, onTestComplete }: TextCon
   // 5. Рендеринг
   return (
     <div className="text-container">
-      <div className="text" ref={textContainerRef} tabIndex={0}>
-        {textData.map((word, index) => (
-          <span key={index} className="word">
-            {word.letters.map((item, index) => (
-              <span key={index} className={`letter ${item.status}`}>
-                {item.letter}
-              </span>
-            ))}
-          </span>
-        ))}
+      <div className="text-wrapper" ref={textContainerRef} tabIndex={0}>
+        <div className="text">
+          {textData.map((word, index) => (
+            <span key={index} className="word">
+              {word.letters.map((item, index) => (
+                <span key={index} className={`letter ${item.status}`}>
+                  {item.letter}
+                </span>
+              ))}
+            </span>
+          ))}
+        </div>
       </div>
 
       <TestControls timeLeft={timeLeft} onRestart={handleRestart} />

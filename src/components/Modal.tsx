@@ -2,9 +2,9 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import "./Modal.css";
 
-type ModalProps = { isOpen: boolean; onClose: () => void };
+type ModalProps = { isOpen: boolean; onClose: () => void; onSubmit: (text: string) => void };
 
-export const Modal = ({ isOpen, onClose }: ModalProps) => {
+export const Modal = ({ isOpen, onClose, onSubmit }: ModalProps) => {
   const [customText, setCustomText] = useState("");
   const { t } = useTranslation();
 
@@ -20,7 +20,7 @@ export const Modal = ({ isOpen, onClose }: ModalProps) => {
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // onSubmit(customText);
+    onSubmit(customText);
 
     setCustomText("");
     onClose();
@@ -49,7 +49,7 @@ export const Modal = ({ isOpen, onClose }: ModalProps) => {
               {t("modal.cancel")}
             </button>
 
-            <button type="submit" onClick={handleCancel} className="confirm-button">
+            <button type="submit" onClick={handleFormSubmit} className="confirm-button">
               {t("modal.confirm")}
             </button>
           </div>

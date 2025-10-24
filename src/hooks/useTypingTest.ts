@@ -40,6 +40,10 @@ export const useTypingTest = (targetText: string, timeLimit: number, onTestCompl
     startTimeRef.current = null;
   }, [timeLimit]);
 
+  useEffect(() => {
+    handleRestart();
+  }, [targetText, timeLimit, handleRestart]);
+
   const finishTest = useCallback(
     (finalTextData: WordData[]) => {
       setTestStatus((currentStatus) => {

@@ -1,40 +1,38 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { setDuration, setLanguage, setMode, setTextType, setCustomText, type Language, type TextType, type Mode } from "../store/configSlice";
+import { type RootState } from "../store";
 import { Modal } from "./Modal";
 
-export const TextConfig = () => {
-  type MenuOptions = "text" | "language" | "duration" | "mode";
-  type TextType = "random" | "custom";
-  type Language = "ukrainian" | "english";
-  type Mode = "normal" | "accuracy" | "strict";
+type MenuOptions = "text" | "language" | "duration" | "mode";
 
+export const TextConfig = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+
+  const { textType, language, duration, mode } = useSelector((state: RootState) => state.config);
 
   const [openMenu, setOpenMenu] = useState<MenuOptions>("text");
-  const [textType, setTextType] = useState<TextType>("random");
-  const [language, setLanguage] = useState<Language>("ukrainian");
-  const [duration, setDuration] = useState<string>("30");
-  const [mode, setMode] = useState<Mode>("normal");
 
-  const handleTextTypeClick = (type: TextType) => {
-    setTextType(type);
+  const handleTextTypeClick = (type: TextType) => dispatch(setTextType(type));
+
+  const handleLanguageClick = (lang: Language) => dispatch(setLanguage(lang));
+
+  const handleDurationClick = (timeStr: string) => {
+    const timeNum = parseInt(timeStr, 10);
+    if (!isNaN(timeNum)) {
+      dispatch(setDuration(timeNum));
+    }
   };
 
-  const handleLanguageClick = (lang: Language) => {
-    setLanguage(lang);
-  };
+  const handleDurationClick2 = (timeStr: number) => dispatch(setDuration(timeStr));
 
-  const handleDurationClick = (time: string) => {
-    setDuration(time);
-  };
+  const handleModeClick = (mode: Mode) => dispatch(setMode(mode));
 
-  const handleModeClick = (mode: Mode) => {
-    setMode(mode);
-  };
+  const handleOptionClick = (option: MenuOptions) => setOpenMenu(option);
 
-  const handleOptionClick = (option: MenuOptions) => {
-    setOpenMenu(option);
-  };
+  const handleCustomTextSubmit = (text: string) => dispatch(setCustomText(text));
 
   return (
     <div className="text-config">
@@ -47,28 +45,51 @@ export const TextConfig = () => {
       {openMenu === "text" && (
         <div className="text-config-list">
           <ConfigMenuItem id="random" activeKey={textType} label={t("config.random-text")} onSelect={() => handleTextTypeClick("random")} />
-          <ConfigMenuItem2 id="custom" activeKey={textType} label={t("config.custom-text")} onSelect={() => handleTextTypeClick("custom")} />
+          <ConfigMenuItem3
+            id="custom"
+            activeKey={textType}
+            label={t("config.custom-text")}
+            onSelect={() => handleTextTypeClick("custom")}
+            onSubmit={handleCustomTextSubmit}
+          />
         </div>
       )}
       {openMenu === "language" && (
         <div className="text-config-list">
-          <ConfigMenuItem id="ukrainian" activeKey={language} label={t("config.ukrainian")} onSelect={() => handleLanguageClick("ukrainian")} />
-          <ConfigMenuItem id="english" activeKey={language} label={t("config.english")} onSelect={() => handleLanguageClick("english")} />
+          <ConfigMenuItem
+            id="ukrainian"
+            activeKey={language}
+            label={t("config.ukrainian")}
+            onSelect={() => handleLanguageClick("ukrainian" as Language)}
+          />
+          <ConfigMenuItem
+            id="english"
+            activeKey={language}
+            label={t("config.english")}
+            onSelect={() => handleLanguageClick("english" as Language)}
+          />
         </div>
       )}
       {openMenu === "duration" && (
-        <div className="text-config-list">
-          <ConfigMenuItem id="30" activeKey={duration} label="30" onSelect={() => handleDurationClick("30")} />
-          <ConfigMenuItem id="60" activeKey={duration} label="60" onSelect={() => handleDurationClick("60")} />
-          <ConfigMenuItem id="90" activeKey={duration} label="90" onSelect={() => handleDurationClick("90")} />
-          <ConfigMenuItem id="120" activeKey={duration} label="120" onSelect={() => handleDurationClick("120")} />
-        </div>
+        <>
+          <div className="text-config-list">
+            {["30", "60", "90", "120"].map((time) => (
+              <ConfigMenuItem key={time} id={time} activeKey={duration.toString()} label={time} onSelect={() => handleDurationClick(time)} />
+            ))}
+          </div>
+          <div className="text-config-list">
+            <ConfigMenuItem2 id={30} activeKey={duration} label={"30"} onSelect={() => handleDurationClick2(30)} />
+            <ConfigMenuItem2 id={60} activeKey={duration} label={"60"} onSelect={() => handleDurationClick2(60)} />
+            <ConfigMenuItem2 id={90} activeKey={duration} label={"90"} onSelect={() => handleDurationClick2(90)} />
+            <ConfigMenuItem2 id={120} activeKey={duration} label={"120"} onSelect={() => handleDurationClick2(120)} />
+          </div>
+        </>
       )}
       {openMenu === "mode" && (
         <div className="text-config-list">
-          <ConfigMenuItem id="normal" activeKey={mode} label={t("config.normal")} onSelect={() => handleModeClick("normal")} />
-          <ConfigMenuItem id="accuracy" activeKey={mode} label={t("config.accuracy")} onSelect={() => handleModeClick("accuracy")} />
-          <ConfigMenuItem id="strict" activeKey={mode} label={t("config.strict")} onSelect={() => handleModeClick("strict")} />
+          <ConfigMenuItem id="normal" activeKey={mode} label={t("config.normal")} onSelect={() => handleModeClick("normal" as Mode)} />
+          <ConfigMenuItem id="accuracy" activeKey={mode} label={t("config.accuracy")} onSelect={() => handleModeClick("accuracy" as Mode)} />
+          <ConfigMenuItem id="strict" activeKey={mode} label={t("config.strict")} onSelect={() => handleModeClick("strict" as Mode)} />
         </div>
       )}
     </div>
@@ -76,6 +97,10 @@ export const TextConfig = () => {
 };
 
 type ConfigMenuItemProps = { id: string; activeKey: string; label: string; onSelect: (id: string) => void };
+
+type ConfigMenuItemProps2 = { id: number; activeKey: number; label: string; onSelect: (id: number) => void };
+
+type ConfigMenuItemProps3 = { id: string; activeKey: string; label: string; onSelect: (id: string) => void; onSubmit: (text: string) => void };
 
 const ConfigMenuItem = ({ id, activeKey, label, onSelect }: ConfigMenuItemProps) => {
   return (
@@ -85,7 +110,15 @@ const ConfigMenuItem = ({ id, activeKey, label, onSelect }: ConfigMenuItemProps)
   );
 };
 
-const ConfigMenuItem2 = ({ id, activeKey, label, onSelect }: ConfigMenuItemProps) => {
+const ConfigMenuItem2 = ({ id, activeKey, label, onSelect }: ConfigMenuItemProps2) => {
+  return (
+    <button key={id} onClick={() => onSelect(id)} className={`text-config-item ${activeKey === id ? "active" : ""}`}>
+      {label}
+    </button>
+  );
+};
+
+const ConfigMenuItem3 = ({ id, activeKey, label, onSelect, onSubmit }: ConfigMenuItemProps3) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const closeModal = () => setIsModalOpen(false);
@@ -103,7 +136,7 @@ const ConfigMenuItem2 = ({ id, activeKey, label, onSelect }: ConfigMenuItemProps
       >
         {label}
       </button>
-      <Modal isOpen={isModalOpen} onClose={closeModal} />
+      <Modal isOpen={isModalOpen} onClose={closeModal} onSubmit={onSubmit} />
     </>
   );
 };

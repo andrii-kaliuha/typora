@@ -1,9 +1,11 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 import { TextConfig } from "../../components/TextConfig";
 import { TextContainer } from "../../components/TextContainer";
 import { TestResult } from "../../components/TestResult";
 import "./TestPage.css";
 import { getNewText, getRandomText } from "../../utils/utils";
+import { useSelector } from "react-redux";
+import { type RootState } from "../../store/index";
 
 type TestStatus = "idle" | "running" | "finished";
 type TestMetrics = { wpm: number; accuracy: number };
@@ -12,13 +14,23 @@ type WordData = { letters: LetterData[]; status: string };
 type StatItem = { label: string; value: string | number | Date };
 
 type FinalResults = { textData: WordData[]; metrics: TestMetrics; stats: StatItem[] };
-const TIME_LIMIT = 15;
 
 export const TestPage = () => {
+  const { language, duration, textType, customText } = useSelector((state: RootState) => state.config);
+
   const [testStatus, setTestStatus] = useState<TestStatus>("idle");
   const [finalResults, setFinalResults] = useState<FinalResults | null>(null);
 
-  const [targetText, setTargetText] = useState(getRandomText());
+  // 3. Обчислюємо targetText за допомогою useMemo
+  const initialText = useMemo(() => {
+    if (textType === "custom" && customText && customText.trim().length > 0) return customText;
+    return getRandomText(language);
+  }, [textType, customText, language]);
+
+  // 4. Оновлюємо targetText при зміні initialText
+  useEffect(() => {
+    setTargetText(initialText);
+  }, [initialText]);
 
   const handleTestComplete = useCallback((data: WordData[], metrics: TestMetrics) => {
     const statsForDisplay: StatItem[] = [
@@ -41,13 +53,30 @@ export const TestPage = () => {
     setTestStatus("idle");
   };
 
-  const handleNextTest = () => {
-    const newText = getNewText(targetText);
-    setTargetText(newText);
+  const baseText = useMemo(() => {
+    if (textType === "custom" && customText && customText.trim().length > 0) return customText;
+    return getRandomText(language);
+  }, [textType, customText, language]);
+
+  const [targetText, setTargetText] = useState(baseText);
+
+  useEffect(() => {
+    if (targetText !== baseText) {
+      setTargetText(baseText);
+      setTestStatus("idle");
+      setFinalResults(null);
+    }
+  }, [baseText, targetText]);
+
+  const handleNextTest = useCallback(() => {
     setFinalResults(null);
     setTestStatus("idle");
-    console.log("Перехід до наступного тексту.");
-  };
+
+    if (textType === "random") {
+      const newText = getNewText(targetText, language);
+      setTargetText(newText);
+    } else setTargetText(baseText);
+  }, [targetText, language, textType, baseText]);
 
   const renderContent = () => {
     switch (testStatus) {
@@ -62,7 +91,7 @@ export const TestPage = () => {
         return (
           <>
             <TextConfig />
-            <TextContainer targetText={targetText} timeLimit={TIME_LIMIT} onTestComplete={handleTestComplete} />
+            <TextContainer targetText={targetText} timeLimit={duration} onTestComplete={handleTestComplete} />
           </>
         );
     }
