@@ -24,7 +24,17 @@ const calculateMetrics = (typedHistory: TypedHistoryEntry[], targetText: string,
   return { wpm, accuracy };
 };
 
-export const useTypingTest = (targetText: string, timeLimit: number, onTestComplete: (data: WordData[], metrics: TestMetrics) => void) => {
+type Mode = "normal" | "accuracy" | "strict";
+
+type TypingTestProps = {
+  targetText: string;
+  timeLimit: number;
+  onTestComplete: (data: WordData[], metrics: TestMetrics) => void;
+  onTestStart: () => void;
+  mode: Mode;
+};
+
+export const useTypingTest = ({ targetText, timeLimit, onTestComplete, onTestStart, mode }: TypingTestProps) => {
   const [typedText, setTypedText] = useState("");
   const [typedHistory, setTypedHistory] = useState<TypedHistoryEntry[]>([]);
   const [testStatus, setTestStatus] = useState<TestStatus>("idle");
@@ -70,21 +80,38 @@ export const useTypingTest = (targetText: string, timeLimit: number, onTestCompl
       if (testStatus === "idle" && event.key.length === 1 && event.key !== "F5") {
         setTestStatus("running");
         startTimeRef.current = now;
+        onTestStart();
       }
 
       if (testStatus === "running") {
-        if (event.key.length === 1 && event.key !== "F5") {
+        const isCharacterKey = event.key.length === 1 && event.key !== "F5" && event.key !== "Shift";
+        const currentPosition = typedText.length;
+
+        if (mode === "strict" && currentPosition < targetText.length && isCharacterKey) {
+          if (event.key !== targetText[currentPosition]) {
+            event.preventDefault();
+            return;
+          }
+        }
+
+        if (isCharacterKey) {
           event.preventDefault();
           setTypedText((prevTypedText) => prevTypedText + event.key);
           setTypedHistory((prevHistory) => [...prevHistory, [event.key, now]]);
         } else if (event.key === "Backspace") {
+          if (mode === "accuracy" || mode === "strict") {
+            event.preventDefault();
+            return;
+          }
+
           event.preventDefault();
           setTypedText((prevTypedText) => prevTypedText.slice(0, -1));
           setTypedHistory((prevHistory) => prevHistory.slice(0, -1));
         }
       }
     },
-    [testStatus]
+
+    [testStatus, typedText, targetText, mode, onTestStart]
   );
 
   useEffect(() => {

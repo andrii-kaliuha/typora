@@ -5,7 +5,7 @@ const REPLAY_SPEED = 1;
 type Letter = { letter: string; status: string; typedAt: number | null };
 type Word = { letters: Letter[]; status: string };
 
-export const useTestReplay = (text: Word[]) => {
+export const useWatchReplay = (text: Word[]) => {
   const [isPlaying, togglePlaying] = useState(false);
   const [replayCharIndex, setReplayCharIndex] = useState(0);
   const intervalRef = useRef<number | null>(null);

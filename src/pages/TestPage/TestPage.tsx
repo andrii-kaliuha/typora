@@ -1,11 +1,12 @@
-import { useState, useCallback, useEffect, useMemo } from "react";
+import { useState, useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { TextConfig } from "../../components/TextConfig";
 import { TextContainer } from "../../components/TextContainer";
 import { TestResult } from "../../components/TestResult";
 import "./TestPage.css";
 import { getNewText, getRandomText } from "../../utils/utils";
-import { useSelector } from "react-redux";
-import { type RootState } from "../../store/index";
+import type { RootState } from "../../store/index";
+import { setRandomText } from "../../store/configSlice";
 
 type TestStatus = "idle" | "running" | "finished";
 type TestMetrics = { wpm: number; accuracy: number };
@@ -16,67 +17,81 @@ type StatItem = { label: string; value: string | number | Date };
 type FinalResults = { textData: WordData[]; metrics: TestMetrics; stats: StatItem[] };
 
 export const TestPage = () => {
-  const { language, duration, textType, customText } = useSelector((state: RootState) => state.config);
+  const dispatch = useDispatch();
+  const { textType, language, duration, mode, currentText } = useSelector((state: RootState) => state.config);
 
   const [testStatus, setTestStatus] = useState<TestStatus>("idle");
   const [finalResults, setFinalResults] = useState<FinalResults | null>(null);
 
-  // 3. Обчислюємо targetText за допомогою useMemo
-  const initialText = useMemo(() => {
-    if (textType === "custom" && customText && customText.trim().length > 0) return customText;
-    return getRandomText(language);
-  }, [textType, customText, language]);
+  const handleTestComplete = useCallback(
+    (data: WordData[], metrics: TestMetrics) => {
+      // 1. Обчислення додаткових метрик з data
+      let correctChars = 0;
+      let incorrectChars = 0;
+      let untypedChars = 0;
+      let correctWords = 0;
 
-  // 4. Оновлюємо targetText при зміні initialText
-  useEffect(() => {
-    setTargetText(initialText);
-  }, [initialText]);
+      data.forEach((word) => {
+        if (word.status === "correct") correctWords++;
 
-  const handleTestComplete = useCallback((data: WordData[], metrics: TestMetrics) => {
-    const statsForDisplay: StatItem[] = [
-      { label: "result.wpm", value: metrics.wpm },
-      { label: "result.accuracy", value: `${metrics.accuracy}%` },
-      { label: "result.date", value: new Date() },
-      // додати інші метрики
-    ];
+        word.letters.forEach((letter) => {
+          if (letter.status === "correct") correctChars++;
+          else if (letter.status === "incorrect") incorrectChars++;
+          else if (letter.status === "untyped") untypedChars++;
+        });
+      });
 
-    // 2 Збереження результатів та оновлення статусу
-    setFinalResults({ textData: data, metrics: metrics, stats: statsForDisplay });
-    setTestStatus("finished");
+      const statsForDisplay: StatItem[] = [
+        // Метрики з хука useTypingTest
+        { label: "result.wpm", value: metrics.wpm },
+        { label: "result.accuracy", value: `${metrics.accuracy}%` },
 
-    // 3 Збереження в глобальний Store (MobX/Redux)
-    console.log("Тест завершено. Результати готові до збереження.");
-  }, []);
+        // Нові обчислені метрики
+        { label: "result.characters", value: `${correctChars}/${incorrectChars}/${untypedChars}` },
+
+        // Налаштування тесту (взяті з Redux)
+        { label: "result.duration", value: duration },
+        { label: "result.mode", value: `result.${mode}` },
+        { label: "result.language", value: `result.${language}` },
+        { label: "result.text", value: `result.${textType}-text` },
+
+        // Дата завершення
+        { label: "result.date", value: new Date() },
+      ];
+
+      // 2. Збереження результатів та оновлення статусу
+      setFinalResults({ textData: data, metrics: metrics, stats: statsForDisplay });
+      setTestStatus("finished");
+
+      // 3. Збереження в глобальний Redux Store
+      console.log("Збереження в глобальний Redux Store");
+    },
+    [duration, mode, language, textType]
+  );
 
   const handleRepeatTest = () => {
     setFinalResults(null);
     setTestStatus("idle");
   };
 
-  const baseText = useMemo(() => {
-    if (textType === "custom" && customText && customText.trim().length > 0) return customText;
-    return getRandomText(language);
-  }, [textType, customText, language]);
-
-  const [targetText, setTargetText] = useState(baseText);
-
   useEffect(() => {
-    if (targetText !== baseText) {
-      setTargetText(baseText);
-      setTestStatus("idle");
-      setFinalResults(null);
-    }
-  }, [baseText, targetText]);
+    const initialRandomText = getRandomText(language);
+    dispatch(setRandomText(initialRandomText));
+  }, [language, dispatch]);
 
   const handleNextTest = useCallback(() => {
     setFinalResults(null);
     setTestStatus("idle");
 
     if (textType === "random") {
-      const newText = getNewText(targetText, language);
-      setTargetText(newText);
-    } else setTargetText(baseText);
-  }, [targetText, language, textType, baseText]);
+      const newRandomText = getNewText(currentText, language);
+      dispatch(setRandomText(newRandomText));
+    }
+  }, [currentText, language, textType, dispatch]);
+
+  const handleTestStart = useCallback(() => {
+    setTestStatus("running");
+  }, []);
 
   const renderContent = () => {
     switch (testStatus) {
@@ -90,8 +105,14 @@ export const TestPage = () => {
       default:
         return (
           <>
-            <TextConfig />
-            <TextContainer targetText={targetText} timeLimit={duration} onTestComplete={handleTestComplete} />
+            <TextConfig visibility={testStatus === "running" ? false : true} />
+            <TextContainer
+              targetText={currentText}
+              timeLimit={duration}
+              onTestComplete={handleTestComplete}
+              onTestStart={handleTestStart}
+              mode={mode}
+            />
           </>
         );
     }

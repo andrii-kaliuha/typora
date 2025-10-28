@@ -1,33 +1,40 @@
-import { useTranslation } from "react-i18next";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { setCustomText, setTextType } from "../store/configSlice";
 import "./Modal.css";
 
-type ModalProps = { isOpen: boolean; onClose: () => void; onSubmit: (text: string) => void };
+type ModalProps = { isOpen: boolean; onClose: () => void };
 
-export const Modal = ({ isOpen, onClose, onSubmit }: ModalProps) => {
-  const [customText, setCustomText] = useState("");
+export const Modal = ({ isOpen, onClose }: ModalProps) => {
+  const [localText, setLocalText] = useState("");
   const { t } = useTranslation();
 
   if (!isOpen) return null;
 
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-      setCustomText("");
-    }
-  };
+  const dispatch = useDispatch();
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormConfirm = (e: React.FormEvent) => {
     e.preventDefault();
 
-    onSubmit(customText);
+    if (localText.trim()) {
+      dispatch(setCustomText(localText));
+      dispatch(setTextType("custom"));
+    }
 
-    setCustomText("");
+    setLocalText("");
     onClose();
   };
 
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      setLocalText("");
+      onClose();
+    }
+  };
+
   const handleCancel = () => {
-    setCustomText("");
+    setLocalText("");
     onClose();
   };
 
@@ -35,13 +42,13 @@ export const Modal = ({ isOpen, onClose, onSubmit }: ModalProps) => {
     <div className="modal-backdrop" onClick={handleBackdropClick}>
       <div className="modal-container">
         <h3 className="modal-title"> {t("modal.title")}</h3>
-        <form onSubmit={handleFormSubmit}>
+        <form onSubmit={handleFormConfirm}>
           <textarea
             name="custom-text"
             placeholder={t("modal.placeholder")}
             rows={10}
-            value={customText}
-            onChange={(e) => setCustomText(e.target.value)}
+            value={localText}
+            onChange={(e) => setLocalText(e.target.value)}
           ></textarea>
 
           <div className="modal-footer">
@@ -49,7 +56,7 @@ export const Modal = ({ isOpen, onClose, onSubmit }: ModalProps) => {
               {t("modal.cancel")}
             </button>
 
-            <button type="submit" onClick={handleFormSubmit} className="confirm-button">
+            <button type="submit" className="confirm-button">
               {t("modal.confirm")}
             </button>
           </div>

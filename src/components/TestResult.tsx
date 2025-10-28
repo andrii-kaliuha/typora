@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import "./TestResult.css";
 import { useScreenshot } from "../hooks/useScreenshot";
-import { useTestReplay } from "../hooks/useWatchReplay";
+import { useWatchReplay } from "../hooks/useWatchReplay";
 import { TextResult } from "../shared/TextResult";
 import { ResultButton } from "../shared/ResultButton";
 import { TestStatistics } from "../shared/TestStatistics";
@@ -16,7 +16,7 @@ type TestResultProps = {
 
 export const TestResult = ({ text, stats, onRepeat, onNext }: TestResultProps) => {
   const { t } = useTranslation();
-  const { isPlaying, replayCharIndex, handleTogglePlay } = useTestReplay(text);
+  const { isPlaying, replayCharIndex, handleTogglePlay } = useWatchReplay(text);
 
   const { captureAndDownload } = useScreenshot("test-result");
   const DivRef = useRef<HTMLDivElement>(null);

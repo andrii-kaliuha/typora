@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useMemo } from "react";
 import { useTypingTest } from "../hooks/useTypingTest";
 import { TestControls } from "../shared/TestControls";
 import { getCharStatus, getWordStatus } from "../utils/utils";
@@ -6,15 +6,24 @@ import { getCharStatus, getWordStatus } from "../utils/utils";
 type LetterData = { letter: string; status: "cursor" | "untyped" | "correct" | "incorrect"; typedAt: number | null };
 type WordData = { letters: LetterData[]; status: "correct" | "untyped" | "incorrect" };
 type TestMetrics = { wpm: number; accuracy: number };
-type TextContainerProps = { targetText: string; timeLimit: number; onTestComplete: (data: WordData[], metrics: TestMetrics) => void };
+type Mode = "normal" | "accuracy" | "strict";
+type TextContainerProps = {
+  targetText: string;
+  timeLimit: number;
+  onTestComplete: (data: WordData[], metrics: TestMetrics) => void;
+  onTestStart: () => void;
+  mode: Mode;
+};
 
-export const TextContainer = ({ targetText, timeLimit, onTestComplete }: TextContainerProps) => {
+export const TextContainer = ({ targetText, timeLimit, onTestComplete, onTestStart, mode }: TextContainerProps) => {
   // 1. Використовуємо хук для всієї логіки стану та введення
-  const { typedText, typedHistory, testStatus, timeLeft, handleRestart, handleKeyDown, finishTest } = useTypingTest(
+  const { typedText, typedHistory, testStatus, timeLeft, handleRestart, handleKeyDown, finishTest } = useTypingTest({
     targetText,
     timeLimit,
-    onTestComplete
-  );
+    onTestComplete,
+    onTestStart,
+    mode,
+  });
 
   const textContainerRef = useRef<HTMLDivElement>(null);
 
@@ -38,31 +47,33 @@ export const TextContainer = ({ targetText, timeLimit, onTestComplete }: TextCon
 
   // 3. Обробка тексту
 
-  const wordsWithSpaces = targetText.match(/(\S+|\s)/g) || [];
+  const textData: WordData[] = useMemo(() => {
+    const wordsWithSpaces = targetText.match(/(\S+|\s)/g) || [];
 
-  const textData: WordData[] = wordsWithSpaces.map((wordOrSpace, wordIndex) => {
-    const startIndex = wordsWithSpaces.slice(0, wordIndex).join("").length;
+    return wordsWithSpaces.map((wordOrSpace, wordIndex) => {
+      const startIndex = wordsWithSpaces.slice(0, wordIndex).join("").length;
 
-    const lettersData: LetterData[] = wordOrSpace.split("").map((char, charIndex) => {
-      const globalIndex = startIndex + charIndex;
-      const status = getCharStatus(char, globalIndex, typedText);
+      const lettersData: LetterData[] = wordOrSpace.split("").map((char, charIndex) => {
+        const globalIndex = startIndex + charIndex;
+        const status = getCharStatus(char, globalIndex, typedText);
 
-      const typedAt = typedHistory[globalIndex] ? typedHistory[globalIndex][1] : null;
+        const typedAt = typedHistory[globalIndex] ? typedHistory[globalIndex][1] : null;
+
+        return {
+          letter: char,
+          status: status as LetterData["status"],
+          typedAt: typedAt,
+        };
+      });
+
+      const wordStatus = getWordStatus(lettersData) as WordData["status"];
 
       return {
-        letter: char,
-        status: status as LetterData["status"],
-        typedAt: typedAt,
+        letters: lettersData,
+        status: wordStatus,
       };
     });
-
-    const wordStatus = getWordStatus(lettersData) as WordData["status"];
-
-    return {
-      letters: lettersData,
-      status: wordStatus,
-    };
-  });
+  }, [targetText, typedText, typedHistory]);
 
   // 4. Умова Завершення: Набрано весь текст
 

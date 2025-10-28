@@ -11,6 +11,10 @@
   user-select: none;
 }
 
+.text-config.hidden {
+  visibility: hidden;
+}
+
 .text-config-list {
   background-color: var(--surface-color);
   border-radius: 12px;
