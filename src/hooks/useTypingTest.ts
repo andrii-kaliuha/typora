@@ -1,9 +1,16 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../store/index";
+import { startTest, completeTest, resetTest } from "../store/testSlice";
+import { addToHistory, type TestResultItem } from "../store/resultsSlice";
 
 type TestStatus = "idle" | "running" | "finished";
 type TestMetrics = { wpm: number; accuracy: number };
-type WordData = { letters: any[]; status: "correct" | "untyped" | "incorrect" };
 type TypedHistoryEntry = [string, number];
+type Mode = "normal" | "accuracy" | "strict";
+type LetterData = { letter: string; status: "cursor" | "untyped" | "correct" | "incorrect"; typedAt: number | null };
+type WordData = { letters: LetterData[]; status: "correct" | "untyped" | "incorrect" };
+type TypingTestProps = { targetText: string; timeLimit: number; mode: Mode };
 
 const calculateMetrics = (typedHistory: TypedHistoryEntry[], targetText: string, timeElapsed: number): TestMetrics => {
   if (timeElapsed === 0) return { wpm: 0, accuracy: 0 };
@@ -24,20 +31,15 @@ const calculateMetrics = (typedHistory: TypedHistoryEntry[], targetText: string,
   return { wpm, accuracy };
 };
 
-type Mode = "normal" | "accuracy" | "strict";
+export const useTypingTest = ({ targetText, timeLimit, mode }: TypingTestProps) => {
+  const dispatch = useDispatch();
 
-type TypingTestProps = {
-  targetText: string;
-  timeLimit: number;
-  onTestComplete: (data: WordData[], metrics: TestMetrics) => void;
-  onTestStart: () => void;
-  mode: Mode;
-};
+  const { duration, language, textType } = useSelector((state: RootState) => state.config);
 
-export const useTypingTest = ({ targetText, timeLimit, onTestComplete, onTestStart, mode }: TypingTestProps) => {
+  const globalTestStatus = useSelector((state: RootState) => state.test.status) as TestStatus;
+
   const [typedText, setTypedText] = useState("");
   const [typedHistory, setTypedHistory] = useState<TypedHistoryEntry[]>([]);
-  const [testStatus, setTestStatus] = useState<TestStatus>("idle");
   const [timeLeft, setTimeLeft] = useState(timeLimit);
 
   const startTimeRef = useRef<number | null>(null);
@@ -45,7 +47,7 @@ export const useTypingTest = ({ targetText, timeLimit, onTestComplete, onTestSta
   const handleRestart = useCallback(() => {
     setTypedText("");
     setTypedHistory([]);
-    setTestStatus("idle");
+    dispatch(resetTest());
     setTimeLeft(timeLimit);
     startTimeRef.current = null;
   }, [timeLimit]);
@@ -56,34 +58,60 @@ export const useTypingTest = ({ targetText, timeLimit, onTestComplete, onTestSta
 
   const finishTest = useCallback(
     (finalTextData: WordData[]) => {
-      setTestStatus((currentStatus) => {
-        if (currentStatus === "finished") return "finished";
+      if (globalTestStatus === "finished") return;
 
-        const endTime = Date.now();
-        const timeElapsed = startTimeRef.current ? (endTime - startTimeRef.current) / 1000 : 0;
+      const endTime = Date.now();
+      const timeElapsed = startTimeRef.current ? (endTime - startTimeRef.current) / 1000 : 0;
 
-        const metrics = calculateMetrics(typedHistory, targetText, timeElapsed);
-        onTestComplete(finalTextData, metrics);
+      const metrics = calculateMetrics(typedHistory, targetText, timeElapsed);
 
-        return "finished";
+      let correctChars = 0;
+      let incorrectChars = 0;
+      let untypedChars = 0;
+
+      finalTextData.forEach((word) => {
+        word.letters.forEach((letter) => {
+          if (letter.status === "correct") correctChars++;
+          else if (letter.status === "incorrect") incorrectChars++;
+          else if (letter.status === "untyped") untypedChars++;
+        });
       });
+
+      const statsForDisplay: TestResultItem["stats"] = [
+        { label: "result.wpm", value: metrics.wpm },
+        { label: "result.accuracy", value: `${metrics.accuracy}%` },
+        { label: "result.characters", value: `${correctChars}/${incorrectChars}/${untypedChars}` },
+        { label: "result.duration", value: duration },
+        { label: "result.mode", value: `result.${mode}` },
+        { label: "result.language", value: `result.${language}` },
+        { label: "result.text", value: `result.${textType}-text` },
+        { label: "result.date", value: Date.now() },
+      ];
+
+      const resultItem: TestResultItem = {
+        textData: finalTextData,
+        stats: statsForDisplay,
+        id: crypto.randomUUID(),
+      };
+
+      dispatch(completeTest(resultItem));
+      dispatch(addToHistory(resultItem));
     },
-    [typedHistory, targetText, onTestComplete]
+    [typedHistory, targetText, dispatch, duration, language, textType, mode, globalTestStatus]
   );
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
-      if (testStatus === "finished") return;
+      if (globalTestStatus === "finished") return;
 
       const now = Date.now();
 
-      if (testStatus === "idle" && event.key.length === 1 && event.key !== "F5") {
-        setTestStatus("running");
+      if (globalTestStatus === "idle" && event.key.length === 1 && event.key !== "F5") {
         startTimeRef.current = now;
-        onTestStart();
+        dispatch(startTest());
       }
 
-      if (testStatus === "running") {
+      if (globalTestStatus === "running") {
         const isCharacterKey = event.key.length === 1 && event.key !== "F5" && event.key !== "Shift";
         const currentPosition = typedText.length;
 
@@ -110,12 +138,11 @@ export const useTypingTest = ({ targetText, timeLimit, onTestComplete, onTestSta
         }
       }
     },
-
-    [testStatus, typedText, targetText, mode, onTestStart]
+    [globalTestStatus, typedText, targetText, mode, dispatch]
   );
 
   useEffect(() => {
-    if (testStatus !== "running" || timeLeft === 0) return;
+    if (globalTestStatus !== "running" || timeLeft === 0) return;
 
     const timerId = setInterval(() => {
       setTimeLeft((prevTime) => {
@@ -128,7 +155,7 @@ export const useTypingTest = ({ targetText, timeLimit, onTestComplete, onTestSta
     }, 1000);
 
     return () => clearInterval(timerId);
-  }, [testStatus, timeLeft]);
+  }, [globalTestStatus, timeLeft]);
 
-  return { typedText, typedHistory, testStatus, timeLeft, handleRestart, handleKeyDown, finishTest };
+  return { typedText, typedHistory, timeLeft, handleRestart, handleKeyDown, finishTest, testStatus: globalTestStatus };
 };

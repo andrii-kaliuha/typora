@@ -9,10 +9,9 @@ type ModalProps = { isOpen: boolean; onClose: () => void };
 export const Modal = ({ isOpen, onClose }: ModalProps) => {
   const [localText, setLocalText] = useState("");
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   if (!isOpen) return null;
-
-  const dispatch = useDispatch();
 
   const handleFormConfirm = (e: React.FormEvent) => {
     e.preventDefault();

@@ -3,3 +3,18 @@
   flex-direction: column;
   gap: 24px;
 }
+
+.empty-history {
+  text-align: center;
+  margin-top: 30vh;
+}
+
+.empty-history-title {
+  color: var(--primary-color);
+  margin-bottom: 12px;
+}
+
+.empty-history-action {
+  color: var(--text-color);
+  font-size: 18px;
+}

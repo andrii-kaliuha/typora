@@ -5,39 +5,35 @@ import { getCharStatus, getWordStatus } from "../utils/utils";
 
 type LetterData = { letter: string; status: "cursor" | "untyped" | "correct" | "incorrect"; typedAt: number | null };
 type WordData = { letters: LetterData[]; status: "correct" | "untyped" | "incorrect" };
-type TestMetrics = { wpm: number; accuracy: number };
 type Mode = "normal" | "accuracy" | "strict";
-type TextContainerProps = {
-  targetText: string;
-  timeLimit: number;
-  onTestComplete: (data: WordData[], metrics: TestMetrics) => void;
-  onTestStart: () => void;
-  mode: Mode;
-};
+type TextContainerProps = { targetText: string; timeLimit: number; mode: Mode };
 
-export const TextContainer = ({ targetText, timeLimit, onTestComplete, onTestStart, mode }: TextContainerProps) => {
-  // 1. Використовуємо хук для всієї логіки стану та введення
+export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProps) => {
+  // 1. Використання хука для логіки введення
+
   const { typedText, typedHistory, testStatus, timeLeft, handleRestart, handleKeyDown, finishTest } = useTypingTest({
     targetText,
     timeLimit,
-    onTestComplete,
-    onTestStart,
     mode,
   });
 
   const textContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (testStatus !== "finished") handleRestart();
-  }, [timeLimit]);
+    if (testStatus === "idle") handleRestart();
+  }, [targetText, timeLimit]);
 
   // 2. Логіка для приєднання/від'єднання слухача
+
   useEffect(() => {
     const textContainer = textContainerRef.current;
 
     if (textContainer) {
-      textContainer.addEventListener("keydown", handleKeyDown);
-      textContainer.focus();
+      if (testStatus === "running" || testStatus === "idle") {
+        textContainer.addEventListener("keydown", handleKeyDown);
+        textContainer.focus();
+      } else if (testStatus === "finished") {
+      }
 
       return () => {
         textContainer.removeEventListener("keydown", handleKeyDown);
@@ -84,6 +80,7 @@ export const TextContainer = ({ targetText, timeLimit, onTestComplete, onTestSta
   }, [timeLeft, isTextFullyTyped, testStatus, textData, finishTest]);
 
   // 5. Рендеринг
+
   return (
     <div className="text-container">
       <div className="text-wrapper" ref={textContainerRef} tabIndex={0}>

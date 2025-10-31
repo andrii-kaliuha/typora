@@ -33,6 +33,7 @@
     "screenshot": "Save",
     "repeat-test": "Repeat test",
     "next-test": "Next test",
+    "delete": "Delete",
     "restart-test": "Restart Test",
 
     "wpm": "Words per Minute",
@@ -100,5 +101,9 @@
       "item-5": "The SHIFT key is always pressed by the pinky finger on the opposite side of the required letter.",
       "item-6": "Press the spacebar with either your left or right thumb, whichever is more comfortable."
     }
+  },
+  "history": {
+    "title": "No test history available",
+    "action": "Take a test to save and view your results in this section."
   }
 }

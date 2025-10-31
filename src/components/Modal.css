@@ -64,6 +64,11 @@
   &:hover {
     background-color: var(--surface-hover-color);
   }
+
+  &:focus-visible {
+    outline: 2px solid var(--primary-color);
+    z-index: 10;
+  }
 }
 
 .cancel-button {
