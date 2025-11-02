@@ -16,8 +16,10 @@ export const Modal = ({ isOpen, onClose }: ModalProps) => {
   const handleFormConfirm = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (localText.trim()) {
-      dispatch(setCustomText(localText));
+    const trimmedText = localText.trimEnd();
+
+    if (trimmedText) {
+      dispatch(setCustomText(trimmedText));
       dispatch(setTextType("custom"));
     }
 

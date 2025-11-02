@@ -83,10 +83,13 @@ export const useTypingTest = ({ targetText, timeLimit, mode }: TypingTestProps) 
         { label: "result.characters", value: `${correctChars}/${incorrectChars}/${untypedChars}` },
         { label: "result.duration", value: duration },
         { label: "result.mode", value: `result.${mode}` },
-        { label: "result.language", value: `result.${language}` },
-        { label: "result.text", value: `result.${textType}-text` },
-        { label: "result.date", value: Date.now() },
       ];
+
+      if (textType !== "custom") {
+        statsForDisplay.push({ label: "result.language", value: `result.${language}` });
+      }
+
+      statsForDisplay.push({ label: "result.text", value: `result.${textType}-text` }, { label: "result.date", value: Date.now() });
 
       const resultItem: TestResultItem = {
         textData: finalTextData,
@@ -105,36 +108,41 @@ export const useTypingTest = ({ targetText, timeLimit, mode }: TypingTestProps) 
       if (globalTestStatus === "finished") return;
 
       const now = Date.now();
+      const isCharacterKey =
+        event.key.length === 1 &&
+        event.key !== "Meta" &&
+        event.key !== "Shift" &&
+        event.key !== "Control" &&
+        event.key !== "Alt" &&
+        event.key !== "F5";
+      if (event.key === "Backspace" && globalTestStatus === "running") {
+        if (mode === "accuracy" || mode === "strict") {
+          event.preventDefault();
+          return;
+        }
 
-      if (globalTestStatus === "idle" && event.key.length === 1 && event.key !== "F5") {
-        startTimeRef.current = now;
-        dispatch(startTest());
-      }
+        event.preventDefault();
+        setTypedText((prevTypedText) => prevTypedText.slice(0, -1));
+        setTypedHistory((prevHistory) => prevHistory.slice(0, -1));
+      } else if (isCharacterKey) {
+        if (globalTestStatus === "idle") {
+          startTimeRef.current = now;
+          dispatch(startTest());
+        }
 
-      if (globalTestStatus === "running") {
-        const isCharacterKey = event.key.length === 1 && event.key !== "F5" && event.key !== "Shift";
         const currentPosition = typedText.length;
 
-        if (mode === "strict" && currentPosition < targetText.length && isCharacterKey) {
+        if (mode === "strict" && currentPosition < targetText.length) {
           if (event.key !== targetText[currentPosition]) {
             event.preventDefault();
             return;
           }
         }
 
-        if (isCharacterKey) {
+        if (currentPosition < targetText.length || mode === "normal") {
           event.preventDefault();
           setTypedText((prevTypedText) => prevTypedText + event.key);
           setTypedHistory((prevHistory) => [...prevHistory, [event.key, now]]);
-        } else if (event.key === "Backspace") {
-          if (mode === "accuracy" || mode === "strict") {
-            event.preventDefault();
-            return;
-          }
-
-          event.preventDefault();
-          setTypedText((prevTypedText) => prevTypedText.slice(0, -1));
-          setTypedHistory((prevHistory) => prevHistory.slice(0, -1));
         }
       }
     },

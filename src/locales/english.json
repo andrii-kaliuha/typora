@@ -104,6 +104,7 @@
   },
   "history": {
     "title": "No test history available",
-    "action": "Take a test to save and view your results in this section."
+    "action": "Take a test to save and view your results in this section.",
+    "clear-all": "Clear all"
   }
 }

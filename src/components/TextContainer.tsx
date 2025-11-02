@@ -1,5 +1,6 @@
 import { useRef, useEffect, useMemo } from "react";
 import { useTypingTest } from "../hooks/useTypingTest";
+import { useAutoScroll } from "../hooks/useAvtoScroll";
 import { TestControls } from "../shared/TestControls";
 import { getCharStatus, getWordStatus } from "../utils/utils";
 
@@ -8,8 +9,10 @@ type WordData = { letters: LetterData[]; status: "correct" | "untyped" | "incorr
 type Mode = "normal" | "accuracy" | "strict";
 type TextContainerProps = { targetText: string; timeLimit: number; mode: Mode };
 
+const LINE_HEIGHT = 48;
+
 export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProps) => {
-  // 1. Використання хука для логіки введення
+  // 1. Використання useTypingTest
 
   const { typedText, typedHistory, testStatus, timeLeft, handleRestart, handleKeyDown, finishTest } = useTypingTest({
     targetText,
@@ -18,6 +21,8 @@ export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProp
   });
 
   const textContainerRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+  const cursorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (testStatus === "idle") handleRestart();
@@ -32,7 +37,6 @@ export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProp
       if (testStatus === "running" || testStatus === "idle") {
         textContainer.addEventListener("keydown", handleKeyDown);
         textContainer.focus();
-      } else if (testStatus === "finished") {
       }
 
       return () => {
@@ -41,18 +45,21 @@ export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProp
     }
   }, [testStatus, handleKeyDown]);
 
-  // 3. Обробка тексту
+  // 3. Використання useAutoScroll
+
+  useAutoScroll(textRef, cursorRef, typedText.length, LINE_HEIGHT);
+
+  // 4. Обробка тексту
 
   const textData: WordData[] = useMemo(() => {
-    const wordsWithSpaces = targetText.match(/(\S+|\s)/g) || [];
+    const words = targetText.match(/\S+/g) || [];
 
-    return wordsWithSpaces.map((wordOrSpace, wordIndex) => {
-      const startIndex = wordsWithSpaces.slice(0, wordIndex).join("").length;
+    return words.map((word, wordIndex) => {
+      const startIndex = words.slice(0, wordIndex).reduce((sum, w) => sum + w.length + 1, 0);
 
-      const lettersData: LetterData[] = wordOrSpace.split("").map((char, charIndex) => {
+      const lettersData: LetterData[] = word.split("").map((char, charIndex) => {
         const globalIndex = startIndex + charIndex;
         const status = getCharStatus(char, globalIndex, typedText);
-
         const typedAt = typedHistory[globalIndex] ? typedHistory[globalIndex][1] : null;
 
         return {
@@ -61,6 +68,16 @@ export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProp
           typedAt: typedAt,
         };
       });
+
+      const isLastWord = wordIndex === words.length - 1;
+      if (!isLastWord) {
+        const spaceIndex = startIndex + word.length;
+        lettersData.push({
+          letter: " ",
+          status: getCharStatus(" ", spaceIndex, typedText) as LetterData["status"],
+          typedAt: typedHistory[spaceIndex] ? typedHistory[spaceIndex][1] : null,
+        });
+      }
 
       const wordStatus = getWordStatus(lettersData) as WordData["status"];
 
@@ -71,7 +88,7 @@ export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProp
     });
   }, [targetText, typedText, typedHistory]);
 
-  // 4. Умова Завершення: Набрано весь текст
+  // 5. Умова Завершення: Набрано весь текст
 
   const isTextFullyTyped = typedText.length === targetText.length && textData.every((word) => word.status === "correct");
 
@@ -79,19 +96,23 @@ export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProp
     if (testStatus === "running" && (timeLeft === 0 || isTextFullyTyped)) finishTest(textData);
   }, [timeLeft, isTextFullyTyped, testStatus, textData, finishTest]);
 
-  // 5. Рендеринг
+  // 6. Рендеринг
 
   return (
     <div className="text-container">
       <div className="text-wrapper" ref={textContainerRef} tabIndex={0}>
-        <div className="text">
+        <div className="text" ref={textRef} tabIndex={-1}>
           {textData.map((word, index) => (
             <span key={index} className="word">
-              {word.letters.map((item, index) => (
-                <span key={index} className={`letter ${item.status}`}>
-                  {item.letter}
-                </span>
-              ))}
+              {word.letters.map((item, index) => {
+                const isCursor = item.status === "cursor";
+
+                return (
+                  <span key={index} ref={isCursor ? cursorRef : null} className={`letter ${item.status}`}>
+                    {item.letter === " " ? "\u00A0" : item.letter}
+                  </span>
+                );
+              })}
             </span>
           ))}
         </div>

@@ -9,12 +9,34 @@ import { getFileName } from "../../utils/utils";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../store";
 import "./HistoryPage.css";
-import { removeFromHistory } from "../../store/resultsSlice";
+import { removeFromHistory, clearHistory } from "../../store/resultsSlice";
 
 export const HistoryPage = () => {
   const history = useSelector((state: RootState) => state.results.history);
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
 
-  return <div className="history-page">{history.length > 0 ? <HistoryList /> : <EmptyHistory />}</div>;
+  const handleClearHistory = () => {
+    if (window.confirm(t("history.confirm-clear"))) dispatch(clearHistory());
+  };
+
+  return (
+    <div className="history-page">
+      {history.length > 0 ? (
+        <>
+          <div className="history-header">
+            <h2>Історія результатів:</h2>
+            <button type="button" onClick={handleClearHistory} className="clear-history-button">
+              {t("history.clear-all")}
+            </button>
+          </div>
+          <HistoryList />
+        </>
+      ) : (
+        <EmptyHistory />
+      )}
+    </div>
+  );
 };
 
 const HistoryList = () => {

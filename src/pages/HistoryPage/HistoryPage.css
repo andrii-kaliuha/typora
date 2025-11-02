@@ -18,3 +18,41 @@
   color: var(--text-color);
   font-size: 18px;
 }
+
+.history-header {
+  background-color: var(--surface-color);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  height: 48px;
+  border-radius: 16px;
+  align-items: center;
+  padding: 0 24px;
+}
+
+.history-header h2 {
+  color: var(--primary-color);
+}
+
+.clear-history-button {
+  color: var(--secondary-color);
+  background-color: transparent;
+  border-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  height: 32px;
+
+  &:hover {
+    color: var(--text-color);
+  }
+
+  &:active {
+    color: var(--primary-color);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--primary-color);
+  }
+}

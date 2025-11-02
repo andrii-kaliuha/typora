@@ -1,4 +1,3 @@
-// src/store/testSlice.ts
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { TestResultItem } from "./resultsSlice";
 
