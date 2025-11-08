@@ -1,8 +1,9 @@
 .learning-page {
-  color: var(--text-color);
   display: flex;
   flex-direction: column;
   gap: 24px;
+  color: var(--text-color);
+  padding: 0 24px 24px;
 }
 
 .learning-title {
@@ -16,8 +17,15 @@
 }
 
 .image-container {
-  display: flex;
-  justify-content: center;
+  margin: 0 auto;
+}
+
+.posture-for-print {
+  width: 515px;
+}
+
+.keyboard {
+  width: 712px;
 }
 
 .advice-block {
@@ -30,15 +38,47 @@
 }
 
 .advice-list {
-  display: contents;
-}
-
-.advice-list li {
   display: flex;
-  gap: 12px;
+  flex-direction: column;
+  gap: 24px;
 }
 
-.advice-list span {
+.advice-list li:first-letter {
   color: var(--primary-color);
   font-weight: bold;
+}
+
+@media (max-width: 1023px) {
+  .keyboard {
+    width: 80%;
+  }
+
+  .posture-for-print {
+    width: 60%;
+  }
+}
+
+@media (max-width: 767px) {
+  .advice-block {
+    background-color: transparent;
+    padding: 0;
+  }
+
+  .keyboard {
+    width: 90%;
+  }
+
+  .posture-for-print {
+    width: 70%;
+  }
+}
+
+@media (max-width: 424px) {
+  .keyboard {
+    width: 100%;
+  }
+
+  .posture-for-print {
+    width: 100%;
+  }
 }

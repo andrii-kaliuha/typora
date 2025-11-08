@@ -29,6 +29,7 @@
   },
 
   "result": {
+    "screenshot-error": "Failed to create screenshot. Please try again.",
     "watch-replay": "Watch replay",
     "screenshot": "Save",
     "repeat-test": "Repeat test",

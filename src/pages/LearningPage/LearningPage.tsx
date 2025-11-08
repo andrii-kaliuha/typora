@@ -10,7 +10,7 @@ export const LearningPage = () => {
       <p className="learning-subtitle">{t("learning.subtitle")}</p>
 
       <section className="advice-block">
-        <LearningImage width={515} height={300} source="posture-for-print.svg" />
+        <LearningImage width={515} height={300} source="posture-for-print.svg" style="posture-for-print" />
         <h2 className="learning-title">{t("learning.posture-for-print.title")}</h2>
         <List
           items={[
@@ -58,7 +58,7 @@ const FingerPosition = ({ language }: { language: string }) => {
       <p>{t("learning.finger-position.first-advice")}</p>
       <p>{t("learning.finger-position.second-advice")}</p>
 
-      <LearningImage width={712} height={244} source={`keyboard.svg#${language === "ukrainian" ? "ukrainian" : "english"}`} />
+      <LearningImage width={712} height={244} source={`keyboard.svg#${language === "ukrainian" ? "ukrainian" : "english"}`} style="keyboard" />
 
       <p>{t("learning.finger-position.third-advice")}</p>
       <List
@@ -81,17 +81,19 @@ const List = ({ items }: { items: string[] }) => {
     <ul className="advice-list">
       {items.map((item, index) => (
         <li key={index}>
-          <span>{index + 1}</span>—<p>{item}</p>
+          {index + 1} — {item}
         </li>
       ))}
     </ul>
   );
 };
 
-const LearningImage = ({ width, height, source }: { width: number; height: number; source: string }) => {
+const LearningImage = ({ width, height, source, style }: { width: number; height: number; source: string; style: string }) => {
+  const viewBoxValue = `0 0 ${width} ${height}`;
+
   return (
-    <div className="image-container">
-      <svg width={width} height={height}>
+    <div className={`image-container ${style}`}>
+      <svg viewBox={viewBoxValue}>
         <use href={`./src/assets/${source}`}></use>
       </svg>
     </div>

@@ -16,13 +16,9 @@ const loadHistory = (): TestResultItem[] => {
   }
 };
 
-const saveHistory = (history: TestResultItem[]) => {
-  localStorage.setItem("typing_history", JSON.stringify(history));
-};
+const saveHistory = (history: TestResultItem[]) => localStorage.setItem("typing_history", JSON.stringify(history));
 
-const initialState: ResultsState = {
-  history: loadHistory(),
-};
+const initialState: ResultsState = { history: loadHistory() };
 
 const resultsSlice = createSlice({
   name: "results",
@@ -44,5 +40,4 @@ const resultsSlice = createSlice({
 });
 
 export const { addToHistory, removeFromHistory, clearHistory } = resultsSlice.actions;
-
 export default resultsSlice.reducer;

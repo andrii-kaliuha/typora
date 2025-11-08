@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   gap: 24px;
+  padding: 0 24px 24px;
 }
 
 .text-config {
@@ -113,6 +114,46 @@
   color: var(--primary-color);
 }
 
-.screenshot-only-styles {
-  border-radius: 0 !important;
+@media (max-width: 839px) {
+  .test-page {
+    padding: 0;
+  }
+
+  .text-config {
+    display: flex;
+    flex-direction: column;
+
+    overflow-x: scroll;
+    width: 100%;
+    scrollbar-width: none;
+    gap: 4px;
+    user-select: none;
+  }
+
+  .text-config-list {
+    overflow-x: scroll;
+    display: flex;
+
+    scrollbar-width: none;
+    border-radius: 0;
+  }
+
+  .text-container {
+    border-radius: 0;
+  }
+
+  .text-wrapper {
+    border-radius: 0;
+    margin: 0 2px;
+  }
+
+  .text-config-item {
+    flex-shrink: 0;
+    flex-grow: 1;
+
+    &:first-child,
+    &:last-child {
+      border-radius: 0;
+    }
+  }
 }

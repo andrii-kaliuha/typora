@@ -22,6 +22,12 @@ html {
   scrollbar-gutter: stable;
 }
 
+@media (max-width: 767px) {
+  html {
+    scrollbar-gutter: unset;
+  }
+}
+
 body {
   background-color: var(--background-color);
   font-family: "Roboto Mono", monospace;
@@ -35,7 +41,6 @@ body {
 .app {
   width: 100%;
   max-width: 1280px;
-  padding: 24px;
 }
 
 ::-webkit-scrollbar {
