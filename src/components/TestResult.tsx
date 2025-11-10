@@ -11,10 +11,11 @@ import { getFileName, getNewText } from "../utils/utils";
 import type { RootState } from "../store";
 import { resetTest } from "../store/testSlice";
 import { setRandomText } from "../store/configSlice";
+import type { Stats } from "../types/types";
 
 type TestResultProps = {
   text: { letters: { letter: string; status: string; typedAt: number | null }[]; status: string }[];
-  stats: { label: string; value: string | number | Date }[];
+  stats: Stats;
 };
 
 export const TestResult = ({ text, stats }: TestResultProps) => {
@@ -24,10 +25,7 @@ export const TestResult = ({ text, stats }: TestResultProps) => {
   const { isPlaying, replayCharIndex, handleTogglePlay } = useWatchReplay(text);
   const { textType, language, currentText } = useSelector((state: RootState) => state.config);
 
-  const dateStat = stats.find((stat) => stat.label === "result.date");
-  const dateUnixMilliseconds = dateStat?.value as number | undefined;
-
-  const { captureAndDownload } = useScreenshot(getFileName(dateUnixMilliseconds));
+  const { captureAndDownload } = useScreenshot(getFileName(stats.date));
   const DivRef = useRef<HTMLDivElement>(null);
   const handleCapture = () => captureAndDownload(DivRef.current);
 

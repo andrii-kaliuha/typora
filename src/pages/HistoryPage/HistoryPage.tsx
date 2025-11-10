@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../store";
 import "./HistoryPage.css";
 import { removeFromHistory } from "../../store/resultsSlice";
+import type { Stats } from "../../types/types";
 
 export const HistoryPage = () => {
   const history = useSelector((state: RootState) => state.results.history);
@@ -42,7 +43,7 @@ const EmptyHistory = () => {
 type HistoryTestResultProps = {
   id: string;
   text: { letters: { letter: string; status: string; typedAt: number | null }[]; status: string }[];
-  stats: { label: string; value: string | number | Date }[];
+  stats: Stats;
 };
 
 export const HistoryTestResult = ({ text, stats, id }: HistoryTestResultProps) => {
@@ -50,10 +51,7 @@ export const HistoryTestResult = ({ text, stats, id }: HistoryTestResultProps) =
   const { t } = useTranslation();
   const { isPlaying, replayCharIndex, handleTogglePlay } = useWatchReplay(text);
 
-  const dateStat = stats.find((stat) => stat.label === "result.date");
-  const dateUnixMilliseconds = dateStat?.value as number | undefined;
-
-  const { captureAndDownload } = useScreenshot(getFileName(dateUnixMilliseconds));
+  const { captureAndDownload } = useScreenshot(getFileName(stats.date));
   const LiRef = useRef<HTMLLIElement>(null);
   const handleCapture = () => captureAndDownload(LiRef.current);
   const handleDelete = () => dispatch(removeFromHistory(id));

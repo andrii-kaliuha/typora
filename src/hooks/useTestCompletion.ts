@@ -3,60 +3,47 @@ import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../store/index";
 import { completeTest } from "../store/testSlice";
 import { addToHistory } from "../store/resultsSlice";
-import type { Mode, TestResultItem, TestStatus, TypedHistoryEntry, WordData } from "../types/types";
+import type { TestResultItem, TestStatus, TypedHistoryEntry, WordData } from "../types/types";
 import { calculateMetrics } from "../utils/calculateMetrics";
+import { countTypedCharacters } from "../utils/countTypedCharacters";
 
 type UseTestCompletionProps = {
   typedHistory: TypedHistoryEntry[];
   targetText: string;
-  mode: Mode;
   testStatus: TestStatus;
   startTimeRef: RefObject<number | null>;
 };
 
-export const useTestCompletion = ({ typedHistory, targetText, mode, testStatus, startTimeRef }: UseTestCompletionProps) => {
+export const useTestCompletion = ({ typedHistory, targetText, testStatus, startTimeRef }: UseTestCompletionProps) => {
   const dispatch = useDispatch();
-  const { duration, language, textType } = useSelector((state: RootState) => state.config);
+  const { textType, language, duration, mode } = useSelector((state: RootState) => state.config);
 
   const finishTest = useCallback(
-    (finalTextData: WordData[]) => {
+    (text: WordData[]) => {
       if (testStatus === "finished") return;
 
-      const endTime = Date.now();
-      const timeElapsed = startTimeRef.current ? (endTime - startTimeRef.current) / 1000 : 0;
+      const timeElapsed = startTimeRef.current ? (Date.now() - startTimeRef.current) / 1000 : 0;
 
-      const metrics = calculateMetrics(typedHistory, targetText, timeElapsed);
+      const { wpm, accuracy } = calculateMetrics(typedHistory, targetText, timeElapsed);
+      const { correctChars, incorrectChars, untypedChars } = countTypedCharacters(text);
 
-      let correctChars = 0;
-      let incorrectChars = 0;
-      let untypedChars = 0;
+      const stats = {
+        wpm: wpm,
+        accuracy: accuracy,
+        characters: { correctChars: correctChars, incorrectChars: incorrectChars, untypedChars: untypedChars },
+        duration: timeElapsed,
+        mode: mode,
+        language: language,
+        text: textType,
+        date: Date.now(),
+      };
 
-      finalTextData.forEach((word) => {
-        word.letters.forEach((letter) => {
-          if (letter.status === "correct") correctChars++;
-          else if (letter.status === "incorrect") incorrectChars++;
-          else if (letter.status === "untyped") untypedChars++;
-        });
-      });
-
-      const statsForDisplay: TestResultItem["stats"] = [
-        { label: "result.wpm", value: metrics.wpm },
-        { label: "result.accuracy", value: `${metrics.accuracy}%` },
-        { label: "result.characters", value: `${correctChars}/${incorrectChars}/${untypedChars}` },
-        { label: "result.duration", value: duration },
-        { label: "result.mode", value: `result.${mode}` },
-      ];
-
-      if (textType !== "custom") statsForDisplay.push({ label: "result.language", value: `result.${language}` });
-
-      statsForDisplay.push({ label: "result.text", value: `result.${textType}-text` }, { label: "result.date", value: Date.now() });
-
-      const resultItem: TestResultItem = { textData: finalTextData, stats: statsForDisplay, id: crypto.randomUUID() };
+      const resultItem: TestResultItem = { textData: text, stats: stats, id: crypto.randomUUID() };
 
       dispatch(completeTest(resultItem));
       dispatch(addToHistory(resultItem));
     },
-    [typedHistory, targetText, duration, language, textType, mode, testStatus, startTimeRef, dispatch]
+    [typedHistory, targetText, testStatus, startTimeRef, duration, language, textType, mode, dispatch]
   );
 
   return { finishTest };

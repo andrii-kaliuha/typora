@@ -6,7 +6,7 @@ export type TestStatus = "idle" | "running" | "finished";
 
 export type StatItem = { label: string; value: string | number };
 
-export type TestResultItem = { textData: Word[]; stats: StatItem[]; id: string };
+export type TestResultItem = { textData: Word[]; stats: Stats; id: string };
 
 export type TestState = { status: TestStatus; finalResults: TestResultItem | null };
 
@@ -17,12 +17,10 @@ export type WordData = { letters: any[]; status: "correct" | "incorrect" | "unty
 export type LetterData = { letter: string; status: "cursor" | "untyped" | "correct" | "incorrect"; typedAt: number | null };
 export type TypedHistoryEntry = [string, number];
 
-export type TestResultItem2 = { textData: Word[]; stats: Stats; id: string };
-
-type Stats = {
+export type Stats = {
   wpm: number;
   accuracy: number;
-  characters: string;
+  characters: { correctChars: number; incorrectChars: number; untypedChars: number };
   duration: number;
   mode: string;
   language: string;

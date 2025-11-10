@@ -20,7 +20,7 @@ export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProp
   });
 
   // 2. Логіка завершення
-  const { finishTest } = useTestCompletion({ typedHistory, targetText, mode, testStatus, startTimeRef });
+  const { finishTest } = useTestCompletion({ typedHistory, targetText, testStatus, startTimeRef });
 
   const textContainerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);

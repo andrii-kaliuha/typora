@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { ResultButton } from "./ResultButton";
-import { formatTime } from "../utils/utils";
+import { formatTime } from "../utils/formatters";
 
 type TestControlsProps = { timeLeft: number; onRestart: () => void };
 
