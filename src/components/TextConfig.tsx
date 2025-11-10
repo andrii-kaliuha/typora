@@ -1,12 +1,10 @@
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { setTextType, setLanguage, setDuration, setMode } from "../store/configSlice";
-import type { TextType, Language, Mode } from "../store/configSlice";
+import { ConfigItem, CustomTextButton } from "../shared/ConfigItem";
+import type { MenuOptions, TextType, Language, Mode } from "../types/types";
 import type { RootState } from "../store/index";
-import { Modal } from "./Modal";
-
-type MenuOptions = "text" | "language" | "duration" | "mode";
 
 export const TextConfig = ({ visibility }: { visibility: boolean }) => {
   const { t } = useTranslation();
@@ -17,8 +15,8 @@ export const TextConfig = ({ visibility }: { visibility: boolean }) => {
 
   const handleOptionClick = (option: MenuOptions) => setOpenMenu(option);
   const handleTextTypeClick = (type: TextType) => dispatch(setTextType(type));
-  const handleLanguageClick = (lang: Language) => dispatch(setLanguage(lang));
-  const handleDurationClick = (timeStr: number) => dispatch(setDuration(timeStr));
+  const handleLanguageClick = (language: Language) => dispatch(setLanguage(language));
+  const handleDurationClick = (duration: number) => dispatch(setDuration(duration));
   const handleModeClick = (mode: Mode) => dispatch(setMode(mode));
 
   return (
@@ -67,32 +65,5 @@ export const TextConfig = ({ visibility }: { visibility: boolean }) => {
         </div>
       )}
     </div>
-  );
-};
-
-type ConfigItemProps<T extends string | number> = { id: T; activeKey: T; label: string; onSelect: (id: T) => void };
-
-const ConfigItem = <T extends string | number>({ id, activeKey, label, onSelect }: ConfigItemProps<T>) => {
-  return (
-    <button key={id} onClick={() => onSelect(id)} className={`text-config-item ${activeKey === id ? "active" : ""}`}>
-      {label}
-    </button>
-  );
-};
-
-const CustomTextButton = ({ label, activeKey }: { label: string; activeKey: string }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleOpen = () => setIsModalOpen(true);
-  const handleClose = () => setIsModalOpen(false);
-
-  return (
-    <>
-      <button onClick={handleOpen} className={`text-config-item ${activeKey === "custom" ? "active" : ""}`}>
-        {label}
-      </button>
-
-      <Modal isOpen={isModalOpen} onClose={handleClose} />
-    </>
   );
 };

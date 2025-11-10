@@ -9,7 +9,7 @@ export const TestControls = ({ timeLeft, onRestart }: TestControlsProps) => {
 
   return (
     <div className="buttons-container">
-      <ResultButton click={onRestart} name={t("result.restart-test")} icon="repeat-icon" />
+      <ResultButton action={onRestart} name={t("result.restart-test")} icon="repeat-icon" />
       <span className="timer">{formatTime(timeLeft)}</span>
     </div>
   );

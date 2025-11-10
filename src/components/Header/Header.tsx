@@ -1,95 +1,32 @@
-import { useTranslation } from "react-i18next";
-import { Navigation } from "./Navigation";
-import "./Header.css";
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import "./Header.css";
+import { Navigation } from "./Navigation";
 
-export const Header = () => {
-  const { i18n } = useTranslation();
+export const Header = () => (
+  <header>
+    <Logotype />
+    <Navigation />
+    <div className="buttons-container">
+      <LanguageSelect />
+      <ThemeToggle />
+    </div>
+    <MobileMenu />
+  </header>
+);
 
-  const toggleLanguage = () => {
-    const language = i18n.language === "english" ? "ukrainian" : "english";
-    i18n.changeLanguage(language);
-  };
-
-  return (
-    <header>
-      <div className="logotype-container">
-        <svg id="logotype-icon">
-          <use href="./src/assets/icons.svg#logotype-icon" />
-        </svg>
-        <p className="logotype-text">Typora</p>
-      </div>
-      <Navigation />
-      <div className="buttons-container">
-        <button onClick={toggleLanguage} type="button" className="language-select-button">
-          <svg id="language-icon" width={32} height={32}>
-            <use href="./src/assets/icons.svg#language-icon" />
-          </svg>
-        </button>
-        <ThemeToggle />
-      </div>
-      <MobileMenuButton />
-    </header>
-  );
-};
-
-const MobileMenuButton = () => {
-  // const toogleMenu = () => {};
-
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const handleOpen = () => setIsMenuOpen(true);
-  const handleClose = () => setIsMenuOpen(false);
-
-  return (
-    <>
-      <button onClick={handleOpen} type="button" className="toggle-menu-button">
-        <svg width={32} height={32}>
-          <use href="./src/assets/icons.svg#menu-icon" />
-        </svg>
-      </button>
-
-      <MobileMenu isOpen={isMenuOpen} onClose={handleClose} />
-    </>
-  );
-};
-
-type MobileMenuProps = { isOpen: boolean; onClose: () => void };
-
-export const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
-  const { i18n } = useTranslation();
-
-  const toggleLanguage = () => {
-    const language = i18n.language === "english" ? "ukrainian" : "english";
-    i18n.changeLanguage(language);
-  };
-
+const Menu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   if (!isOpen) return null;
 
   return (
     <div className="menu-backdrop">
       <div className="menu-container">
-        <div className="logotype-container">
-          <svg id="logotype-icon">
-            <use href="./src/assets/icons.svg#logotype-icon" />
-          </svg>
-          <p className="logotype-text">Typora</p>
-        </div>
-        <Navigation onClose={onClose} />
+        <Logotype />
+        <Navigation action={onClose} />
         <div className="buttons-container">
-          <button onClick={toggleLanguage} type="button" className="language-select-button">
-            <svg id="language-icon" width={32} height={32}>
-              <use href="./src/assets/icons.svg#language-icon" />
-            </svg>
-          </button>
-
+          <LanguageSelect />
           <ThemeToggle />
-
-          <button onClick={onClose} type="button" className="language-select-button">
-            <svg id="exit-icon" width={32} height={32}>
-              <use href="./src/assets/icons.svg#exit-icon" />
-            </svg>
-          </button>
+          <SettingButton icon="exit-icon" action={onClose} />
         </div>
       </div>
     </div>
@@ -113,10 +50,48 @@ const ThemeToggle = () => {
 
   const handleThemeToggle = () => setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
 
+  return <SettingButton icon="theme-icon" action={handleThemeToggle} />;
+};
+
+const LanguageSelect = () => {
+  const { i18n } = useTranslation();
+
+  const toggleLanguage = () => {
+    const language = i18n.language === "english" ? "ukrainian" : "english";
+    i18n.changeLanguage(language);
+  };
+
+  return <SettingButton icon="language-icon" action={toggleLanguage} />;
+};
+
+const MobileMenu = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const handleToggleMenu = () => setIsMenuOpen((prev) => !prev);
+
   return (
-    <button type="button" onClick={handleThemeToggle} className="theme-toggle-button">
-      <svg id="theme-icon" width={32} height={32}>
-        <use href="./src/assets/icons.svg#theme-icon" />
+    <>
+      <Menu isOpen={isMenuOpen} onClose={handleToggleMenu} />
+      <SettingButton icon="menu-icon" action={handleToggleMenu} style="toggle-menu-button" />
+    </>
+  );
+};
+
+const Logotype = () => {
+  return (
+    <div className="logotype-container">
+      <svg id="logotype-icon">
+        <use href="./src/assets/icons.svg#logotype-icon" />
+      </svg>
+      <p className="logotype-text">Typora</p>
+    </div>
+  );
+};
+
+const SettingButton = ({ icon, action, style }: { icon: string; action: () => void; style?: string }) => {
+  return (
+    <button type="button" onClick={action} className={`setting-button ${style}`}>
+      <svg width={32} height={32}>
+        <use href={`./src/assets/icons.svg#${icon}`} />
       </svg>
     </button>
   );

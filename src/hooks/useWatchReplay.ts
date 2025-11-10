@@ -1,9 +1,7 @@
 import { useState, useRef, useEffect } from "react";
+import type { Word } from "../types/types";
 
 const REPLAY_SPEED = 1;
-
-type Letter = { letter: string; status: string; typedAt: number | null };
-type Word = { letters: Letter[]; status: string };
 
 export const useWatchReplay = (text: Word[]) => {
   const [isPlaying, togglePlaying] = useState(false);

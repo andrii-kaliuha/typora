@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import configReducer from "./configSlice";
-import resultsReducer from "./resultsSlice";
 import testReducer from "./testSlice";
+import resultsReducer from "./resultsSlice";
 
 export const store = configureStore({
   reducer: {
     config: configReducer,
-    results: resultsReducer,
     test: testReducer,
+    results: resultsReducer,
   },
 });
 

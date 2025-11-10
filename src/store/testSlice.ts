@@ -1,7 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { TestResultItem } from "./resultsSlice";
+import type { TestStatus, TestResultItem } from "../types/types";
 
-export type TestStatus = "idle" | "running" | "finished";
 type TestState = { status: TestStatus; finalResults: TestResultItem | null };
 
 const initialState: TestState = { status: "idle", finalResults: null };

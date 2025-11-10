@@ -1,7 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { renderStatValue } from "../utils/utils";
 
-export const TestStatistics = ({ stats }: { stats: { label: string; value: string | number | Date }[] }) => {
+type TestStatisticsProps = { stats: { label: string; value: string | number | Date }[] };
+
+export const TestStatistics = ({ stats }: TestStatisticsProps) => {
   const { t } = useTranslation();
 
   return (

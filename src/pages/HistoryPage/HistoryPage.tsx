@@ -63,9 +63,9 @@ export const HistoryTestResult = ({ text, stats, id }: HistoryTestResultProps) =
       <TextResult text={text} isReplaying={isPlaying} replayCharIndex={replayCharIndex} />
       <TestStatistics stats={stats} />
       <div className="buttons-container">
-        <ResultButton click={handleTogglePlay} name={t("result.watch-replay")} icon={isPlaying === false ? "play-icon" : "pause-icon"} />
-        <ResultButton click={handleCapture} name={t("result.screenshot")} icon="screenshot-icon" />
-        <ResultButton click={handleDelete} name={t("result.delete")} icon="delete-icon" />
+        <ResultButton action={handleTogglePlay} name={t("result.watch-replay")} icon={isPlaying === false ? "play-icon" : "pause-icon"} />
+        <ResultButton action={handleCapture} name={t("result.screenshot")} icon="screenshot-icon" />
+        <ResultButton action={handleDelete} name={t("result.delete")} icon="delete-icon" />
       </div>
     </li>
   );

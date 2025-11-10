@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { formatDate } from "./formatDate";
-import type { Language } from "../store/configSlice";
+import type { Language, TestResultItem } from "../types/types";
 import TEXT_POOL_UA from "../texts/ukrainian-texts.json";
 import TEXT_POOL_EN from "../texts/english-texts.json";
 
@@ -75,3 +75,14 @@ export const getFileName = (unixTimestamp: number | undefined): string => {
 
   return `test-result ${datePart} ${timePart}`;
 };
+
+export const loadHistory = (): TestResultItem[] => {
+  try {
+    const data = localStorage.getItem("typing_history");
+    return data ? JSON.parse(data) : [];
+  } catch {
+    return [];
+  }
+};
+
+export const saveHistory = (history: TestResultItem[]) => localStorage.setItem("typing_history", JSON.stringify(history));

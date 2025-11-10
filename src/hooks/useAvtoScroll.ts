@@ -4,7 +4,7 @@ export const useAutoScroll = (
   scrollContainerRef: RefObject<HTMLElement | null>,
   targetElementRef: RefObject<HTMLElement | null>,
   triggerDependency: number,
-  lineHeight: number = 48
+  lineHeight: number
 ) => {
   useEffect(() => {
     const container = scrollContainerRef.current;

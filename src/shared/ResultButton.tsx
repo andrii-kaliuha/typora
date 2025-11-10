@@ -1,8 +1,8 @@
-type ButtonProps = { click: () => void; name: string; icon: string };
+type ButtonProps = { action: () => void; name: string; icon: string };
 
-export const ResultButton = ({ click, name, icon }: ButtonProps) => {
+export const ResultButton = ({ action, name, icon }: ButtonProps) => {
   return (
-    <button type="button" className="result-button" onClick={click}>
+    <button type="button" className="result-button" onClick={action}>
       <p>{name}</p>
       <svg width={24} height={24}>
         <use href={`./src/assets/icons.svg#${icon}`} />

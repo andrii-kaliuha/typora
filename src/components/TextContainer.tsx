@@ -1,12 +1,11 @@
 import { useRef, useEffect, useMemo } from "react";
-import { useTypingTest } from "../hooks/useTypingTest";
 import { useAutoScroll } from "../hooks/useAvtoScroll";
 import { TestControls } from "../shared/TestControls";
 import { getCharStatus, getWordStatus } from "../utils/utils";
+import { useTestCompletion } from "../hooks/useTestCompletion";
+import { useTypingTest } from "../hooks/useTypingTest";
+import type { LetterData, Mode, WordData } from "../types/types";
 
-type LetterData = { letter: string; status: "cursor" | "untyped" | "correct" | "incorrect"; typedAt: number | null };
-type WordData = { letters: LetterData[]; status: "correct" | "untyped" | "incorrect" };
-type Mode = "normal" | "accuracy" | "strict";
 type TextContainerProps = { targetText: string; timeLimit: number; mode: Mode };
 
 const LINE_HEIGHT = 48;
@@ -14,11 +13,14 @@ const LINE_HEIGHT = 48;
 export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProps) => {
   // 1. Використання useTypingTest
 
-  const { typedText, typedHistory, testStatus, timeLeft, handleRestart, handleKeyDown, finishTest } = useTypingTest({
+  const { typedText, typedHistory, timeLeft, handleRestart, handleKeyDown, testStatus, startTimeRef } = useTypingTest({
     targetText,
     timeLimit,
     mode,
   });
+
+  // 2. Логіка завершення
+  const { finishTest } = useTestCompletion({ typedHistory, targetText, mode, testStatus, startTimeRef });
 
   const textContainerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
@@ -28,7 +30,7 @@ export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProp
     if (testStatus === "idle") handleRestart();
   }, [targetText, timeLimit]);
 
-  // 2. Логіка для приєднання/від'єднання слухача
+  // 3. Логіка для приєднання/від'єднання слухача
 
   useEffect(() => {
     const textContainer = textContainerRef.current;
@@ -45,11 +47,11 @@ export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProp
     }
   }, [testStatus, handleKeyDown]);
 
-  // 3. Використання useAutoScroll
+  // 4. Використання useAutoScroll
 
   useAutoScroll(textRef, cursorRef, typedText.length, LINE_HEIGHT);
 
-  // 4. Обробка тексту
+  // 5. Обробка тексту
 
   const textData: WordData[] = useMemo(() => {
     const words = targetText.match(/\S+/g) || [];
@@ -88,7 +90,7 @@ export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProp
     });
   }, [targetText, typedText, typedHistory]);
 
-  // 5. Умова Завершення: Набрано весь текст
+  // 6. Умова Завершення: Набрано весь текст
 
   const isTextFullyTyped = typedText.length === targetText.length && textData.every((word) => word.status === "correct");
 
@@ -96,7 +98,7 @@ export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProp
     if (testStatus === "running" && (timeLeft === 0 || isTextFullyTyped)) finishTest(textData);
   }, [timeLeft, isTextFullyTyped, testStatus, textData, finishTest]);
 
-  // 6. Рендеринг
+  // 7. Рендеринг
 
   return (
     <div className="text-container">

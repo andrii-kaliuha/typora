@@ -1,0 +1,31 @@
+export type MenuOptions = "text" | "language" | "duration" | "mode";
+export type TextType = "random" | "custom";
+export type Language = "ukrainian" | "english";
+export type Mode = "normal" | "accuracy" | "strict";
+export type TestStatus = "idle" | "running" | "finished";
+
+export type StatItem = { label: string; value: string | number };
+
+export type TestResultItem = { textData: Word[]; stats: StatItem[]; id: string };
+
+export type TestState = { status: TestStatus; finalResults: TestResultItem | null };
+
+export type Letter = { letter: string; status: string; typedAt: number | null };
+export type Word = { letters: Letter[]; status: string };
+
+export type WordData = { letters: any[]; status: "correct" | "incorrect" | "untyped" };
+export type LetterData = { letter: string; status: "cursor" | "untyped" | "correct" | "incorrect"; typedAt: number | null };
+export type TypedHistoryEntry = [string, number];
+
+export type TestResultItem2 = { textData: Word[]; stats: Stats; id: string };
+
+type Stats = {
+  wpm: number;
+  accuracy: number;
+  characters: string;
+  duration: number;
+  mode: string;
+  language: string;
+  text: string;
+  date: number;
+};

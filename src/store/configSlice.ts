@@ -1,8 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-
-export type TextType = "random" | "custom";
-export type Language = "ukrainian" | "english";
-export type Mode = "normal" | "accuracy" | "strict";
+import type { TextType, Language, Mode } from "../types/types";
 
 type ConfigState = {
   textType: TextType;
