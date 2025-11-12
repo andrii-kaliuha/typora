@@ -1,18 +1,11 @@
-import { useCallback, type RefObject } from "react";
+import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../store/index";
 import { completeTest } from "../store/testSlice";
 import { addToHistory } from "../store/resultsSlice";
-import type { TestResultItem, TestStatus, TypedHistoryEntry, WordData } from "../types/types";
+import type { UseTestCompletionProps, WordData, TestResultItem } from "../types/types";
 import { calculateMetrics } from "../utils/calculateMetrics";
 import { countTypedCharacters } from "../utils/countTypedCharacters";
-
-type UseTestCompletionProps = {
-  typedHistory: TypedHistoryEntry[];
-  targetText: string;
-  testStatus: TestStatus;
-  startTimeRef: RefObject<number | null>;
-};
 
 export const useTestCompletion = ({ typedHistory, targetText, testStatus, startTimeRef }: UseTestCompletionProps) => {
   const dispatch = useDispatch();
@@ -43,7 +36,7 @@ export const useTestCompletion = ({ typedHistory, targetText, testStatus, startT
       dispatch(completeTest(resultItem));
       dispatch(addToHistory(resultItem));
     },
-    [typedHistory, targetText, testStatus, startTimeRef, duration, language, textType, mode, dispatch]
+    [typedHistory, targetText, testStatus, startTimeRef, textType, language, duration, mode, dispatch]
   );
 
   return { finishTest };

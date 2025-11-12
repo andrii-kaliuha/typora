@@ -1,3 +1,5 @@
+import type { RefObject } from "react";
+
 export type MenuOptions = "text" | "language" | "duration" | "mode";
 export type TextType = "random" | "custom";
 export type Language = "ukrainian" | "english";
@@ -26,4 +28,28 @@ export type Stats = {
   language: string;
   text: string;
   date: number;
+};
+
+export type HistoryTestResultProps = {
+  id: string;
+  text: { letters: { letter: string; status: string; typedAt: number | null }[]; status: string }[];
+  stats: Stats;
+};
+
+export type TestResultProps = {
+  text: { letters: { letter: string; status: string; typedAt: number | null }[]; status: string }[];
+  stats: Stats;
+};
+
+export type TextProps = {
+  text: { letters: { letter: string; status: string; typedAt: number | null }[]; status: string }[];
+  isReplaying: boolean;
+  cursorIndex: number;
+};
+
+export type UseTestCompletionProps = {
+  typedHistory: TypedHistoryEntry[];
+  targetText: string;
+  testStatus: TestStatus;
+  startTimeRef: RefObject<number | null>;
 };

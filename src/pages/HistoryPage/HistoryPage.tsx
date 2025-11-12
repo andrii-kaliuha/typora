@@ -1,16 +1,16 @@
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import { useScreenshot } from "../../hooks/useScreenshot";
 import { useWatchReplay } from "../../hooks/useWatchReplay";
 import { TextResult } from "../../shared/TextResult";
 import { ResultButton } from "../../shared/ResultButton";
 import { TestStatistics } from "../../shared/TestStatistics";
 import { getFileName } from "../../utils/utils";
-import { useDispatch, useSelector } from "react-redux";
+import { removeFromHistory } from "../../store/resultsSlice";
+import type { HistoryTestResultProps } from "../../types/types";
 import type { RootState } from "../../store";
 import "./HistoryPage.css";
-import { removeFromHistory } from "../../store/resultsSlice";
-import type { Stats } from "../../types/types";
 
 export const HistoryPage = () => {
   const history = useSelector((state: RootState) => state.results.history);
@@ -40,16 +40,10 @@ const EmptyHistory = () => {
   );
 };
 
-type HistoryTestResultProps = {
-  id: string;
-  text: { letters: { letter: string; status: string; typedAt: number | null }[]; status: string }[];
-  stats: Stats;
-};
-
 export const HistoryTestResult = ({ text, stats, id }: HistoryTestResultProps) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const { isPlaying, replayCharIndex, handleTogglePlay } = useWatchReplay(text);
+  const { isPlaying, cursorIndex, handleTogglePlay } = useWatchReplay(text);
 
   const { captureAndDownload } = useScreenshot(getFileName(stats.date));
   const LiRef = useRef<HTMLLIElement>(null);
@@ -58,7 +52,7 @@ export const HistoryTestResult = ({ text, stats, id }: HistoryTestResultProps) =
 
   return (
     <li className="test-result" ref={LiRef}>
-      <TextResult text={text} isReplaying={isPlaying} replayCharIndex={replayCharIndex} />
+      <TextResult text={text} isReplaying={isPlaying} cursorIndex={cursorIndex} />
       <TestStatistics stats={stats} />
       <div className="buttons-container">
         <ResultButton action={handleTogglePlay} name={t("result.watch-replay")} icon={isPlaying === false ? "play-icon" : "pause-icon"} />

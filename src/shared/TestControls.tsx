@@ -2,9 +2,9 @@ import { useTranslation } from "react-i18next";
 import { ResultButton } from "./ResultButton";
 import { formatTime } from "../utils/formatters";
 
-type TestControlsProps = { timeLeft: number; onRestart: () => void };
+type TestControlsProps = { onRestart: () => void; timeLeft: number };
 
-export const TestControls = ({ timeLeft, onRestart }: TestControlsProps) => {
+export const TestControls = ({ onRestart, timeLeft }: TestControlsProps) => {
   const { t } = useTranslation();
 
   return (

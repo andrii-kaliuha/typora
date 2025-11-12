@@ -5,7 +5,7 @@ export const formatStats = (rawStats: Stats): StatItem[] => {
 
   const statsArray: StatItem[] = [
     { label: "result.wpm", value: wpm },
-    { label: "result.accuracy", value: `${accuracy}%` },
+    { label: "result.accuracy", value: accuracy },
     { label: "result.characters", value: `${characters.correctChars}/${characters.incorrectChars}/${characters.untypedChars}` },
     { label: "result.duration", value: duration },
     { label: "result.mode", value: `result.${mode}` },

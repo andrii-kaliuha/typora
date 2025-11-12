@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import "./Header.css";
 import { Navigation } from "./Navigation";
+import "./Header.css";
 
 export const Header = () => (
   <header>
@@ -87,7 +87,7 @@ const Logotype = () => {
   );
 };
 
-const SettingButton = ({ icon, action, style }: { icon: string; action: () => void; style?: string }) => {
+const SettingButton = ({ action, style, icon }: { action: () => void; style?: string; icon: string }) => {
   return (
     <button type="button" onClick={action} className={`setting-button ${style}`}>
       <svg width={32} height={32}>

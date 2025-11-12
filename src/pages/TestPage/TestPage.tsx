@@ -1,17 +1,17 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { TextConfig } from "../../components/TextConfig";
 import { TextContainer } from "../../components/TextContainer";
 import { TestResult } from "../../components/TestResult";
-import "./TestPage.css";
 import { getRandomText } from "../../utils/utils";
-import type { RootState } from "../../store/index";
 import { setRandomText } from "../../store/configSlice";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../../store/index";
+import "./TestPage.css";
 
 export const TestPage = () => {
   const dispatch = useDispatch();
   const { language, duration, mode, currentText } = useSelector((state: RootState) => state.config);
-  const { status: testStatus, finalResults } = useSelector((state: RootState) => state.test);
+  const { status, results } = useSelector((state: RootState) => state.test);
 
   useEffect(() => {
     const initialRandomText = getRandomText(language);
@@ -20,14 +20,14 @@ export const TestPage = () => {
 
   return (
     <div className="test-page">
-      {testStatus !== "finished" && (
+      {status !== "finished" && (
         <>
-          <TextConfig visibility={testStatus === "idle"} />
+          <TextConfig visibility={status === "idle"} />
           <TextContainer targetText={currentText} timeLimit={duration} mode={mode} />
         </>
       )}
 
-      {finalResults && <TestResult text={finalResults.textData} stats={finalResults.stats} />}
+      {results && <TestResult text={results.textData} stats={results.stats} />}
     </div>
   );
 };

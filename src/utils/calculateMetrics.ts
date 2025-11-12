@@ -7,7 +7,7 @@ export const calculateMetrics = (typedHistory: TypedHistoryEntry[], targetText: 
   const typedCharsCount = typedHistory.length;
   let correctCharsCount = 0;
 
-  const wpm = Math.round(typedCharsCount / 5 / (timeElapsed / 60));
+  const wpm = typedCharsCount / 5 / (timeElapsed / 60);
 
   for (let i = 0; i < typedCharsCount; i++) {
     if (i < targetText.length && targetText[i] === typedHistory[i][0]) {
@@ -15,7 +15,7 @@ export const calculateMetrics = (typedHistory: TypedHistoryEntry[], targetText: 
     }
   }
 
-  const accuracy = typedCharsCount > 0 ? Math.round((correctCharsCount / typedCharsCount) * 100) : 0;
+  const accuracy = typedCharsCount > 0 ? (correctCharsCount / typedCharsCount) * 100 : 0;
 
   return { wpm, accuracy };
 };

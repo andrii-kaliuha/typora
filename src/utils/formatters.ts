@@ -5,7 +5,15 @@ export const renderStatValue = ({ label, value }: { label: string; value: any })
   const { t, i18n } = useTranslation();
 
   if (label === "result.date") return formatDate(value, i18n.language);
-  else if (typeof value === "string" && value.startsWith("result.")) return t(value);
+  else if ((label === "result.wpm" || label === "result.accuracy" || label === "result.duration") && typeof value === "number") {
+    const roundedValue = Math.round(value);
+
+    if (label === "result.accuracy") {
+      return `${roundedValue}%`;
+    }
+
+    return roundedValue;
+  } else if (typeof value === "string" && value.startsWith("result.")) return t(value);
   else return value;
 };
 

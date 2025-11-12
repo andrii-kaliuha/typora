@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Modal } from "../components/Modal";
 
-type ConfigItemProps<T extends string | number> = { id: T; activeKey: T; label: string; onSelect: (id: T) => void };
+type ConfigItemProps<T extends string | number> = { id: T; onSelect: (id: T) => void; activeKey: T; label: string };
 
-export const ConfigItem = <T extends string | number>({ id, activeKey, label, onSelect }: ConfigItemProps<T>) => {
+export const ConfigItem = <T extends string | number>({ id, onSelect, activeKey, label }: ConfigItemProps<T>) => {
   return (
     <button key={id} onClick={() => onSelect(id)} className={`text-config-item ${activeKey === id ? "active" : ""}`}>
       {label}

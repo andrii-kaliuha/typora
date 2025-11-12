@@ -5,7 +5,7 @@ const REPLAY_SPEED = 1;
 
 export const useWatchReplay = (text: Word[]) => {
   const [isPlaying, togglePlaying] = useState(false);
-  const [replayCharIndex, setReplayCharIndex] = useState(0);
+  const [cursorIndex, setReplayCharIndex] = useState(0);
   const intervalRef = useRef<number | null>(null);
   const flatTypedHistory = useRef<number[]>([]);
 
@@ -32,12 +32,12 @@ export const useWatchReplay = (text: Word[]) => {
       return;
     }
 
-    if (replayCharIndex === flatTypedHistory.current.length) {
+    if (cursorIndex === flatTypedHistory.current.length) {
       setReplayCharIndex(0);
       return;
     }
 
-    let currentIndex = replayCharIndex;
+    let currentIndex = cursorIndex;
     const history = flatTypedHistory.current;
 
     const runReplay = () => {
@@ -61,10 +61,10 @@ export const useWatchReplay = (text: Word[]) => {
       intervalRef.current = setTimeout(runReplay, delay);
     };
 
-    if (history.length > 0 && replayCharIndex < history.length) {
-      const initialDelay = history[replayCharIndex + 1] ? (history[replayCharIndex + 1] - history[replayCharIndex]) / REPLAY_SPEED : 0;
+    if (history.length > 0 && cursorIndex < history.length) {
+      const initialDelay = history[cursorIndex + 1] ? (history[cursorIndex + 1] - history[cursorIndex]) / REPLAY_SPEED : 0;
 
-      if (replayCharIndex === 0) {
+      if (cursorIndex === 0) {
         intervalRef.current = setTimeout(runReplay, history[0] / REPLAY_SPEED);
       } else {
         intervalRef.current = setTimeout(runReplay, initialDelay);
@@ -74,10 +74,10 @@ export const useWatchReplay = (text: Word[]) => {
     return () => {
       if (intervalRef.current) clearTimeout(intervalRef.current);
     };
-  }, [isPlaying, replayCharIndex]);
+  }, [isPlaying, cursorIndex]);
 
   const handleTogglePlay = () => {
-    if (replayCharIndex === flatTypedHistory.current.length && !isPlaying) {
+    if (cursorIndex === flatTypedHistory.current.length && !isPlaying) {
       setReplayCharIndex(0);
     }
     togglePlaying((prevIsPlaying) => !prevIsPlaying);
@@ -90,5 +90,5 @@ export const useWatchReplay = (text: Word[]) => {
     }
   }, [isPlaying]);
 
-  return { isPlaying, replayCharIndex, handleTogglePlay };
+  return { isPlaying, cursorIndex, handleTogglePlay };
 };

@@ -1,32 +1,26 @@
-type TextProps = {
-  text: { letters: { letter: string; status: string; typedAt: number | null }[]; status: string }[];
-  isReplaying: boolean;
-  replayCharIndex: number;
-};
+import type { TextProps } from "../types/types";
 
-export const TextResult = ({ text, isReplaying, replayCharIndex }: TextProps) => {
-  let typedCount = 0;
+export const TextResult = ({ text, isReplaying, cursorIndex }: TextProps) => {
+  let charIndex = 0;
 
   return (
     <div className="text">
       {text.map((word, index) => (
         <span key={index}>
-          {word.letters.map((item, charIndex) => {
-            const charGlobalIndex = typedCount;
-            typedCount++;
+          {word.letters.map((item, index) => {
+            const currentCharIndex = charIndex;
+            charIndex++;
 
-            let statusClass = item.status;
+            let status = item.status;
 
             if (isReplaying) {
-              if (charGlobalIndex < replayCharIndex) statusClass = item.status;
-              else if (charGlobalIndex === replayCharIndex) statusClass = "cursor";
-              else statusClass = "untyped";
+              if (currentCharIndex < cursorIndex) status = item.status;
+              else if (currentCharIndex === cursorIndex) status = "cursor";
+              else status = "untyped";
             }
 
-            const finalClass = isReplaying ? statusClass : item.status;
-
             return (
-              <span key={charIndex} className={finalClass}>
+              <span key={index} className={status}>
                 {item.letter}
               </span>
             );
