@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import { setTextType, setLanguage, setDuration, setMode } from "../store/configSlice";
 import { ConfigItem, CustomTextButton } from "../shared/ConfigItem";
 import type { MenuOptions, TextType, Language, Mode } from "../types/types";

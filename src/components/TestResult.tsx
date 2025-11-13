@@ -12,6 +12,7 @@ import { setRandomText } from "../store/configSlice";
 import type { TestResultProps } from "../types/types";
 import type { RootState } from "../store";
 import "./TestResult.css";
+import { formatStats } from "../utils/formatStats";
 
 export const TestResult = ({ text, stats }: TestResultProps) => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ export const TestResult = ({ text, stats }: TestResultProps) => {
   const { t } = useTranslation();
   const { isPlaying, cursorIndex, handleTogglePlay } = useWatchReplay(text);
   const { textType, language, currentText } = useSelector((state: RootState) => state.config);
+  const statsForDisplay = formatStats(stats);
 
   const { captureAndDownload } = useScreenshot(getFileName(stats.date));
   const DivRef = useRef<HTMLDivElement>(null);
@@ -40,7 +42,7 @@ export const TestResult = ({ text, stats }: TestResultProps) => {
   return (
     <div className="test-result" ref={DivRef}>
       <TextResult text={text} isReplaying={isPlaying} cursorIndex={cursorIndex} />
-      <TestStatistics stats={stats} />
+      <TestStatistics stats={statsForDisplay} />
       <div className="buttons-container">
         <ResultButton action={handleTogglePlay} name={t("result.watch-replay")} icon={isPlaying === false ? "play-icon" : "pause-icon"} />
         <ResultButton action={handleCapture} name={t("result.screenshot")} icon="screenshot-icon" />

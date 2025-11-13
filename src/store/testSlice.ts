@@ -24,5 +24,4 @@ const testSlice = createSlice({
 });
 
 export const { resetTest, startTest, completeTest } = testSlice.actions;
-
 export default testSlice.reducer;

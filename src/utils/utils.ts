@@ -1,6 +1,6 @@
 import type { Language, TestResultItem } from "../types/types";
-import TEXT_POOL_UA from "../texts/ukrainian-texts.json";
-import TEXT_POOL_EN from "../texts/english-texts.json";
+import TEXT_POOL_UA from "../locales/texts/ukrainian-texts.json";
+import TEXT_POOL_EN from "../locales/texts/english-texts.json";
 
 const texts = { ukrainian: TEXT_POOL_UA, english: TEXT_POOL_EN };
 

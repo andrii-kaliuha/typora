@@ -15,22 +15,26 @@ export const Header = () => (
   </header>
 );
 
-const Menu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
-  if (!isOpen) return null;
-
+const Logotype = () => {
   return (
-    <div className="menu-backdrop">
-      <div className="menu-container">
-        <Logotype />
-        <Navigation action={onClose} />
-        <div className="buttons-container">
-          <LanguageSelect />
-          <ThemeToggle />
-          <SettingButton icon="exit-icon" action={onClose} />
-        </div>
-      </div>
+    <div className="logotype-container">
+      <svg id="logotype-icon">
+        <use href="./src/assets/icons.svg#logotype-icon" />
+      </svg>
+      <p className="logotype-text">Typora</p>
     </div>
   );
+};
+
+const LanguageSelect = () => {
+  const { i18n } = useTranslation();
+
+  const toggleLanguage = () => {
+    const language = i18n.language === "english" ? "ukrainian" : "english";
+    i18n.changeLanguage(language);
+  };
+
+  return <SettingButton icon="language-icon" action={toggleLanguage} />;
 };
 
 const ThemeToggle = () => {
@@ -53,17 +57,6 @@ const ThemeToggle = () => {
   return <SettingButton icon="theme-icon" action={handleThemeToggle} />;
 };
 
-const LanguageSelect = () => {
-  const { i18n } = useTranslation();
-
-  const toggleLanguage = () => {
-    const language = i18n.language === "english" ? "ukrainian" : "english";
-    i18n.changeLanguage(language);
-  };
-
-  return <SettingButton icon="language-icon" action={toggleLanguage} />;
-};
-
 const MobileMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const handleToggleMenu = () => setIsMenuOpen((prev) => !prev);
@@ -76,13 +69,20 @@ const MobileMenu = () => {
   );
 };
 
-const Logotype = () => {
+const Menu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+  if (!isOpen) return null;
+
   return (
-    <div className="logotype-container">
-      <svg id="logotype-icon">
-        <use href="./src/assets/icons.svg#logotype-icon" />
-      </svg>
-      <p className="logotype-text">Typora</p>
+    <div className="menu-backdrop">
+      <div className="menu-container">
+        <Logotype />
+        <Navigation action={onClose} />
+        <div className="buttons-container">
+          <LanguageSelect />
+          <ThemeToggle />
+          <SettingButton icon="exit-icon" action={onClose} />
+        </div>
+      </div>
     </div>
   );
 };

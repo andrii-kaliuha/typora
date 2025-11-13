@@ -1,18 +1,17 @@
-import { useRef, useEffect, useMemo } from "react";
+import { useRef, useEffect } from "react";
 import { useAutoScroll } from "../hooks/useAvtoScroll";
 import { TestControls } from "../shared/TestControls";
-import { getCharStatus, getWordStatus } from "../utils/utils";
 import { useTestCompletion } from "../hooks/useTestCompletion";
 import { useTypingTest } from "../hooks/useTypingTest";
-import type { LetterData, Mode, WordData } from "../types/types";
+import { useTextStructure } from "../hooks/useTextStructure";
+import type { Mode } from "../types/types";
 
-type TextContainerProps = { targetText: string; timeLimit: number; mode: Mode };
+export type TextContainerProps = { targetText: string; timeLimit: number; mode: Mode };
 
 const LINE_HEIGHT = 48;
 
 export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProps) => {
   // 1. Використання useTypingTest
-
   const { typedText, typedHistory, timeLeft, handleRestart, handleKeyDown, testStatus, startTimeRef } = useTypingTest({
     targetText,
     timeLimit,
@@ -53,46 +52,11 @@ export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProp
 
   // 5. Обробка тексту
 
-  const textData: WordData[] = useMemo(() => {
-    const words = targetText.match(/\S+/g) || [];
-
-    return words.map((word, wordIndex) => {
-      const startIndex = words.slice(0, wordIndex).reduce((sum, w) => sum + w.length + 1, 0);
-
-      const lettersData: LetterData[] = word.split("").map((char, charIndex) => {
-        const globalIndex = startIndex + charIndex;
-        const status = getCharStatus(char, globalIndex, typedText);
-        const typedAt = typedHistory[globalIndex] ? typedHistory[globalIndex][1] : null;
-
-        return {
-          letter: char,
-          status: status as LetterData["status"],
-          typedAt: typedAt,
-        };
-      });
-
-      const isLastWord = wordIndex === words.length - 1;
-      if (!isLastWord) {
-        const spaceIndex = startIndex + word.length;
-        lettersData.push({
-          letter: " ",
-          status: getCharStatus(" ", spaceIndex, typedText) as LetterData["status"],
-          typedAt: typedHistory[spaceIndex] ? typedHistory[spaceIndex][1] : null,
-        });
-      }
-
-      const wordStatus = getWordStatus(lettersData) as WordData["status"];
-
-      return {
-        letters: lettersData,
-        status: wordStatus,
-      };
-    });
-  }, [targetText, typedText, typedHistory]);
+  const textData = useTextStructure({ targetText, typedText, typedHistory });
 
   // 6. Умова Завершення: Набрано весь текст
 
-  const isTextFullyTyped = typedText.length === targetText.length && textData.every((word) => word.status === "correct");
+  const isTextFullyTyped = typedText.length === targetText.length && textData.every((word) => word.status !== "untyped");
 
   useEffect(() => {
     if (testStatus === "running" && (timeLeft === 0 || isTextFullyTyped)) finishTest(textData);

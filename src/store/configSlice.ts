@@ -50,5 +50,4 @@ const configSlice = createSlice({
 });
 
 export const { setTextType, setLanguage, setDuration, setMode, setCustomText, setRandomText } = configSlice.actions;
-
 export default configSlice.reducer;

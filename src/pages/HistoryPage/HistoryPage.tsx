@@ -11,6 +11,7 @@ import { removeFromHistory } from "../../store/resultsSlice";
 import type { HistoryTestResultProps } from "../../types/types";
 import type { RootState } from "../../store";
 import "./HistoryPage.css";
+import { formatStats } from "../../utils/formatStats";
 
 export const HistoryPage = () => {
   const history = useSelector((state: RootState) => state.results.history);
@@ -49,11 +50,12 @@ export const HistoryTestResult = ({ text, stats, id }: HistoryTestResultProps) =
   const LiRef = useRef<HTMLLIElement>(null);
   const handleCapture = () => captureAndDownload(LiRef.current);
   const handleDelete = () => dispatch(removeFromHistory(id));
+  const statsForDisplay = formatStats(stats);
 
   return (
     <li className="test-result" ref={LiRef}>
       <TextResult text={text} isReplaying={isPlaying} cursorIndex={cursorIndex} />
-      <TestStatistics stats={stats} />
+      <TestStatistics stats={statsForDisplay} />
       <div className="buttons-container">
         <ResultButton action={handleTogglePlay} name={t("result.watch-replay")} icon={isPlaying === false ? "play-icon" : "pause-icon"} />
         <ResultButton action={handleCapture} name={t("result.screenshot")} icon="screenshot-icon" />
