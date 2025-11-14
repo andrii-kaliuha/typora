@@ -1,8 +1,8 @@
+import "./Modal.css";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { setCustomText, setTextType } from "../store/configSlice";
-import "./Modal.css";
 
 type ModalProps = { isOpen: boolean; onClose: () => void };
 
@@ -12,6 +12,13 @@ export const Modal = ({ isOpen, onClose }: ModalProps) => {
   const dispatch = useDispatch();
 
   if (!isOpen) return null;
+
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      setLocalText("");
+      onClose();
+    }
+  };
 
   const handleFormConfirm = (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,13 +32,6 @@ export const Modal = ({ isOpen, onClose }: ModalProps) => {
 
     setLocalText("");
     onClose();
-  };
-
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) {
-      setLocalText("");
-      onClose();
-    }
   };
 
   const handleCancel = () => {

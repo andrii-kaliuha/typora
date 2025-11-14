@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../store/index";
 import { completeTest } from "../store/testSlice";
@@ -7,7 +7,7 @@ import type { UseTestCompletionProps, WordData, TestResultItem } from "../types/
 import { calculateMetrics } from "../utils/calculateMetrics";
 import { countTypedCharacters } from "../utils/countTypedCharacters";
 
-export const useTestCompletion = ({ typedHistory, targetText, testStatus, startTimeRef }: UseTestCompletionProps) => {
+export const useTestCompletion = ({ typedHistory, targetText, testStatus, startTimeRef, timeLeft, textData }: UseTestCompletionProps) => {
   const dispatch = useDispatch();
   const { textType, language, duration, mode } = useSelector((state: RootState) => state.config);
 
@@ -39,5 +39,13 @@ export const useTestCompletion = ({ typedHistory, targetText, testStatus, startT
     [typedHistory, targetText, testStatus, startTimeRef, textType, language, duration, mode, dispatch]
   );
 
-  return { finishTest };
+  const isTextFullyTyped = typedHistory.length === targetText.length && textData.every((word) => word.status !== "untyped");
+
+  useEffect(() => {
+    if (testStatus === "running" && (timeLeft === 0 || isTextFullyTyped)) {
+      finishTest(textData);
+    }
+  }, [timeLeft, isTextFullyTyped, testStatus, textData, finishTest]);
+
+  return {};
 };

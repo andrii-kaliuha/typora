@@ -52,4 +52,8 @@ export type UseTestCompletionProps = {
   targetText: string;
   testStatus: TestStatus;
   startTimeRef: RefObject<number | null>;
+  timeLeft: number;
+  textData: WordData[];
 };
+
+export type TextContainerProps = { targetText: string; timeLimit: number; mode: Mode };

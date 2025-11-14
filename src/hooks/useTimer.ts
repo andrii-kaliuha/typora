@@ -8,20 +8,24 @@ export const useTimer = (duration: number, status: TestStatus): TimerTuple => {
   const [timeLeft, setTimeLeft] = useState(duration);
 
   useEffect(() => {
-    if (status !== "running" || timeLeft === 0) return;
+    if (status !== "running") return;
 
-    const timerId = setInterval(() => {
+    let timerId: ReturnType<typeof setInterval> | null = null;
+
+    timerId = setInterval(() => {
       setTimeLeft((prevTime) => {
         if (prevTime <= 1) {
-          clearInterval(timerId);
+          if (timerId) clearInterval(timerId);
           return 0;
         }
         return prevTime - 1;
       });
     }, 1000);
 
-    return () => clearInterval(timerId);
-  }, [status, timeLeft]);
+    return () => {
+      if (timerId) clearInterval(timerId);
+    };
+  }, [status]);
 
   return [timeLeft, setTimeLeft];
 };

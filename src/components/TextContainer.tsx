@@ -1,68 +1,29 @@
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { useAutoScroll } from "../hooks/useAvtoScroll";
 import { TestControls } from "../shared/TestControls";
 import { useTestCompletion } from "../hooks/useTestCompletion";
 import { useTypingTest } from "../hooks/useTypingTest";
 import { useTextStructure } from "../hooks/useTextStructure";
-import type { Mode } from "../types/types";
-
-export type TextContainerProps = { targetText: string; timeLimit: number; mode: Mode };
+import type { TextContainerProps } from "../types/types";
+import { useTestKeyHandler } from "../hooks/useTestKeyHandler";
 
 const LINE_HEIGHT = 48;
 
 export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProps) => {
-  // 1. Використання useTypingTest
+  const textContainerRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+  const cursorRef = useRef<HTMLDivElement>(null);
+
   const { typedText, typedHistory, timeLeft, handleRestart, handleKeyDown, testStatus, startTimeRef } = useTypingTest({
     targetText,
     timeLimit,
     mode,
   });
 
-  // 2. Логіка завершення
-  const { finishTest } = useTestCompletion({ typedHistory, targetText, testStatus, startTimeRef });
-
-  const textContainerRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
-  const cursorRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (testStatus === "idle") handleRestart();
-  }, [targetText, timeLimit]);
-
-  // 3. Логіка для приєднання/від'єднання слухача
-
-  useEffect(() => {
-    const textContainer = textContainerRef.current;
-
-    if (textContainer) {
-      if (testStatus === "running" || testStatus === "idle") {
-        textContainer.addEventListener("keydown", handleKeyDown);
-        textContainer.focus();
-      }
-
-      return () => {
-        textContainer.removeEventListener("keydown", handleKeyDown);
-      };
-    }
-  }, [testStatus, handleKeyDown]);
-
-  // 4. Використання useAutoScroll
-
+  useTestKeyHandler({ textContainerRef, testStatus, handleKeyDown });
   useAutoScroll(textRef, cursorRef, typedText.length, LINE_HEIGHT);
-
-  // 5. Обробка тексту
-
   const textData = useTextStructure({ targetText, typedText, typedHistory });
-
-  // 6. Умова Завершення: Набрано весь текст
-
-  const isTextFullyTyped = typedText.length === targetText.length && textData.every((word) => word.status !== "untyped");
-
-  useEffect(() => {
-    if (testStatus === "running" && (timeLeft === 0 || isTextFullyTyped)) finishTest(textData);
-  }, [timeLeft, isTextFullyTyped, testStatus, textData, finishTest]);
-
-  // 7. Рендеринг
+  useTestCompletion({ typedHistory, targetText, testStatus, startTimeRef, timeLeft, textData });
 
   return (
     <div className="text-container">

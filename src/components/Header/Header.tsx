@@ -1,7 +1,7 @@
+import "./Header.css";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigation } from "./Navigation";
-import "./Header.css";
 
 export const Header = () => (
   <header>

@@ -1,3 +1,4 @@
+import "./TestResult.css";
 import { useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -11,19 +12,19 @@ import { resetTest } from "../store/testSlice";
 import { setRandomText } from "../store/configSlice";
 import type { TestResultProps } from "../types/types";
 import type { RootState } from "../store";
-import "./TestResult.css";
 import { formatStats } from "../utils/formatStats";
 
 export const TestResult = ({ text, stats }: TestResultProps) => {
   const dispatch = useDispatch();
-
   const { t } = useTranslation();
-  const { isPlaying, cursorIndex, handleTogglePlay } = useWatchReplay(text);
-  const { textType, language, currentText } = useSelector((state: RootState) => state.config);
-  const statsForDisplay = formatStats(stats);
 
-  const { captureAndDownload } = useScreenshot(getFileName(stats.date));
   const DivRef = useRef<HTMLDivElement>(null);
+  const formatedStats = formatStats(stats);
+  const { textType, language, currentText } = useSelector((state: RootState) => state.config);
+
+  const { isPlaying, cursorIndex, handleTogglePlay } = useWatchReplay(text);
+  const { captureAndDownload } = useScreenshot(getFileName(stats.date));
+
   const handleCapture = () => captureAndDownload(DivRef.current);
 
   const handleRepeatTest = useCallback(() => {
@@ -42,7 +43,7 @@ export const TestResult = ({ text, stats }: TestResultProps) => {
   return (
     <div className="test-result" ref={DivRef}>
       <TextResult text={text} isReplaying={isPlaying} cursorIndex={cursorIndex} />
-      <TestStatistics stats={statsForDisplay} />
+      <TestStatistics stats={formatedStats} />
       <div className="buttons-container">
         <ResultButton action={handleTogglePlay} name={t("result.watch-replay")} icon={isPlaying === false ? "play-icon" : "pause-icon"} />
         <ResultButton action={handleCapture} name={t("result.screenshot")} icon="screenshot-icon" />

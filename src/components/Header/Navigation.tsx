@@ -1,6 +1,6 @@
+import "./Navigation.css";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
-import "./Navigation.css";
 
 export const Navigation = ({ action }: { action?: () => void }) => {
   const { t } = useTranslation();

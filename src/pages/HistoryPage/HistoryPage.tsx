@@ -44,18 +44,20 @@ const EmptyHistory = () => {
 export const HistoryTestResult = ({ text, stats, id }: HistoryTestResultProps) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const { isPlaying, cursorIndex, handleTogglePlay } = useWatchReplay(text);
 
-  const { captureAndDownload } = useScreenshot(getFileName(stats.date));
   const LiRef = useRef<HTMLLIElement>(null);
+  const formatedStats = formatStats(stats);
+
+  const { isPlaying, cursorIndex, handleTogglePlay } = useWatchReplay(text);
+  const { captureAndDownload } = useScreenshot(getFileName(stats.date));
+
   const handleCapture = () => captureAndDownload(LiRef.current);
   const handleDelete = () => dispatch(removeFromHistory(id));
-  const statsForDisplay = formatStats(stats);
 
   return (
     <li className="test-result" ref={LiRef}>
       <TextResult text={text} isReplaying={isPlaying} cursorIndex={cursorIndex} />
-      <TestStatistics stats={statsForDisplay} />
+      <TestStatistics stats={formatedStats} />
       <div className="buttons-container">
         <ResultButton action={handleTogglePlay} name={t("result.watch-replay")} icon={isPlaying === false ? "play-icon" : "pause-icon"} />
         <ResultButton action={handleCapture} name={t("result.screenshot")} icon="screenshot-icon" />
