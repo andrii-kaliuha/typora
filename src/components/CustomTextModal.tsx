@@ -1,12 +1,12 @@
-import "./Modal.css";
+import "./CustomTextModal.css";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { setCustomText, setTextType } from "../store/configSlice";
 
-type ModalProps = { isOpen: boolean; onClose: () => void };
+type CustomTextModalProps = { isOpen: boolean; onClose: () => void };
 
-export const Modal = ({ isOpen, onClose }: ModalProps) => {
+export const CustomTextModal = ({ isOpen, onClose }: CustomTextModalProps) => {
   const [localText, setLocalText] = useState("");
   const { t } = useTranslation();
   const dispatch = useDispatch();

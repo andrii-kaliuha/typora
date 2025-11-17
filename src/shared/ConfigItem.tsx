@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Modal } from "../components/Modal";
+import { CustomTextModal } from "../components/CustomTextModal";
 
 type ConfigItemProps<T extends string | number> = { id: T; onSelect: (id: T) => void; activeKey: T; label: string };
 
@@ -21,7 +21,7 @@ export const CustomTextButton = ({ label, activeKey }: { label: string; activeKe
         {label}
       </button>
 
-      <Modal isOpen={isModalOpen} onClose={handleToggleModal} />
+      <CustomTextModal isOpen={isModalOpen} onClose={handleToggleModal} />
     </>
   );
 };

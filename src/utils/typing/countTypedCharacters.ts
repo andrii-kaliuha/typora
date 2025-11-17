@@ -1,4 +1,4 @@
-import type { WordData } from "../types/types";
+import type { WordData } from "../../types/types";
 
 export const countTypedCharacters = (text: WordData[]): { correctChars: number; incorrectChars: number; untypedChars: number } => {
   let correctChars = 0;

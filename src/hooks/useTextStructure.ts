@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import type { LetterData, WordData, TypedHistoryEntry } from "../types/types";
-import { getCharStatus, getWordStatus } from "../utils/utils";
+import { getCharStatus, getWordStatus } from "../utils/typing/getStatus";
 
 type useTextStructureProps = { targetText: string; typedText: string; typedHistory: TypedHistoryEntry[] };
 

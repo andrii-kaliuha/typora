@@ -1,8 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { renderStatValue } from "../utils/formatters";
-import type { StatItem } from "../types/types";
-
-type TestStatisticsProps = { stats: StatItem[] };
+import { formatStat } from "../utils/formatters/formatStat";
+import type { TestStatisticsProps } from "../types/types";
 
 export const TestStatistics = ({ stats }: TestStatisticsProps) => {
   const { t } = useTranslation();
@@ -12,7 +10,7 @@ export const TestStatistics = ({ stats }: TestStatisticsProps) => {
       {stats.map((stat, index) => (
         <dl key={index}>
           <dt>{t(stat.label)}</dt>
-          <dd>{renderStatValue(stat)}</dd>
+          <dd>{formatStat(stat)}</dd>
         </dl>
       ))}
     </div>

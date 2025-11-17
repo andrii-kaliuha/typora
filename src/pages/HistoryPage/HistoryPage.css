@@ -1,5 +1,8 @@
 .history-page {
   padding: 0 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 @media (max-width: 767px) {
@@ -28,4 +31,49 @@
 .empty-history-action {
   color: var(--text-color);
   font-size: 18px;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.history-header h2 {
+  color: var(--primary-color);
+}
+
+.history-header button {
+  color: var(--primary-color);
+  background-color: transparent;
+  border-width: 0;
+}
+
+.history-header .buttons-container {
+  display: flex;
+  gap: 12px;
+}
+
+.filter-button,
+.sort-button,
+.clear-all-button {
+  color: var(--secondary-color);
+  background-color: transparent;
+  border-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+
+  &:hover {
+    color: var(--text-color);
+  }
+
+  &:active {
+    color: var(--primary-color);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--primary-color);
+  }
 }

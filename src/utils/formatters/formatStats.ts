@@ -1,4 +1,4 @@
-import type { Stats, StatItem } from "../types/types";
+import type { Stats, StatItem } from "../../types/types";
 
 export const formatStats = (rawStats: Stats): StatItem[] => {
   const { wpm, accuracy, characters, duration, mode, language, text, date } = rawStats;

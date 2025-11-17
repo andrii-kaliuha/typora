@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { getRandomText } from "../utils/utils";
+import { getRandomText } from "../utils/typing/getText";
 import { setRandomText } from "../store/configSlice";
 import type { Language } from "../types/types";
 

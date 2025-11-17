@@ -7,19 +7,20 @@ import { useWatchReplay } from "../hooks/useWatchReplay";
 import { TextResult } from "../shared/TextResult";
 import { ResultButton } from "../shared/ResultButton";
 import { TestStatistics } from "../shared/TestStatistics";
-import { getFileName, getNewText } from "../utils/utils";
+import { getNewText } from "../utils/typing/getText";
+import { getFileName } from "../utils/typing/getFileName";
 import { resetTest } from "../store/testSlice";
 import { setRandomText } from "../store/configSlice";
 import type { TestResultProps } from "../types/types";
 import type { RootState } from "../store";
-import { formatStats } from "../utils/formatStats";
+import { formatStats } from "../utils/formatters/formatStats";
 
 export const TestResult = ({ text, stats }: TestResultProps) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
   const DivRef = useRef<HTMLDivElement>(null);
-  const formatedStats = formatStats(stats);
+  const formattedStats = formatStats(stats);
   const { textType, language, currentText } = useSelector((state: RootState) => state.config);
 
   const { isPlaying, cursorIndex, handleTogglePlay } = useWatchReplay(text);
@@ -43,7 +44,7 @@ export const TestResult = ({ text, stats }: TestResultProps) => {
   return (
     <div className="test-result" ref={DivRef}>
       <TextResult text={text} isReplaying={isPlaying} cursorIndex={cursorIndex} />
-      <TestStatistics stats={formatedStats} />
+      <TestStatistics stats={formattedStats} />
       <div className="buttons-container">
         <ResultButton action={handleTogglePlay} name={t("result.watch-replay")} icon={isPlaying === false ? "play-icon" : "pause-icon"} />
         <ResultButton action={handleCapture} name={t("result.screenshot")} icon="screenshot-icon" />

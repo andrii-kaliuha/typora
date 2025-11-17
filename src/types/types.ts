@@ -57,3 +57,4 @@ export type UseTestCompletionProps = {
 };
 
 export type TextContainerProps = { targetText: string; timeLimit: number; mode: Mode };
+export type TestStatisticsProps = { stats: StatItem[] };

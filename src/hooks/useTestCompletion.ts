@@ -4,8 +4,8 @@ import type { RootState } from "../store/index";
 import { completeTest } from "../store/testSlice";
 import { addToHistory } from "../store/resultsSlice";
 import type { UseTestCompletionProps, WordData, TestResultItem } from "../types/types";
-import { calculateMetrics } from "../utils/calculateMetrics";
-import { countTypedCharacters } from "../utils/countTypedCharacters";
+import { calculateMetrics } from "../utils/typing/calculateMetrics";
+import { countTypedCharacters } from "../utils/typing/countTypedCharacters";
 
 export const useTestCompletion = ({ typedHistory, targetText, testStatus, startTimeRef, timeLeft, textData }: UseTestCompletionProps) => {
   const dispatch = useDispatch();
