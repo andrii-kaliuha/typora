@@ -25,7 +25,7 @@
     "title": "Custom text",
     "placeholder": "Enter your own text here...",
     "cancel": "Cancel",
-    "confirm": "Сonfirm"
+    "confirm": "Confirm"
   },
 
   "result": {
@@ -38,7 +38,7 @@
     "restart-test": "Restart Test",
 
     "wpm": "Words per Minute",
-    "characters": "Сharacters",
+    "characters": "Characters",
     "text": "Text",
     "language": "Language",
     "duration": "Duration",
@@ -107,8 +107,69 @@
   "history": {
     "title": "No test history available",
     "action": "Take a test to save and view your results in this section.",
-    "filter": "Filter",
-    "sort": "Sort",
-    "clear-all": "Clear all"
+
+    "filter-btn": "Filter",
+    "sort-btn": "Sort",
+    "clear-all": "Clear all",
+    "reset": "Reset filter",
+    "show-results": "Show results",
+
+    "pagination": {
+      "prev": "Previous",
+      "next": "Next"
+    },
+
+    "filter": {
+      "date": {
+        "title": "Date",
+        "all": "All history",
+        "last-hour": "Last hour",
+        "today": "Today",
+        "this-week": "This week",
+        "this-month": "This month",
+        "this-year": "This year"
+      },
+
+      "text-type": {
+        "title": "Text type",
+        "all": "All types",
+        "random": "Random text",
+        "custom": "Custom text"
+      },
+
+      "mode": {
+        "title": "Mode",
+        "all": "All modes",
+        "normal": "Normal",
+        "accuracy": "Accuracy",
+        "strict": "Strict"
+      },
+
+      "language": {
+        "title": "Language",
+        "all": "All languages",
+        "english": "English",
+        "ukrainian": "Ukrainian"
+      },
+
+      "duration": {
+        "title": "Duration",
+        "less-than": "Less than",
+        "more-than": "More than"
+      }
+    },
+
+    "sort": {
+      "title": "Sort",
+      "by": {
+        "date": "Date",
+        "speed": "Speed",
+        "accuracy": "Accuracy"
+      },
+      "order": {
+        "asc": "Ascending",
+        "desc": "Descending"
+      }
+    }
   }
 }

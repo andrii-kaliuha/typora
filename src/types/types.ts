@@ -26,7 +26,7 @@ export type Stats = {
   duration: number;
   mode: string;
   language: string;
-  text: string;
+  textType: string;
   date: number;
 };
 

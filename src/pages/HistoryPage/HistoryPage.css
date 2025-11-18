@@ -36,16 +36,16 @@
 .history-header {
   display: flex;
   justify-content: space-between;
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  border-radius: 16px;
+  padding: 16px;
 }
 
-.history-header h2 {
-  color: var(--primary-color);
-}
-
-.history-header button {
-  color: var(--primary-color);
-  background-color: transparent;
-  border-width: 0;
+@media (max-width: 839px) {
+  .history-header {
+    border-radius: 0;
+  }
 }
 
 .history-header .buttons-container {
@@ -53,27 +53,89 @@
   gap: 12px;
 }
 
-.filter-button,
-.sort-button,
-.clear-all-button {
-  color: var(--secondary-color);
+.history-header button {
+  color: var(--text-color);
   background-color: transparent;
   border-width: 0;
+}
+
+.pagination-controls {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  height: 32px;
+  gap: 16px;
+}
+
+.pagination-button {
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  border-width: 0;
+  border-radius: 12px;
+  height: 48px;
+  min-width: 48px;
+
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
 
   &:hover {
-    color: var(--text-color);
+    background-color: var(--surface-hover-color);
   }
 
-  &:active {
-    color: var(--primary-color);
-  }
+  &:disabled {
+    cursor: default;
+    opacity: 0.5;
 
-  &:focus-visible {
-    outline: 2px solid var(--primary-color);
+    /* &:hover {
+      background-color: var(--surface-color);
+    } */
+  }
+}
+
+.pagination-button:first-child,
+.pagination-button:last-child {
+  /* background-color: var(--primary-color); */
+  padding: 0 24px;
+  /* width: max-content; */
+}
+
+.pagination-button.active {
+  color: var(--primary-color);
+}
+
+.flex-group {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.sort-select-field {
+  padding: 0 16px;
+  font-size: 16px;
+  border-width: 0;
+  color: var(--text-color);
+  background-color: var(--surface-color);
+  cursor: pointer;
+  height: 32px;
+}
+
+.sort-button-order {
+  background-color: var(--surface-color);
+  border-radius: 16px;
+  /* padding: 8px; */
+  height: 32px;
+  width: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--surface-hover-color);
   }
 }

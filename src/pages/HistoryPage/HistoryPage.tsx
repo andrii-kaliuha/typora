@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useScreenshot } from "../../hooks/useScreenshot";
@@ -8,77 +8,77 @@ import { ResultButton } from "../../shared/ResultButton";
 import { TestStatistics } from "../../shared/TestStatistics";
 import { getFileName } from "../../utils/typing/getFileName";
 import { clearHistory, removeFromHistory } from "../../store/resultsSlice";
-import type { HistoryTestResultProps } from "../../types/types";
-import type { RootState } from "../../store";
-import "./HistoryPage.css";
 import { formatStats } from "../../utils/formatters/formatStats";
+import { Filter } from "../../components/Filter";
+import { selectFilteredAndSortedHistory } from "../../store/selectors/historySelectors";
+import { SortComponent } from "../../components/SortComponent";
+import { Pagination } from "../../components/Pagination";
+import type { HistoryTestResultProps } from "../../types/types";
+import "./HistoryPage.css";
 
 export const HistoryPage = () => {
-  const history = useSelector((state: RootState) => state.results.history);
-  const dispatch = useDispatch();
+  const history = useSelector(selectFilteredAndSortedHistory);
+
+  return (
+    <div className="history-page">
+      <HistoryHeader />
+      {history.length > 0 ? <HistoryList /> : <EmptyHistory />}
+    </div>
+  );
+};
+
+const HistoryHeader = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const handleClearHistory = () => {
     if (window.confirm(t("history.confirm-clear"))) dispatch(clearHistory());
   };
 
-  return (
-    <div className="history-page">
-      {history.length > 0 ? (
-        <>
-          <HistoryHeader action={handleClearHistory} />
-          <HistoryList />
-        </>
-      ) : (
-        <EmptyHistory />
-      )}
-    </div>
-  );
-};
-
-const HistoryHeader = ({ action }: { action: () => void }) => {
-  const { t } = useTranslation();
-
-  const handleFilter = () => console.log("filter");
-  const handleSort = () => console.log("sort");
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const handleToggleFilter = () => setIsFilterOpen((prev) => !prev);
 
   return (
     <div className="history-header">
       <div className="buttons-container">
-        <button type="button" className="filter-button" onClick={handleFilter}>
-          <svg width={24} height={24}>
-            <use href="./src/assets/icons.svg#filter-icon" />
-          </svg>
-          <p>{t("history.filter")}</p>
-        </button>
-
-        <button type="button" className="sort-button" onClick={handleSort}>
-          <svg width={24} height={24}>
-            <use href="./src/assets/icons.svg#sort-icon" />
-          </svg>
-          <p>{t("history.sort")}</p>
-        </button>
+        <HistoryHeaderButton action={handleToggleFilter} name={t("history.filter-btn")} icon="filter-icon" />
+        <HistoryHeaderButton action={() => console.log("sort")} name={t("history.sort-btn")} icon="sort-icon" />
+        <SortComponent />
       </div>
 
-      <button type="button" className="clear-all-button" onClick={action}>
-        <p>{t("history.clear-all")}</p>
-        <svg width={24} height={24}>
-          <use href="./src/assets/icons.svg#delete-icon" />
-        </svg>
-      </button>
+      <Filter isOpen={isFilterOpen} onClose={handleToggleFilter} />
+
+      <HistoryHeaderButton action={handleClearHistory} name={t("history.clear-all")} icon="delete-icon" />
     </div>
   );
 };
 
+type HistoryHeaderButtonProps = { action: () => void; name: string; icon: string };
+
+export const HistoryHeaderButton = ({ action, name, icon }: HistoryHeaderButtonProps) => {
+  return (
+    <button type="button" className="result-button" onClick={action}>
+      <svg width={24} height={24}>
+        <use href={`./src/assets/icons.svg#${icon}`} />
+      </svg>
+      <p>{name}</p>
+    </button>
+  );
+};
+
 const HistoryList = () => {
-  const history = useSelector((state: RootState) => state.results.history);
+  const history = useSelector(selectFilteredAndSortedHistory);
 
   return (
-    <ul className="history-list">
-      {history.map((item) => (
-        <HistoryTestResult key={item.id} text={item.textData} stats={item.stats} id={item.id} />
-      ))}
-    </ul>
+    <>
+      <ul className="history-list">
+        {history.map((item) => (
+          <HistoryTestResult key={item.id} text={item.textData} stats={item.stats} id={item.id} />
+        ))}
+      </ul>
+
+      <Pagination />
+    </>
   );
 };
 

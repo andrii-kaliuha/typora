@@ -27,7 +27,7 @@ export const useTestCompletion = ({ typedHistory, targetText, testStatus, startT
         duration: timeElapsed,
         mode: mode,
         language: language,
-        text: textType,
+        textType: textType,
         date: Date.now(),
       };
 
