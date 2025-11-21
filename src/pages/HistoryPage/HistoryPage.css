@@ -7,7 +7,7 @@
 
 @media (max-width: 767px) {
   .history-page {
-    padding: 0;
+    padding: 0 0 24px;
   }
 }
 
@@ -106,7 +106,7 @@
   color: var(--primary-color);
 }
 
-.flex-group {
+.sort-container {
   display: flex;
   gap: 12px;
   align-items: center;
@@ -120,6 +120,7 @@
   background-color: var(--surface-color);
   cursor: pointer;
   height: 32px;
+  user-select: none;
 }
 
 .sort-button-order {

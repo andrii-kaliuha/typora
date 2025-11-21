@@ -2,8 +2,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { setSortBy, setSortOrder } from "../store/filterSlice";
 import type { SortBy } from "../store/filterSlice";
 import type { RootState } from "../store";
+import { useTranslation } from "react-i18next";
 
-export const SortComponent = () => {
+export const Sort = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const currentSortBy = useSelector((state: RootState) => state.filter.sortBy);
   const currentSortOrder = useSelector((state: RootState) => state.filter.sortOrder);
@@ -18,19 +20,22 @@ export const SortComponent = () => {
   };
 
   return (
-    <div className="flex-group">
+    <div className="sort-container">
       <select onChange={handleFieldChange} value={currentSortBy} className="sort-select-field">
-        <option value="date">Дата</option>
-        <option value="duration">Тривалість</option>
-        <option value="wpm">WPM</option>
-        <option value="accuracy">Точність</option>
+        <option value="date">{t("history.sort.by.date")}</option>
+        <option value="duration">{t("history.sort.by.duration")}</option>
+        <option value="wpm">{t("history.sort.by.speed")}</option>
+        <option value="accuracy">{t("history.sort.by.accuracy")}</option>
       </select>
 
       <button
         onClick={handleOrderToggle}
         className="sort-button-order"
-        aria-label={`Сортувати за ${currentSortBy} у ${currentSortOrder === "asc" ? "спадаючому" : "зростаючому"} порядку`}
-        title={`Напрямок: ${currentSortOrder === "asc" ? "Зростаючий" : "Спадаючий"}`}
+        aria-label={t("history.sort.order.aria", {
+          field: t(`history.sort.by.${currentSortBy}`),
+          order: t(`history.sort.order.${currentSortOrder}`),
+        })}
+        title={t("history.sort.order.title", { order: t(`history.sort.order.${currentSortOrder}`) })}
       >
         <svg width={24} height={24}>
           <use href={`./src/assets/icons.svg#${currentSortOrder === "asc" ? "arrow-up-icon" : "arrow-down-icon"}`} />

@@ -1,32 +1,32 @@
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-}
+.filter-content {
+  display: none;
+  justify-content: space-between;
+  gap: 12px;
 
-.filter-container {
-  background-color: var(--background-color);
+  background-color: var(--surface-color);
+  color: var(--text-color);
   border-radius: 24px;
   padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  max-width: 1024px;
-  width: 75%;
 }
 
-.filter-title {
+.filter-content.open {
+  display: flex;
+}
+
+@media (max-width: 767px) {
+  .filter-content {
+    border-radius: 0;
+  }
+}
+
+h4 {
   color: var(--primary-color);
-  font-size: 20px;
+  padding-bottom: 12px;
 }
 
-.filter-content {
+.filter-list {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
   gap: 12px;
 }
 
@@ -35,18 +35,7 @@
   color: var(--primary-color);
 }
 
-.filter-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.filter-list li:first-child {
-  padding-bottom: 12px;
-  border-bottom: 4px solid var(--primary-color);
-}
-
-.filter-duration {
+.duration {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -54,33 +43,13 @@
   line-height: 1;
 }
 
-.filter-reset-button,
-.filter-confirm-button {
-  background-color: var(--surface-color) !important;
+.duration select {
+  text-align: right;
+  padding: 0 16px;
+  font-size: 16px;
   border-width: 0;
-  padding: 12px 20px;
+  color: var(--text-color);
+  background-color: var(--surface-color);
   cursor: pointer;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &:hover {
-    background-color: var(--surface-hover-color) !important;
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--primary-color);
-    z-index: 10;
-  }
-}
-
-.filter-reset-button {
-  color: var(--text-color) !important;
-  border-radius: 12px 0 0 12px;
-}
-
-.filter-confirm-button {
-  color: var(--primary-color) !important;
-  border-radius: 0 12px 12px 0;
+  height: 32px;
 }

@@ -24,8 +24,14 @@
   "modal": {
     "title": "Custom text",
     "placeholder": "Enter your own text here...",
+    "close": " Close",
     "cancel": "Cancel",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+
+    "confirm-modal": {
+      "title": "Підтвердження дії",
+      "confirm-clear": "Ви впевнені, що хочете очистити всю історію результатів?"
+    }
   },
 
   "result": {
@@ -108,8 +114,6 @@
     "title": "No test history available",
     "action": "Take a test to save and view your results in this section.",
 
-    "filter-btn": "Filter",
-    "sort-btn": "Sort",
     "clear-all": "Clear all",
     "reset": "Reset filter",
     "show-results": "Show results",
@@ -120,6 +124,7 @@
     },
 
     "filter": {
+      "title": "Filter",
       "date": {
         "title": "Date",
         "all": "All history",
@@ -163,12 +168,15 @@
       "title": "Sort",
       "by": {
         "date": "Date",
+        "duration": "Duration",
         "speed": "Speed",
         "accuracy": "Accuracy"
       },
       "order": {
         "asc": "Ascending",
-        "desc": "Descending"
+        "desc": "Descending",
+        "title": "Direction: {{order}}",
+        "aria": "Sort by {{field}} in {{order}} order"
       }
     }
   }

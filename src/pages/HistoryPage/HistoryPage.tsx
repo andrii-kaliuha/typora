@@ -9,53 +9,76 @@ import { TestStatistics } from "../../shared/TestStatistics";
 import { getFileName } from "../../utils/typing/getFileName";
 import { clearHistory, removeFromHistory } from "../../store/resultsSlice";
 import { formatStats } from "../../utils/formatters/formatStats";
-import { Filter } from "../../components/Filter";
-import { selectFilteredAndSortedHistory } from "../../store/selectors/historySelectors";
-import { SortComponent } from "../../components/SortComponent";
+import { selectPaginatedHistory } from "../../store/selectors/historySelectors";
+import { Sort } from "../../components/Sort";
 import { Pagination } from "../../components/Pagination";
 import type { HistoryTestResultProps } from "../../types/types";
 import "./HistoryPage.css";
+import { Filter } from "../../components/Filter";
+import { ConfirmModal } from "../../shared/ConfirmModal";
+import { ErrorModal } from "../../shared/ErrorModal";
 
 export const HistoryPage = () => {
-  const history = useSelector(selectFilteredAndSortedHistory);
+  const history = useSelector(selectPaginatedHistory);
 
   return (
     <div className="history-page">
-      <HistoryHeader />
+      <HistoryControls />
       {history.length > 0 ? <HistoryList /> : <EmptyHistory />}
     </div>
   );
 };
 
-const HistoryHeader = () => {
+const HistoryControls = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const handleClearHistory = () => setIsConfirmModalOpen(true);
 
-  const handleClearHistory = () => {
-    if (window.confirm(t("history.confirm-clear"))) dispatch(clearHistory());
+  const handleConfirmClear = () => {
+    dispatch(clearHistory());
+    setIsConfirmModalOpen(false);
   };
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const handleToggleFilter = () => setIsFilterOpen((prev) => !prev);
 
   return (
-    <div className="history-header">
-      <div className="buttons-container">
-        <HistoryHeaderButton action={handleToggleFilter} name={t("history.filter-btn")} icon="filter-icon" />
-        <HistoryHeaderButton action={() => console.log("sort")} name={t("history.sort-btn")} icon="sort-icon" />
-        <SortComponent />
+    <>
+      <div className="history-header">
+        <div className="buttons-container">
+          <HistoryControl action={handleToggleFilter} name={t("history.filter.title")} icon="filter-icon" />
+          <HistoryControl action={() => console.log("sort")} name={t("history.sort.title")} icon="sort-icon" />
+          <Sort />
+        </div>
+
+        {/* <Filter isOpen={isFilterOpen} onClose={handleToggleFilter} /> */}
+
+        <HistoryControl action={handleClearHistory} name={t("history.clear-all")} icon="delete-icon" />
+
+        {/* <ErrorModal
+          isOpen={isConfirmModalOpen}
+          onClose={() => setIsConfirmModalOpen(false)}
+          title="Упс! Щось пішло не так"
+          message="Під час збереження результату сталася помилка. Будь ласка, спробуйте ще раз."
+        /> */}
+
+        <ConfirmModal
+          isOpen={isConfirmModalOpen}
+          title="Підтвердити видалення?"
+          message="Після видалення запис буде втрачено без можливості відновлення. Підтвердьте вибір, щоб продовжити."
+          onConfirm={handleConfirmClear}
+          onClose={() => setIsConfirmModalOpen(false)}
+        />
       </div>
-
-      <Filter isOpen={isFilterOpen} onClose={handleToggleFilter} />
-
-      <HistoryHeaderButton action={handleClearHistory} name={t("history.clear-all")} icon="delete-icon" />
-    </div>
+      <Filter isOpen={isFilterOpen} />
+    </>
   );
 };
 
-type HistoryHeaderButtonProps = { action: () => void; name: string; icon: string };
+type HistoryControlProps = { action: () => void; name: string; icon: string };
 
-export const HistoryHeaderButton = ({ action, name, icon }: HistoryHeaderButtonProps) => {
+export const HistoryControl = ({ action, name, icon }: HistoryControlProps) => {
   return (
     <button type="button" className="result-button" onClick={action}>
       <svg width={24} height={24}>
@@ -67,7 +90,7 @@ export const HistoryHeaderButton = ({ action, name, icon }: HistoryHeaderButtonP
 };
 
 const HistoryList = () => {
-  const history = useSelector(selectFilteredAndSortedHistory);
+  const history = useSelector(selectPaginatedHistory);
 
   return (
     <>
@@ -103,8 +126,12 @@ export const HistoryTestResult = ({ text, stats, id }: HistoryTestResultProps) =
   const { captureAndDownload } = useScreenshot(getFileName(stats.date));
 
   const handleCapture = () => captureAndDownload(LiRef.current);
-  const handleDelete = () => {
-    if (window.confirm(t("result.delete"))) dispatch(removeFromHistory(id));
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const handleDelete = () => setIsConfirmModalOpen(true);
+
+  const handleConfirmClear = () => {
+    dispatch(removeFromHistory(id));
+    setIsConfirmModalOpen(false);
   };
 
   return (
@@ -116,6 +143,21 @@ export const HistoryTestResult = ({ text, stats, id }: HistoryTestResultProps) =
         <ResultButton action={handleCapture} name={t("result.screenshot")} icon="screenshot-icon" />
         <ResultButton action={handleDelete} name={t("result.delete")} icon="delete-icon" />
       </div>
+
+      {/* <ErrorModal
+        isOpen={isConfirmModalOpen}
+        onClose={() => setIsConfirmModalOpen(false)}
+        title="Упс! Щось пішло не так"
+        message="Під час збереження результату сталася помилка. Будь ласка, спробуйте ще раз."
+      /> */}
+
+      <ConfirmModal
+        isOpen={isConfirmModalOpen}
+        title="Підтвердити видалення?"
+        message="Після видалення запис буде втрачено без можливості відновлення. Підтвердьте вибір, щоб продовжити."
+        onConfirm={handleConfirmClear}
+        onClose={() => setIsConfirmModalOpen(false)}
+      />
     </li>
   );
 };

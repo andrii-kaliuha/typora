@@ -18,18 +18,20 @@ export const FilterList = <T extends FilterValue>({ title, filterValues, actionC
   const currentFilter = useSelector(selector);
 
   return (
-    <ul className="filter-list">
-      <li>{title}</li>
+    <div>
+      <h4>{title}</h4>
 
-      {filterValues.map((filterValue) => (
-        <li
-          key={String(filterValue)}
-          className={currentFilter === filterValue ? "active-filter" : ""}
-          onClick={() => dispatch(actionCreator(filterValue))}
-        >
-          {t(`${i18nBaseKey}.${filterValue}`)}
-        </li>
-      ))}
-    </ul>
+      <ul className="filter-list">
+        {filterValues.map((filterValue) => (
+          <li
+            key={String(filterValue)}
+            className={currentFilter === filterValue ? "active-filter" : ""}
+            onClick={() => dispatch(actionCreator(filterValue))}
+          >
+            {t(`${i18nBaseKey}.${filterValue}`)}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
