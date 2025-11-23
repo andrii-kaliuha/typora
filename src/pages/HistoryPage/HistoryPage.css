@@ -19,7 +19,7 @@
 
 .empty-history {
   text-align: center;
-  margin-top: 10vh;
+  margin: 10vh 0;
   padding: 24px;
 }
 
@@ -35,6 +35,11 @@
 
 .history-header {
   display: flex;
+
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+
   justify-content: space-between;
   background-color: var(--surface-color);
   color: var(--text-color);
@@ -113,7 +118,7 @@
 }
 
 .sort-select-field {
-  padding: 0 16px;
+  /* padding: 0 16px; */
   font-size: 16px;
   border-width: 0;
   color: var(--text-color);
@@ -138,5 +143,22 @@
 
   &:hover {
     background-color: var(--surface-hover-color);
+  }
+}
+
+.history-controls {
+  display: flex;
+  flex-direction: column;
+  /* gap: 12px; */
+}
+
+.history-controls.filter-open .history-header {
+  /* border-radius: 24px 24px 0 0; */
+  border-radius: 16px 16px 0 0;
+}
+
+@media (max-width: 767px) {
+  .history-controls.filter-open .history-header {
+    border-radius: 0;
   }
 }

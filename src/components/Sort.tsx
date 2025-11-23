@@ -21,7 +21,7 @@ export const Sort = () => {
 
   return (
     <div className="sort-container">
-      <select onChange={handleFieldChange} value={currentSortBy} className="sort-select-field">
+      <select onChange={handleFieldChange} value={currentSortBy} className="sort-select-field" id="sort">
         <option value="date">{t("history.sort.by.date")}</option>
         <option value="duration">{t("history.sort.by.duration")}</option>
         <option value="wpm">{t("history.sort.by.speed")}</option>

@@ -22,20 +22,30 @@
   },
 
   "modal": {
-    "title": "Custom text",
-    "placeholder": "Enter your own text here...",
-    "close": " Close",
-    "cancel": "Cancel",
-    "confirm": "Confirm",
+    "custom-text": {
+      "title": "Custom text",
+      "placeholder": "Enter your own text here...",
+      "confirm": "Confirm",
+      "cancel": "Cancel"
+    },
 
-    "confirm-modal": {
-      "title": "Підтвердження дії",
-      "confirm-clear": "Ви впевнені, що хочете очистити всю історію результатів?"
+    "confirm": {
+      "title": "Confirm Deletion?",
+      "message": "After deletion, the record will be lost without possibility of recovery.",
+      "message-delete-all": "All results history will be lost without the possibility of recovery.",
+      "action": " Confirm your choice to proceed.",
+      "confirm": "Confirm",
+      "cancel": "Cancel"
+    },
+
+    "error": {
+      "title": "Oops! Something went wrong",
+      "close": "Close"
     }
   },
 
   "result": {
-    "screenshot-error": "Failed to create screenshot. Please try again.",
+    "screenshot-error": "An error occurred while saving the result. Please try again.",
     "watch-replay": "Watch replay",
     "screenshot": "Save",
     "repeat-test": "Repeat test",
@@ -173,9 +183,9 @@
         "accuracy": "Accuracy"
       },
       "order": {
-        "asc": "Ascending",
-        "desc": "Descending",
-        "title": "Direction: {{order}}",
+        "asc": "ascending",
+        "desc": "descending",
+        "title": "In {{order}} order",
         "aria": "Sort by {{field}} in {{order}} order"
       }
     }

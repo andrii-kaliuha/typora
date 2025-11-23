@@ -1,35 +1,55 @@
-import { t } from "i18next";
-import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../store/index";
 import type { TextType, Mode, Language } from "../types/types";
+import type { DateFilter } from "../store/filterSlice";
+import { useTranslation } from "react-i18next";
 
-type FilterValue = string | TextType | Mode | Language;
+type FilterValue = string | TextType | Mode | Language | DateFilter;
 
-type FilterListProps<T extends FilterValue> = {
-  title: string;
-  filterValues: readonly T[];
-  actionCreator: (value: T) => { type: string; payload: T };
-  selector: (state: RootState) => T;
-  i18nBaseKey: string;
+type DataItemType = {
+  value: FilterValue;
+  label: string;
 };
 
-export const FilterList = <T extends FilterValue>({ title, filterValues, actionCreator, selector, i18nBaseKey }: FilterListProps<T>) => {
-  const dispatch = useDispatch();
-  const currentFilter = useSelector(selector);
+type FilterItemProps<T extends FilterValue> = {
+  isActive: boolean;
+  onSelect: (value: T) => void;
+  value: T;
+  label: string;
+};
+
+type FilterListProps = {
+  title: string;
+  filterList: DataItemType[];
+  onSelect: (value: any) => void;
+  currentFilter: FilterValue;
+};
+
+export const Title = ({ text }: { text: string }) => {
+  return (
+    <div className="title-container">
+      <h4>{text}</h4>
+      <div className="divider"></div>
+    </div>
+  );
+};
+
+export const FilterItem = <T extends FilterValue>({ value, label, onSelect, isActive }: FilterItemProps<T>) => {
+  return (
+    <li className={`filter-item  ${isActive ? "active" : ""}`} onClick={() => onSelect(value)}>
+      {label}
+    </li>
+  );
+};
+
+export const FilterList = ({ title, filterList, onSelect, currentFilter }: FilterListProps) => {
+  const { t } = useTranslation();
 
   return (
     <div>
-      <h4>{title}</h4>
+      <Title text={title} />
 
-      <ul className="filter-list">
-        {filterValues.map((filterValue) => (
-          <li
-            key={String(filterValue)}
-            className={currentFilter === filterValue ? "active-filter" : ""}
-            onClick={() => dispatch(actionCreator(filterValue))}
-          >
-            {t(`${i18nBaseKey}.${filterValue}`)}
-          </li>
+      <ul className="filter-list vjlkamchdh">
+        {filterList.map((item) => (
+          <FilterItem key={item.value} value={item.value} label={t(item.label)} onSelect={onSelect} isActive={currentFilter === item.value} />
         ))}
       </ul>
     </div>

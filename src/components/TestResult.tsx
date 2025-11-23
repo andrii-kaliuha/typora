@@ -14,6 +14,7 @@ import { setRandomText } from "../store/configSlice";
 import type { TestResultProps } from "../types/types";
 import type { RootState } from "../store";
 import { formatStats } from "../utils/formatters/formatStats";
+import { ErrorModal } from "../shared/ErrorModal";
 
 export const TestResult = ({ text, stats }: TestResultProps) => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ export const TestResult = ({ text, stats }: TestResultProps) => {
   const { textType, language, currentText } = useSelector((state: RootState) => state.config);
 
   const { isPlaying, cursorIndex, handleTogglePlay } = useWatchReplay(text);
-  const { captureAndDownload } = useScreenshot(getFileName(stats.date));
+  const { captureAndDownload, error, clearError } = useScreenshot(getFileName(stats.date), false);
 
   const handleCapture = () => captureAndDownload(DivRef.current);
 
@@ -51,6 +52,8 @@ export const TestResult = ({ text, stats }: TestResultProps) => {
         <ResultButton action={handleRepeatTest} name={t("result.repeat-test")} icon="repeat-icon" />
         <ResultButton action={handleNextTest} name={t("result.next-test")} icon="next-icon" />
       </div>
+
+      <ErrorModal isOpen={!!error} onClose={clearError} message={error} />
     </div>
   );
 };

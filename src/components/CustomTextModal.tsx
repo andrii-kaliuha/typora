@@ -1,8 +1,9 @@
-import "./CustomTextModal.css";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { setCustomText, setTextType } from "../store/configSlice";
+import { Modal } from "../shared/Modal";
+import "./CustomTextModal.css";
 
 type CustomTextModalProps = { isOpen: boolean; onClose: () => void };
 
@@ -10,15 +11,6 @@ export const CustomTextModal = ({ isOpen, onClose }: CustomTextModalProps) => {
   const [localText, setLocalText] = useState("");
   const { t } = useTranslation();
   const dispatch = useDispatch();
-
-  if (!isOpen) return null;
-
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) {
-      setLocalText("");
-      onClose();
-    }
-  };
 
   const handleFormConfirm = (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,39 +22,38 @@ export const CustomTextModal = ({ isOpen, onClose }: CustomTextModalProps) => {
       dispatch(setTextType("custom"));
     }
 
-    setLocalText("");
-    onClose();
+    handleClose();
   };
 
-  const handleCancel = () => {
+  const handleClose = () => {
     setLocalText("");
     onClose();
   };
 
   return (
-    <div className="modal-backdrop" onClick={handleBackdropClick}>
+    <Modal isOpen={isOpen} onClose={handleClose}>
       <div className="modal-container">
-        <h3 className="modal-title"> {t("modal.title")}</h3>
+        <h3 className="modal-title"> {t("modal.custom-text.title")}</h3>
         <form onSubmit={handleFormConfirm}>
           <textarea
             name="custom-text"
-            placeholder={t("modal.placeholder")}
+            placeholder={t("modal.custom-text.placeholder")}
             rows={10}
             value={localText}
             onChange={(e) => setLocalText(e.target.value)}
           ></textarea>
 
           <div className="modal-footer">
-            <button type="button" onClick={handleCancel} className="cancel-button">
-              {t("modal.cancel")}
+            <button type="button" onClick={handleClose} className="cancel-button">
+              {t("modal.custom-text.cancel")}
             </button>
 
             <button type="submit" className="confirm-button">
-              {t("modal.confirm")}
+              {t("modal.custom-text.confirm")}
             </button>
           </div>
         </form>
       </div>
-    </div>
+    </Modal>
   );
 };

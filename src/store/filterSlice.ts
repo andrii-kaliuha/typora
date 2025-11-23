@@ -3,9 +3,10 @@ import type { TextType, Mode, Language } from "../types/types";
 
 export type SortBy = "date" | "wpm" | "accuracy" | "duration";
 export type SortOrder = "asc" | "desc";
+export type DateFilter = "last-hour" | "today" | "this-week" | "this-month" | "this-year";
 
 type FilterState = {
-  dateFilter: "all" | "last-hour" | "today" | "this-week" | "this-month" | "this-year";
+  dateFilter: DateFilter | "all";
   textTypeFilter: TextType | "all";
   modeFilter: Mode | "all";
   languageFilter: Language | "all";

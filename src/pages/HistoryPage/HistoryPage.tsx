@@ -44,35 +44,31 @@ const HistoryControls = () => {
   const handleToggleFilter = () => setIsFilterOpen((prev) => !prev);
 
   return (
-    <>
+    <div className={`history-controls ${isFilterOpen ? "filter-open" : ""}`}>
       <div className="history-header">
         <div className="buttons-container">
           <HistoryControl action={handleToggleFilter} name={t("history.filter.title")} icon="filter-icon" />
           <HistoryControl action={() => console.log("sort")} name={t("history.sort.title")} icon="sort-icon" />
+
           <Sort />
         </div>
 
-        {/* <Filter isOpen={isFilterOpen} onClose={handleToggleFilter} /> */}
-
         <HistoryControl action={handleClearHistory} name={t("history.clear-all")} icon="delete-icon" />
-
-        {/* <ErrorModal
-          isOpen={isConfirmModalOpen}
-          onClose={() => setIsConfirmModalOpen(false)}
-          title="Упс! Щось пішло не так"
-          message="Під час збереження результату сталася помилка. Будь ласка, спробуйте ще раз."
-        /> */}
 
         <ConfirmModal
           isOpen={isConfirmModalOpen}
-          title="Підтвердити видалення?"
-          message="Після видалення запис буде втрачено без можливості відновлення. Підтвердьте вибір, щоб продовжити."
+          message={t("modal.confirm.message-delete-all")}
           onConfirm={handleConfirmClear}
           onClose={() => setIsConfirmModalOpen(false)}
         />
       </div>
+
       <Filter isOpen={isFilterOpen} />
-    </>
+
+      {/* <Modal isOpen={isFilterOpen} onClose={handleToggleFilter}>
+        <Filter isOpen={isFilterOpen} />
+      </Modal> */}
+    </div>
   );
 };
 
@@ -80,7 +76,7 @@ type HistoryControlProps = { action: () => void; name: string; icon: string };
 
 export const HistoryControl = ({ action, name, icon }: HistoryControlProps) => {
   return (
-    <button type="button" className="result-button" onClick={action}>
+    <button type="button" className="result-button tyu" onClick={action}>
       <svg width={24} height={24}>
         <use href={`./src/assets/icons.svg#${icon}`} />
       </svg>
@@ -123,7 +119,7 @@ export const HistoryTestResult = ({ text, stats, id }: HistoryTestResultProps) =
   const formattedStats = formatStats(stats);
 
   const { isPlaying, cursorIndex, handleTogglePlay } = useWatchReplay(text);
-  const { captureAndDownload } = useScreenshot(getFileName(stats.date));
+  const { captureAndDownload, error, clearError } = useScreenshot(getFileName(stats.date), false);
 
   const handleCapture = () => captureAndDownload(LiRef.current);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
@@ -143,21 +139,13 @@ export const HistoryTestResult = ({ text, stats, id }: HistoryTestResultProps) =
         <ResultButton action={handleCapture} name={t("result.screenshot")} icon="screenshot-icon" />
         <ResultButton action={handleDelete} name={t("result.delete")} icon="delete-icon" />
       </div>
-
-      {/* <ErrorModal
-        isOpen={isConfirmModalOpen}
-        onClose={() => setIsConfirmModalOpen(false)}
-        title="Упс! Щось пішло не так"
-        message="Під час збереження результату сталася помилка. Будь ласка, спробуйте ще раз."
-      /> */}
-
       <ConfirmModal
         isOpen={isConfirmModalOpen}
-        title="Підтвердити видалення?"
-        message="Після видалення запис буде втрачено без можливості відновлення. Підтвердьте вибір, щоб продовжити."
-        onConfirm={handleConfirmClear}
+        message={t("modal.confirm.message")}
         onClose={() => setIsConfirmModalOpen(false)}
+        onConfirm={handleConfirmClear}
       />
+      <ErrorModal isOpen={!!error} onClose={clearError} message={error} />
     </li>
   );
 };
