@@ -2,6 +2,7 @@ import "./Header.css";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigation } from "./Navigation";
+import { Modal } from "../../shared/Modal";
 
 export const Header = () => (
   <header>
@@ -73,7 +74,8 @@ const Menu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => 
   if (!isOpen) return null;
 
   return (
-    <div className="menu-backdrop">
+    // <div className="menu-backdrop">
+    <Modal isOpen={isOpen} onClose={onClose}>
       <div className="menu-container">
         <Logotype />
         <Navigation action={onClose} />
@@ -83,7 +85,8 @@ const Menu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => 
           <SettingButton icon="exit-icon" action={onClose} />
         </div>
       </div>
-    </div>
+    </Modal>
+    // </div>
   );
 };
 

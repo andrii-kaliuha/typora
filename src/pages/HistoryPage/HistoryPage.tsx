@@ -10,13 +10,13 @@ import { getFileName } from "../../utils/typing/getFileName";
 import { clearHistory, removeFromHistory } from "../../store/resultsSlice";
 import { formatStats } from "../../utils/formatters/formatStats";
 import { selectPaginatedHistory } from "../../store/selectors/historySelectors";
-import { Sort } from "../../components/Sort";
 import { Pagination } from "../../components/Pagination";
 import type { HistoryTestResultProps } from "../../types/types";
 import "./HistoryPage.css";
 import { Filter } from "../../components/Filter";
 import { ConfirmModal } from "../../shared/ConfirmModal";
 import { ErrorModal } from "../../shared/ErrorModal";
+import { Sort } from "../../components/Sort";
 
 export const HistoryPage = () => {
   const history = useSelector(selectPaginatedHistory);
@@ -48,20 +48,17 @@ const HistoryControls = () => {
       <div className="history-header">
         <div className="buttons-container">
           <HistoryControl action={handleToggleFilter} name={t("history.filter.title")} icon="filter-icon" />
-          <HistoryControl action={() => console.log("sort")} name={t("history.sort.title")} icon="sort-icon" />
-
           <Sort />
         </div>
 
         <HistoryControl action={handleClearHistory} name={t("history.clear-all")} icon="delete-icon" />
-
-        <ConfirmModal
-          isOpen={isConfirmModalOpen}
-          message={t("modal.confirm.message-delete-all")}
-          onConfirm={handleConfirmClear}
-          onClose={() => setIsConfirmModalOpen(false)}
-        />
       </div>
+      <ConfirmModal
+        isOpen={isConfirmModalOpen}
+        message={t("modal.confirm.message-delete-all")}
+        onConfirm={handleConfirmClear}
+        onClose={() => setIsConfirmModalOpen(false)}
+      />
 
       <Filter isOpen={isFilterOpen} />
 
@@ -76,7 +73,7 @@ type HistoryControlProps = { action: () => void; name: string; icon: string };
 
 export const HistoryControl = ({ action, name, icon }: HistoryControlProps) => {
   return (
-    <button type="button" className="result-button tyu" onClick={action}>
+    <button type="button" className="history-control-button" onClick={action}>
       <svg width={24} height={24}>
         <use href={`./src/assets/icons.svg#${icon}`} />
       </svg>

@@ -1,4 +1,5 @@
 import { useEffect, type ReactNode } from "react";
+import FocusLock from "react-focus-lock";
 import "./Modal.css";
 
 type ModalProps = { isOpen: boolean; onClose: () => void; children: ReactNode };
@@ -18,8 +19,10 @@ export const Modal = ({ isOpen, onClose, children }: ModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className="modal-backdrop" onClick={handleBackdropClick}>
-      {children}
-    </div>
+    <FocusLock disabled={!isOpen}>
+      <div className="modal-backdrop" onClick={handleBackdropClick}>
+        {children}
+      </div>
+    </FocusLock>
   );
 };

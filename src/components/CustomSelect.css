@@ -1,0 +1,102 @@
+.sort-container {
+  display: flex;
+  gap: 12px;
+  position: relative;
+}
+
+.custom-select {
+  color: var(--secondary-color);
+  background-color: transparent;
+  padding: 4px 8px;
+  border-radius: 8px;
+  border-width: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    color: var(--text-color);
+    background-color: var(--surface-hover-color);
+  }
+
+  &:focus-visible {
+    color: var(--text-color);
+    outline: none;
+  }
+}
+
+.custom-select-menu {
+  position: absolute;
+  overflow-y: auto;
+
+  color: var(--secondary-color);
+  background-color: var(--surface-hover-color);
+
+  margin-top: 12px;
+  /* border: 2px solid var(--secondary-color); */
+  border-radius: 8px;
+}
+
+.custom-select-option {
+  background-color: var(--tertiary-color);
+  border-width: 0;
+  width: 100%;
+  color: var(--secondary-color);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 32px;
+  padding: 0 24px;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--text-color);
+    background-color: var(--surface-hover-color);
+    background-color: var(--primary-color);
+  }
+
+  &:focus-visible {
+    color: var(--text-color);
+    background-color: var(--surface-hover-color);
+    outline: none;
+  }
+}
+
+.custom-select-option.selected {
+  color: var(--primary-color);
+  font-weight: 600;
+
+  &:hover {
+    color: var(--text-color);
+    background-color: var(--surface-hover-color);
+    background-color: var(--primary-color);
+    color: var(--background-color);
+  }
+}
+
+.sort-button-order {
+  background-color: transparent;
+  color: var(--secondary-color);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: transparent;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--text-color);
+  }
+
+  &:focus-visible {
+    color: var(--text-color);
+    outline: transparent;
+  }
+}

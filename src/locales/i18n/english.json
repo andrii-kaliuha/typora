@@ -179,7 +179,7 @@
       "by": {
         "date": "Date",
         "duration": "Duration",
-        "speed": "Speed",
+        "wpm": "Speed",
         "accuracy": "Accuracy"
       },
       "order": {

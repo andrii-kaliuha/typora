@@ -61,22 +61,42 @@ h4 {
 .filter-item {
   font-size: 14px;
   color: var(--secondary-color);
+  background-color: transparent;
+  border-width: 0;
   cursor: pointer;
 
   &:hover {
     color: var(--text-color);
+  }
+
+  &:focus-visible {
+    color: var(--text-color);
+    outline: none;
   }
 }
 
 .filter-item.active {
   font-weight: bold;
   color: var(--primary-color);
+
+  &:hover {
+    color: var(--text-color);
+  }
+
+  &:focus-visible {
+    color: var(--text-color);
+    outline: none;
+  }
 }
 
 .duration {
   display: flex;
   align-items: center;
   gap: 12px;
+
+  &:hover {
+    color: var(--secondary-color);
+  }
 }
 
 .duration select {

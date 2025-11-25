@@ -1,0 +1,76 @@
+/* ======================== 1. ОСНОВА ======================== */
+.custom-select-wrapper {
+  position: relative;
+  width: 250px;
+  user-select: none;
+  font-family: sans-serif;
+  /* Важливо: додайте тут стилі для шрифтів та базового вигляду */
+}
+
+/* ======================== 2. ТРИГЕР (КНОПКА) ======================== */
+.custom-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  font-size: 16px;
+  color: #333;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.custom-select-trigger:hover {
+  border-color: #007bff;
+}
+
+/* ======================== 3. СТРІЛКА ======================== */
+.arrow {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #333;
+  transition: transform 0.2s;
+}
+
+/* Клас для повороту стрілки */
+.arrow.rotated {
+  transform: rotate(180deg);
+}
+
+/* ======================== 4. СПИСОК ОПЦІЙ ======================== */
+.custom-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  margin-top: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+  /* display: none; Більше не потрібен, оскільки список приховується через умову {isOpen && ...} в React */
+}
+
+/* Окрема опція */
+.custom-option {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.custom-option:hover {
+  background-color: #f0f0f0;
+}
+
+/* Стиль для поточно вибраної опції */
+.custom-option.selected {
+  background-color: #e9f5ff;
+  font-weight: 600;
+}

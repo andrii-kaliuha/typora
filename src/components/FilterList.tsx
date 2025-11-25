@@ -32,11 +32,26 @@ export const Title = ({ text }: { text: string }) => {
   );
 };
 
+// export const FilterItem = <T extends FilterValue>({ value, label, onSelect, isActive }: FilterItemProps<T>) => {
+//   return (
+//     <li className={`filter-item  ${isActive ? "active" : ""}`} onClick={() => onSelect(value)}>
+//       {label}
+//     </li>
+//   );
+// };
+
+// Оновлений компонент FilterItem
 export const FilterItem = <T extends FilterValue>({ value, label, onSelect, isActive }: FilterItemProps<T>) => {
   return (
-    <li className={`filter-item  ${isActive ? "active" : ""}`} onClick={() => onSelect(value)}>
+    <button
+      className={`filter-item ${isActive ? "active" : ""}`}
+      onClick={() => onSelect(value)}
+      // button вже має tabIndex=0, role="button" та обробку Enter/Space
+      type="button" // Додатково вказуємо type="button", щоб уникнути відправки форм
+      aria-pressed={isActive} // Додатковий ARIA-атрибут, що вказує на стан "натиснуто/активно"
+    >
       {label}
-    </li>
+    </button>
   );
 };
 
@@ -47,7 +62,7 @@ export const FilterList = ({ title, filterList, onSelect, currentFilter }: Filte
     <div>
       <Title text={title} />
 
-      <ul className="filter-list vjlkamchdh">
+      <ul className="filter-list">
         {filterList.map((item) => (
           <FilterItem key={item.value} value={item.value} label={t(item.label)} onSelect={onSelect} isActive={currentFilter === item.value} />
         ))}

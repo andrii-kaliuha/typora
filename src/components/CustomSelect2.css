@@ -1,0 +1,78 @@
+.cs-wrapper {
+  position: relative;
+}
+
+.cs-control {
+  border: 2px solid var(--secondary-color);
+  color: var(--secondary-color);
+
+  border-radius: 8px;
+  height: 32px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-width: 64px;
+
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    color: var(--text-color);
+    /* border-color: var(--text-color); */
+  }
+
+  &:focus-visible {
+    border: 2px solid transparent;
+    color: var(--text-color);
+    outline: 2px solid var(--text-color);
+  }
+}
+
+.cs-control.open {
+  border-radius: 8px 8px 0 0;
+}
+
+.cs-menu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 10;
+
+  background-color: var(--surface-color);
+  color: var(--secondary-color);
+
+  border: 2px solid var(--secondary-color);
+  border-top: 0;
+  border-radius: 0 0 8px 8px;
+}
+
+.cs-option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 24px;
+  cursor: pointer;
+
+  &:last-child {
+    border-radius: 0 0 8px 8px;
+  }
+
+  &:hover {
+    color: var(--text-color);
+    background-color: var(--surface-hover-color);
+  }
+
+  &:focus-visible {
+    color: var(--text-color);
+    background-color: var(--surface-hover-color);
+    outline: none;
+  }
+}
+
+.cs-option.selected {
+  color: var(--primary-color);
+  font-weight: 600;
+}
