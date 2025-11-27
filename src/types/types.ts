@@ -32,7 +32,7 @@ export type Stats = {
 
 export type HistoryTestResultProps = {
   id: string;
-  text: { letters: { letter: string; status: string; typedAt: number | null }[]; status: string }[];
+  textData: { letters: { letter: string; status: string; typedAt: number | null }[]; status: string }[];
   stats: Stats;
 };
 

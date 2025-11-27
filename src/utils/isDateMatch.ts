@@ -7,9 +7,6 @@ export const isDateMatch = (item: TestResultItem, dateFilter: string): boolean =
   const now = new Date();
 
   switch (dateFilter) {
-    case "last-hour":
-      return now.getTime() - testDate.getTime() <= 60 * 60 * 1000;
-
     case "today":
       return testDate.toDateString() === now.toDateString();
 

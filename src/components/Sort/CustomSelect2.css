@@ -4,23 +4,22 @@
 
 .cs-control {
   border: 2px solid var(--secondary-color);
+  background-color: transparent;
   color: var(--secondary-color);
 
-  border-radius: 8px;
+  border-radius: 6px;
+  min-width: 64px;
   height: 32px;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  min-width: 64px;
-
   cursor: pointer;
   user-select: none;
 
   &:hover {
     color: var(--text-color);
-    /* border-color: var(--text-color); */
   }
 
   &:focus-visible {
@@ -31,10 +30,10 @@
 }
 
 .cs-control.open {
-  border-radius: 8px 8px 0 0;
+  border-radius: 6px 6px 0 0;
 }
 
-.cs-menu {
+#cs-menu {
   position: absolute;
   left: 0;
   right: 0;
@@ -45,7 +44,7 @@
 
   border: 2px solid var(--secondary-color);
   border-top: 0;
-  border-radius: 0 0 8px 8px;
+  border-radius: 0 0 6px 6px;
 }
 
 .cs-option {
@@ -55,20 +54,16 @@
 
   height: 24px;
   cursor: pointer;
+  outline: none;
 
   &:last-child {
-    border-radius: 0 0 8px 8px;
+    border-radius: 0 0 6px 6px;
   }
 
-  &:hover {
-    color: var(--text-color);
-    background-color: var(--surface-hover-color);
-  }
-
+  &:hover,
   &:focus-visible {
     color: var(--text-color);
     background-color: var(--surface-hover-color);
-    outline: none;
   }
 }
 

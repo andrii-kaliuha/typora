@@ -53,7 +53,7 @@
   background-color: var(--surface-color);
   padding: 12px 20px;
   border-radius: 12px;
-  border-width: 0;
+  border: none;
 
   &:hover {
     background-color: var(--surface-hover-color);

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { setCustomText, setTextType } from "../store/configSlice";
-import { Modal } from "../shared/Modal";
+import { setCustomText, setTextType } from "../../store/configSlice";
+import { Modal } from "../Shared/Modal";
 import "./CustomTextModal.css";
 
 type CustomTextModalProps = { isOpen: boolean; onClose: () => void };

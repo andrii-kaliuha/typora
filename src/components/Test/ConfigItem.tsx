@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CustomTextModal } from "../components/CustomTextModal";
+import { CustomTextModal } from "./CustomTextModal";
 
 type ConfigItemProps<T extends string | number> = { id: T; onSelect: (id: T) => void; activeKey: T; label: string };
 

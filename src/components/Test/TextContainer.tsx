@@ -1,11 +1,11 @@
 import { useRef } from "react";
-import { useAutoScroll } from "../hooks/useAvtoScroll";
-import { TestControls } from "../shared/TestControls";
-import { useTestCompletion } from "../hooks/useTestCompletion";
-import { useTypingTest } from "../hooks/useTypingTest";
-import { useTextStructure } from "../hooks/useTextStructure";
-import type { TextContainerProps } from "../types/types";
-import { useTestKeyHandler } from "../hooks/useTestKeyHandler";
+import { useAutoScroll } from "../../hooks/useAvtoScroll";
+import { TestControls } from "./TestControls";
+import { useTestCompletion } from "../../hooks/useTestCompletion";
+import { useTypingTest } from "../../hooks/useTypingTest";
+import { useTextStructure } from "../../hooks/useTextStructure";
+import type { TextContainerProps } from "../../types/types";
+import { useTestKeyHandler } from "../../hooks/useTestKeyHandler";
 
 const LINE_HEIGHT = 48;
 

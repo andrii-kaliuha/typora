@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { setTextType, setLanguage, setDuration, setMode } from "../store/configSlice";
-import { ConfigItem, CustomTextButton } from "../shared/ConfigItem";
-import type { MenuOptions, TextType, Language, Mode } from "../types/types";
-import type { RootState } from "../store/index";
+import { setTextType, setLanguage, setDuration, setMode } from "../../store/configSlice";
+import { ConfigItem, CustomTextButton } from "./ConfigItem";
+import type { MenuOptions, TextType, Language, Mode } from "../../types/types";
+import type { RootState } from "../../store/index";
 
 export const TextConfig = ({ visibility }: { visibility: boolean }) => {
   const { t } = useTranslation();

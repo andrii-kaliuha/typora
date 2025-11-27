@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { formatStat } from "../utils/formatters/formatStat";
-import type { TestStatisticsProps } from "../types/types";
+import { formatStat } from "../../utils/formatters/formatStat";
+import type { TestStatisticsProps } from "../../types/types";
 
 export const TestStatistics = ({ stats }: TestStatisticsProps) => {
   const { t } = useTranslation();

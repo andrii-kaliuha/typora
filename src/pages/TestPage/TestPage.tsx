@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store/index";
-import { TextConfig } from "../../components/TextConfig";
-import { TextContainer } from "../../components/TextContainer";
-import { TestResult } from "../../components/TestResult";
+import { TextConfig } from "../../components/Test/TextConfig";
+import { TextContainer } from "../../components/Test/TextContainer";
+import { TestResult } from "../../components/Test/TestResult";
 import { useLoadingText } from "../../hooks/useLoadingText";
 import "./TestPage.css";
 

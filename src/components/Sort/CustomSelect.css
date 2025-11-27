@@ -4,12 +4,9 @@
   position: relative;
 }
 
-.custom-select {
-  color: var(--secondary-color);
+.custom-select-control {
   background-color: transparent;
-  padding: 4px 8px;
-  border-radius: 8px;
-  border-width: 0;
+  color: var(--secondary-color);
 
   display: flex;
   align-items: center;
@@ -17,54 +14,66 @@
 
   cursor: pointer;
   user-select: none;
+  border: none;
+  outline: none;
 
-  &:hover {
-    color: var(--text-color);
-    background-color: var(--surface-hover-color);
-  }
-
+  &:hover,
   &:focus-visible {
     color: var(--text-color);
-    outline: none;
   }
 }
 
-.custom-select-menu {
+@media (max-width: 475px) {
+  .current-option {
+    display: none;
+  }
+}
+
+#custom-select-menu {
   position: absolute;
-  overflow-y: auto;
+  margin-top: 12px;
+
+  width: max-content;
 
   color: var(--secondary-color);
-  background-color: var(--surface-hover-color);
-
-  margin-top: 12px;
-  /* border: 2px solid var(--secondary-color); */
+  background-color: var(--surface-color);
+  border: 2px solid var(--secondary-color);
   border-radius: 8px;
 }
 
+#custom-select-menu .select-buttons-container .custom-select-mobile-option {
+  padding: 0 12px;
+}
+
 .custom-select-option {
-  background-color: var(--tertiary-color);
-  border-width: 0;
-  width: 100%;
+  background-color: transparent;
   color: var(--secondary-color);
 
   display: flex;
   justify-content: center;
   align-items: center;
 
+  width: 100%;
   height: 32px;
   padding: 0 24px;
-  cursor: pointer;
+  padding: 0 12px;
 
-  &:hover {
-    color: var(--text-color);
-    background-color: var(--surface-hover-color);
-    background-color: var(--primary-color);
+  cursor: pointer;
+  border: none;
+  outline: none;
+
+  &:first-child {
+    border-radius: 6px 6px 0 0;
   }
 
+  &:last-child {
+    border-radius: 0 0 6px 6px;
+  }
+
+  &:hover,
   &:focus-visible {
     color: var(--text-color);
     background-color: var(--surface-hover-color);
-    outline: none;
   }
 }
 
@@ -72,11 +81,9 @@
   color: var(--primary-color);
   font-weight: 600;
 
-  &:hover {
-    color: var(--text-color);
+  &:hover,
+  &:focus-visible {
     background-color: var(--surface-hover-color);
-    background-color: var(--primary-color);
-    color: var(--background-color);
   }
 }
 
@@ -88,15 +95,12 @@
   justify-content: center;
   align-items: center;
 
-  border: transparent;
   cursor: pointer;
+  border: none;
+  outline: none;
 
-  &:hover {
-    color: var(--text-color);
-  }
-
+  &:hover,
   &:focus-visible {
     color: var(--text-color);
-    outline: transparent;
   }
 }

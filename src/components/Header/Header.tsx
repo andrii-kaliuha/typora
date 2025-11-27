@@ -2,7 +2,7 @@ import "./Header.css";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigation } from "./Navigation";
-import { Modal } from "../../shared/Modal";
+import { Modal } from "../Shared/Modal";
 
 export const Header = () => (
   <header>
@@ -74,7 +74,6 @@ const Menu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => 
   if (!isOpen) return null;
 
   return (
-    // <div className="menu-backdrop">
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="menu-container">
         <Logotype />
@@ -86,7 +85,6 @@ const Menu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => 
         </div>
       </div>
     </Modal>
-    // </div>
   );
 };
 

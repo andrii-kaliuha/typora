@@ -1,4 +1,4 @@
-import type { TextProps } from "../types/types";
+import type { TextProps } from "../../types/types";
 
 export const TextResult = ({ text, isReplaying, cursorIndex }: TextProps) => {
   let charIndex = 0;
