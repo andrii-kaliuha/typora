@@ -55,15 +55,18 @@
   background-color: var(--surface-color);
 }
 
+.hidden-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  font-size: 16px;
+}
+
 .text-wrapper {
   border-radius: 24px 24px 0 0;
   padding: 24px 24px 12px;
 
-  &:focus {
-    outline: 2px solid var(--primary-color);
-  }
-
-  &:focus-visible {
+  &:focus-within {
     outline: 2px solid var(--primary-color);
   }
 }

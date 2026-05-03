@@ -13,6 +13,7 @@ export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProp
   const textContainerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const { typedText, typedHistory, timeLeft, handleRestart, handleKeyDown, testStatus, startTimeRef } = useTypingTest({
     targetText,
@@ -20,14 +21,15 @@ export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProp
     mode,
   });
 
-  useTestKeyHandler({ textContainerRef, testStatus, handleKeyDown });
-  useAutoScroll(textRef, cursorRef, typedText.length, LINE_HEIGHT);
+  useTestKeyHandler({ textContainerRef, inputRef, testStatus, handleKeyDown });
+  useAutoScroll({ textRef, cursorRef, textLength: typedText.length, lineHeight: LINE_HEIGHT });
   const textData = useTextStructure({ targetText, typedText, typedHistory });
   useTestCompletion({ typedHistory, targetText, testStatus, startTimeRef, timeLeft, textData });
 
   return (
     <div className="text-container">
       <div className="text-wrapper" ref={textContainerRef} tabIndex={0}>
+        <input ref={inputRef} className="hidden-input" />
         <div className="text" ref={textRef} tabIndex={-1}>
           {textData.map((word, index) => (
             <span key={index} className="word">

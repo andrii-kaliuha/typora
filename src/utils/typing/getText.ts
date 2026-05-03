@@ -1,10 +1,10 @@
 import type { Language } from "../../types/types";
-import TEXT_POOL_UA from "../../locales/texts/ukrainian-texts.json";
-import TEXT_POOL_EN from "../../locales/texts/english-texts.json";
+import TEXT_POOL_UA from "../../localization/texts/ukrainian-texts.json";
+import TEXT_POOL_EN from "../../localization/texts/english-texts.json";
 
-const texts = { ukrainian: TEXT_POOL_UA, english: TEXT_POOL_EN };
+const texts = { uk: TEXT_POOL_UA, en: TEXT_POOL_EN };
 
-export const getRandomText = (language: Language = "ukrainian"): string => {
+export const getRandomText = (language: Language = "uk"): string => {
   const availableTexts = texts[language];
   if (!availableTexts || availableTexts.length === 0) return "";
 
@@ -12,7 +12,7 @@ export const getRandomText = (language: Language = "ukrainian"): string => {
   return availableTexts[randomIndex];
 };
 
-export const getNewText = (currentText: string, language: Language = "ukrainian"): string => {
+export const getNewText = (currentText: string, language: Language = "uk"): string => {
   const availableTexts = texts[language];
   if (!availableTexts || availableTexts.length === 0) return "";
 

@@ -61,7 +61,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .pagination-button {
@@ -80,8 +80,16 @@
   border: none;
   cursor: pointer;
 
+  &:active {
+    color: var(--primary-color);
+  }
+
   &:hover {
     background-color: var(--surface-hover-color);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--primary-color);
   }
 
   &:disabled {
@@ -138,7 +146,7 @@
   color: var(--secondary-color);
 
   &:hover,
-  &:focus-visibl {
+  &:focus-visible {
     color: var(--text-color);
   }
 
@@ -147,12 +155,24 @@
   }
 }
 
-.control-button-name {
-  display: block;
+@media (max-width: 475px) {
+  .history-control-button.delete-button > p {
+    display: none;
+  }
 }
 
-@media (max-width: 475px) {
-  .control-button-name {
+@media (max-width: 767px) {
+  .sort-container {
+    display: none;
+  }
+}
+
+.mobile-sort {
+  display: flex;
+}
+
+@media (min-width: 767px) {
+  .mobile-sort {
     display: none;
   }
 }

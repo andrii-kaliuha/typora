@@ -1,8 +1,8 @@
-type HistoryControlProps = { action: () => void; name: string; icon: string };
+type HistoryControlProps = { className?: string; action: () => void; name: string; icon: string };
 
-export const HistoryControl = ({ action, name, icon }: HistoryControlProps) => {
+export const HistoryControl = ({ className, action, name, icon }: HistoryControlProps) => {
   return (
-    <button type="button" className="history-control-button" onClick={action}>
+    <button type="button" className={`history-control-button ${className}`} onClick={action}>
       <svg width={24} height={24}>
         <use href={`./src/assets/icons.svg#${icon}`} />
       </svg>

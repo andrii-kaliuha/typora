@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { setSortBy, setSortOrder } from "../../store/filterSlice";
-import type { SortBy } from "../../store/filterSlice";
+import type { SortBy } from "../../types/SortTypes";
 import type { RootState } from "../../store";
 import { useTranslation } from "react-i18next";
 import { CustomSelect } from "./CustomSelect";

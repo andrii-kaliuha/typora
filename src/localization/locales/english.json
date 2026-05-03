@@ -13,8 +13,8 @@
 
     "random-text": "Random Text",
     "custom-text": "Custom Text",
-    "ukrainian": "Ukrainian",
-    "english": "English",
+    "uk": "Ukrainian",
+    "en": "English",
 
     "normal": "Normal",
     "accuracy": "Accuracy",
@@ -185,7 +185,9 @@
         "asc": "ascending",
         "desc": "descending",
         "title": "In {{order}} order",
-        "aria": "Sort by {{field}} in {{order}} order"
+        "aria": "Sort by {{field}} in {{order}} order",
+        "asc_short": "By ascending",
+        "desc_short": "By descending"
       }
     }
   }

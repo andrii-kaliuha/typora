@@ -1,5 +1,5 @@
 import type { TextType, Language, Mode } from "./types";
-import type { DateFilter } from "../store/filterSlice";
+import type { DateFilter } from "./SortTypes";
 
 export type DateListType = { value: DateFilter | string; label: string }[];
 export type TextTypeList = { value: TextType | string; label: string }[];

@@ -1,11 +1,13 @@
 import { useEffect, useCallback, type RefObject } from "react";
 
-export const useSelectKeyboardNavigation = (
-  wrapperRef: RefObject<HTMLElement | null>,
-  menuRef: RefObject<HTMLDivElement | null>,
-  isOpen: boolean,
-  setOpen: (isOpen: boolean) => void
-) => {
+type useSelectKeyboardNavigationProps = {
+  wrapperRef: RefObject<HTMLElement | null>;
+  menuRef: RefObject<HTMLDivElement | null>;
+  isOpen: boolean;
+  setOpen: (isOpen: boolean) => void;
+};
+
+export const useSelectKeyboardNavigation = ({ wrapperRef, menuRef, isOpen, setOpen }: useSelectKeyboardNavigationProps) => {
   // 1. Обробка закриття по клавіші Escape та переміщення фокусу
   const handleEscapeKey = useCallback(
     (e: KeyboardEvent) => {

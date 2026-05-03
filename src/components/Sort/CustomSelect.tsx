@@ -1,26 +1,19 @@
-import { useState, useRef, type ReactNode } from "react";
+import { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import FocusLock from "react-focus-lock";
-import "./CustomSelect.css";
 import { useClickOutside } from "../../hooks/useClickOutside";
 import { useSelectKeyboardNavigation } from "../../hooks/useKeyboardNavigation";
-
-type Option = { label: string; value: string };
-
-type CustomSelectProps = {
-  options: Option[];
-  currentOption: string;
-  onChange: (value: string) => void;
-};
+import type { CustomSelectControlProps, CustomSelectProps, CustomOptionProps } from "../../types/SortTypes";
+import "./CustomSelect.css";
 
 export const CustomSelect = ({ options, currentOption, onChange }: CustomSelectProps) => {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
-  useClickOutside(wrapperRef, () => setOpen(false));
 
-  useSelectKeyboardNavigation(wrapperRef, menuRef, open, setOpen);
+  useClickOutside({ ref: wrapperRef, handler: () => setOpen(false) });
+  useSelectKeyboardNavigation({ wrapperRef, menuRef, isOpen: open, setOpen: setOpen });
 
   return (
     <div ref={wrapperRef}>
@@ -51,14 +44,6 @@ export const CustomSelect = ({ options, currentOption, onChange }: CustomSelectP
   );
 };
 
-type CustomOptionProps = {
-  style: string;
-  option: Option;
-  currentOption: string;
-  onChange: (value: string) => void;
-  setOpen: (isOpen: boolean) => void;
-};
-
 export const CustomOption = ({ style, option, currentOption, onChange, setOpen }: CustomOptionProps) => {
   const isSelected = option.value === currentOption;
 
@@ -72,14 +57,6 @@ export const CustomOption = ({ style, option, currentOption, onChange, setOpen }
       {option.label}
     </button>
   );
-};
-
-type CustomSelectControlProps = {
-  style: string;
-  open: boolean;
-  forElement: string;
-  children: ReactNode;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const CustomSelectControl = ({ style, open, forElement, children, setOpen }: CustomSelectControlProps) => {

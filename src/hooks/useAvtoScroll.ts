@@ -1,14 +1,16 @@
 import { useEffect, type RefObject } from "react";
 
-export const useAutoScroll = (
-  scrollContainerRef: RefObject<HTMLElement | null>,
-  targetElementRef: RefObject<HTMLElement | null>,
-  triggerDependency: number,
-  lineHeight: number
-) => {
+type useAutoScrollProps = {
+  textRef: RefObject<HTMLElement | null>;
+  cursorRef: RefObject<HTMLElement | null>;
+  textLength: number;
+  lineHeight: number;
+};
+
+export const useAutoScroll = ({ textRef, cursorRef, textLength, lineHeight }: useAutoScrollProps) => {
   useEffect(() => {
-    const container = scrollContainerRef.current;
-    const cursor = targetElementRef.current;
+    const container = textRef.current;
+    const cursor = cursorRef.current;
 
     if (!container || !cursor) return;
 
@@ -27,5 +29,5 @@ export const useAutoScroll = (
     if (cursorRelativeTop < 0) {
       container.scrollTop -= lineHeight;
     }
-  }, [triggerDependency, lineHeight, scrollContainerRef, targetElementRef]);
+  }, [textRef, cursorRef, textLength, lineHeight]);
 };

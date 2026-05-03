@@ -13,7 +13,7 @@ type ConfigState = {
 
 const initialState: ConfigState = {
   textType: "random",
-  language: "ukrainian",
+  language: "uk",
   duration: 30,
   mode: "normal",
   currentText: "",

@@ -1,6 +1,8 @@
 import { useEffect, type RefObject } from "react";
 
-export const useClickOutside = (ref: RefObject<Node | null>, handler: () => void) => {
+type useClickOutsideProps = { ref: RefObject<Node | null>; handler: () => void };
+
+export const useClickOutside = ({ ref, handler }: useClickOutsideProps) => {
   useEffect(() => {
     const listener = (event: MouseEvent | TouchEvent) => {
       if (!ref.current || ref.current.contains(event.target as Node)) {
@@ -19,14 +21,3 @@ export const useClickOutside = (ref: RefObject<Node | null>, handler: () => void
     };
   }, [ref, handler]);
 };
-
-// useEffect(() => {
-//   const onClick = (e: MouseEvent) => {
-//     if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
-//       setOpen(false);
-//     }
-//   };
-
-//   document.addEventListener("mousedown", onClick);
-//   return () => document.removeEventListener("mousedown", onClick);
-// }, []);

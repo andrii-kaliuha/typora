@@ -35,18 +35,8 @@ export const TextConfig = ({ visibility }: { visibility: boolean }) => {
       )}
       {openMenu === "language" && (
         <div className="text-config-list">
-          <ConfigItem
-            id="ukrainian"
-            activeKey={language}
-            label={t("config.ukrainian")}
-            onSelect={() => handleLanguageClick("ukrainian" as Language)}
-          />
-          <ConfigItem
-            id="english"
-            activeKey={language}
-            label={t("config.english")}
-            onSelect={() => handleLanguageClick("english" as Language)}
-          />
+          <ConfigItem id="uk" activeKey={language} label={t("config.uk")} onSelect={() => handleLanguageClick("uk" as Language)} />
+          <ConfigItem id="en" activeKey={language} label={t("config.en")} onSelect={() => handleLanguageClick("en" as Language)} />
         </div>
       )}
       {openMenu === "duration" && (

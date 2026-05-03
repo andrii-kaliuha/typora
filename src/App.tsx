@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Header } from "./components/Header/Header";
 import { TestPage } from "./pages/TestPage/TestPage";
 import { LearningPage } from "./pages/LearningPage/LearningPage";
@@ -7,7 +7,7 @@ import { HistoryPage } from "./pages/HistoryPage/HistoryPage";
 export const App = () => {
   return (
     <div className="app">
-      <BrowserRouter basename="typora">
+      <HashRouter>
         <Header />
         <main>
           <Routes>
@@ -15,9 +15,10 @@ export const App = () => {
             <Route path="/test" element={<TestPage />} />
             <Route path="/learning" element={<LearningPage />} />
             <Route path="/history" element={<HistoryPage />} />
+            <Route path="*" element={<Navigate to="/test" replace />} />
           </Routes>
         </main>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 };

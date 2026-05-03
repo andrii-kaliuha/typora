@@ -1,7 +1,8 @@
 export const getVisibleLimit = (width: number): number => {
-  if (width < 768) return 3;
-  if (width < 1024) return 5;
-  return 7;
+  if (width < 475) return 3;
+  if (width < 768) return 5;
+  if (width < 1024) return 7;
+  return 9;
 };
 
 export const getVisiblePages = (totalPages: number, currentPage: number, maxVisibleButtons: number): number[] => {

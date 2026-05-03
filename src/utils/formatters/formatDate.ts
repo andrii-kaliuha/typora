@@ -1,6 +1,4 @@
 export const formatDate = (timestamp: number, language: string) => {
-  const locale = language === "english" ? "en" : "uk";
-
   const date = new Date(timestamp);
   const now = new Date();
   const isToday = date.toDateString() === now.toDateString();
@@ -12,9 +10,9 @@ export const formatDate = (timestamp: number, language: string) => {
   else if (isSameYear) options = { hour: "2-digit", minute: "2-digit", day: "2-digit", month: "long" };
   else options = { day: "2-digit", month: "long", year: "numeric" };
 
-  let formatted = new Intl.DateTimeFormat(locale, options).format(date);
+  let formatted = new Intl.DateTimeFormat(language, options).format(date);
 
-  if (locale === "uk") formatted = formatted.replace(/\s?р\.$/, "");
+  if (language === "uk") formatted = formatted.replace(/\s?р\.$/, "");
 
   return formatted;
 };

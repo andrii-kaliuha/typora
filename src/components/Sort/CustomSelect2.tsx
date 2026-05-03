@@ -1,25 +1,18 @@
 import { useState, useRef } from "react";
 import FocusLock from "react-focus-lock";
-import "./CustomSelect2.css";
 import { useClickOutside } from "../../hooks/useClickOutside";
-import { CustomOption, CustomSelectControl } from "./CustomSelect";
 import { useSelectKeyboardNavigation } from "../../hooks/useKeyboardNavigation";
-
-type Option = { value: string; label: string };
-
-type CustomSelectProps = {
-  options: Option[];
-  currentOption: string;
-  onChange: (value: string) => void;
-};
+import { CustomOption, CustomSelectControl } from "./CustomSelect";
+import type { CustomSelectProps } from "../../types/SortTypes";
+import "./CustomSelect2.css";
 
 export const CustomSelect2 = ({ options, currentOption, onChange }: CustomSelectProps) => {
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
-  useClickOutside(wrapperRef, () => setOpen(false));
 
-  useSelectKeyboardNavigation(wrapperRef, menuRef, open, setOpen);
+  useClickOutside({ ref: wrapperRef, handler: () => setOpen(false) });
+  useSelectKeyboardNavigation({ wrapperRef, menuRef, isOpen: open, setOpen: setOpen });
 
   return (
     <div ref={wrapperRef} className="cs-wrapper">

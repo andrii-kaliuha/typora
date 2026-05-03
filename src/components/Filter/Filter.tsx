@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import type { RootState } from "../../store/index";
 import { setDateFilter, setTextTypeFilter, setLanguageFilter, setModeFilter } from "../../store/filterSlice";
-import type { DateFilter } from "../../store/filterSlice";
+import type { DateFilter } from "../../types/SortTypes";
 import type { DateListType, TextTypeList, LanguageListType, ModeListType } from "../../types/FilterTypes";
 import type { TextType, Language, Mode } from "../../types/types";
 import { FilterList } from "./FilterList";

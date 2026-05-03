@@ -1,12 +1,12 @@
 import i18n from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
-import english from "./locales/i18n/english.json";
-import ukrainian from "./locales/i18n/ukrainian.json";
+import english from "./locales/english.json";
+import ukrainian from "./locales/ukrainian.json";
 
 const resources = {
-  english: { translation: english },
-  ukrainian: { translation: ukrainian },
+  en: { translation: english },
+  uk: { translation: ukrainian },
 };
 
 i18n
@@ -14,7 +14,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    fallbackLng: "english",
+    fallbackLng: "en",
     interpolation: {
       escapeValue: false,
     },

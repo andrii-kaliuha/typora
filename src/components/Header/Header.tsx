@@ -31,7 +31,7 @@ const LanguageSelect = () => {
   const { i18n } = useTranslation();
 
   const toggleLanguage = () => {
-    const language = i18n.language === "english" ? "ukrainian" : "english";
+    const language = i18n.language === "en" ? "uk" : "en";
     i18n.changeLanguage(language);
   };
 

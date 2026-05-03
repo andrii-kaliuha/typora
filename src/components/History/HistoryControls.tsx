@@ -31,9 +31,9 @@ export const HistoryControls = () => {
         <div className="buttons-container">
           <HistoryControl action={handleToggleFilter} name={t("history.filter.title")} icon="filter-icon" />
           <Sort />
-          <HistoryControl action={handleToggleMobileSort} name="Сортувати" icon="sort-icon" />
+          <HistoryControl action={handleToggleMobileSort} name="Сортувати" icon="sort-icon" className="mobile-sort" />
         </div>
-        <HistoryControl action={handleClearHistory} name={t("history.clear-all")} icon="delete-icon" />
+        <HistoryControl action={handleClearHistory} name={t("history.clear-all")} icon="delete-icon" className="delete-button" />
       </div>
       <ConfirmModal
         isOpen={isConfirmModalOpen}

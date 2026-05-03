@@ -2,7 +2,7 @@ import type { RefObject } from "react";
 
 export type MenuOptions = "text" | "language" | "duration" | "mode";
 export type TextType = "random" | "custom";
-export type Language = "ukrainian" | "english";
+export type Language = "uk" | "en";
 export type Mode = "normal" | "accuracy" | "strict";
 export type TestStatus = "idle" | "running" | "finished";
 

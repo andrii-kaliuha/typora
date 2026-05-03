@@ -1,9 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { TextType, Mode, Language } from "../types/types";
-
-export type SortBy = "date" | "wpm" | "accuracy" | "duration";
-export type SortOrder = "asc" | "desc";
-export type DateFilter = "today" | "this-week" | "this-month" | "this-year";
+import type { DateFilter, SortBy, SortOrder } from "../types/SortTypes";
 
 type FilterState = {
   dateFilter: DateFilter | "all";

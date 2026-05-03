@@ -1,69 +1,88 @@
-# React + TypeScript + Vite
+# About Typora
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[**Typora**](https://andrii-kaliuha.github.io/typora/) is a web app for improving typing skills. Users can practice typing in different modes, watch replays of their sessions to see their mistakes, and keep track of their progress with a detailed result history.
 
-Currently, two official plugins are available:
+## 📷 Screenshots
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<div align="center">
+  <h3>Test Page</h3>
+  <img src="src/assets/screenshots/TestPage.png" width="100%" alt="Test Page">
 
-## Expanding the ESLint configuration
+  <h3>History Page</h3>
+  <img src="src/assets/screenshots/HistoryPage.png" width="100%" alt="History Page">
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+</div>
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## ✨ Features
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- **Typing Metrics** — Real-time speed and accuracy tracking
+- **Performance Replay** — Watch and analyze your typing sessions
+- **Different Modes** — Normal, Strict, and Accuracy training modes
+- **Custom Settings** — Choose duration, language, or custom text
+- **Detailed History** — Save results with filters and pagination
+- **Visual Sharing** — Save result statistics as an image
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🛠️ Tech Stack
+
+- **Frontend:** React, TypeScript
+- **State Management:** Redux Toolkit
+- **Styling:** CSS
+- **Localization:** react-i18next
+- **Build Tooling:** Vite
+
+## 📁 Project Structure
+
+```text
+
+src/
+├── components/
+│   ├── Filter/        # Filter by duration and other params
+│   ├── Header/        # App header and navigation
+│   ├── History/       # History list, controls and pagination
+│   ├── Shared/        # Reusable UI components (Modals, Buttons)
+│   ├── Sort/          # Sorting controls and custom selects
+│   └── Test/          # Typing test UI and result display
+├── pages/
+│   ├── HistoryPage/   # Results history view
+│   ├── LearningPage/  # Learning/practice mode view
+│   └── TestPage/      # Main typing test view
+├── hooks/             # Custom React hooks
+├── store/             # Redux Toolkit slices and selectors
+├── locales/
+│   ├── i18n/          # UI translations (EN, UA)
+│   └── texts/         # Typing texts (EN, UA)
+├── types/             # TypeScript types
+├── utils/             # Helper functions (formatters, storage, typing)
+├── App.tsx
+├── main.tsx
+└── index.css
+
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## ⚙️ Installation & Setup
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# Clone the repository
+git clone https://github.com/andrii-kaliuha/typora.git
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Go to project folder
+cd typora
+
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
 ```
+
+## 📦 Build
+
+```bash
+npm run build
+```
+
+## 🚀 Future Improvements
+
+- **Charts:** Add typing statistics visualization with Chart.js
+- **Offline Support:** PWA support with IndexedDB for local storage
+- **Architecture:** Migrate to Feature-Sliced Design (FSD)
