@@ -48,7 +48,7 @@ export const useScreenshot = (fileName: string = "screenshot", simulateError: bo
         setIsLoading(false);
       }
     },
-    [fileName, t, simulateError]
+    [fileName, t, simulateError],
   );
 
   return { captureAndDownload, isLoading, error, clearError };
