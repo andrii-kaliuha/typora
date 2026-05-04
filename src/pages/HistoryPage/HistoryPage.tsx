@@ -8,7 +8,6 @@ import { Pagination } from "../../features/history/Pagination";
 import "./HistoryPage.css";
 
 import emptyHistoryIcon from "../../assets/empty-history.svg";
-import { Icon } from "../../shared/Icon";
 
 export const HistoryPage = () => {
   const history = useSelector(selectPaginatedHistory);
