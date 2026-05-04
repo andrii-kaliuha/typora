@@ -29,7 +29,16 @@ export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProp
   return (
     <div className="text-container">
       <div className="text-wrapper" ref={textContainerRef} tabIndex={0}>
-        <input ref={inputRef} className="hidden-input" />
+        {/* <input ref={inputRef} className="hidden-input" /> */}
+        <input
+          ref={inputRef}
+          className="hidden-input"
+          type="text"
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck={false}
+        />
         <div className="text" ref={textRef} tabIndex={-1}>
           {textData.map((word, index) => (
             <span key={index} className="word">
