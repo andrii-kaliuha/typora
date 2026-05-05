@@ -25,7 +25,7 @@ export const TestResult = ({ text, stats }: TestResultProps) => {
   const { textType, language, currentText } = useSelector((state: RootState) => state.config);
 
   const { isPlaying, cursorIndex, handleTogglePlay } = useWatchReplay(text);
-  const { captureAndDownload, error, clearError } = useScreenshot(getFileName(stats.date), false);
+  const { captureAndDownload, error, clearError } = useScreenshot(getFileName(stats.date));
 
   const handleCapture = () => captureAndDownload(DivRef.current);
 
