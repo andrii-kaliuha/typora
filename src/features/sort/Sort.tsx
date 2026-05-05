@@ -5,6 +5,7 @@ import type { RootState } from "../../store";
 import { useTranslation } from "react-i18next";
 import { SortSelect } from "./SortSelect";
 import { Icon } from "../../shared/Icon";
+import "./Sort.css";
 
 export const Sort = () => {
   const { t } = useTranslation();

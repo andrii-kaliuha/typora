@@ -1,8 +1,8 @@
-.modal-backdrop:has(.custom-select-mobile-menu) {
+.modal-backdrop:has(.mobile-sort-menu) {
   align-items: flex-end;
 }
 
-.custom-select-mobile-menu {
+.mobile-sort-menu {
   background-color: var(--surface-color);
   min-width: 256px;
   border-radius: 16px;
@@ -10,7 +10,7 @@
   padding: 16px 0;
 }
 
-.custom-select-mobile-header {
+.mobile-sort-header {
   color: var(--secondary-color);
 
   display: flex;
@@ -19,7 +19,7 @@
   padding: 0 16px;
 }
 
-.custom-select-close-button {
+.mobile-sort-close-button {
   background-color: transparent;
   border: none;
   color: var(--secondary-color);
@@ -38,7 +38,7 @@
   }
 }
 
-.custom-select-mobile-option {
+.mobile-sort-option {
   background-color: transparent;
   color: var(--secondary-color);
 
@@ -61,7 +61,7 @@
   }
 }
 
-.custom-select-mobile-option.selected {
+.mobile-sort-option.selected {
   color: var(--primary-color);
   font-weight: 600;
 
@@ -71,12 +71,8 @@
   }
 }
 
-.custom-select-mobile-menu > .divider {
+.mobile-sort-menu > .divider {
   height: 4px;
   background-color: var(--background-color);
   margin: 12px 0;
-}
-
-.select-buttons-container {
-  padding-bottom: 24px;
 }

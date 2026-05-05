@@ -12,14 +12,14 @@ export const ConfirmModal = ({ isOpen, message, onClose, onConfirm }: ConfirmMod
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="modal-confirm" onClick={(e) => e.stopPropagation()}>
         <div className="icon-warning">
-          <Icon width={72} height={72} icon="warning-icon" />
+          <Icon width={90} height={90} icon="warning-icon" />
         </div>
 
         <h2 className="modal-confirm-title">{t("modal.confirm.title")}</h2>
-        <div>
-          <p className="modal-confirm-message">{message}</p>
-          <p className="modal-confirm-action">{t("modal.confirm.action")}</p>
-        </div>
+        {/* <div> */}
+        <p className="modal-confirm-message">{message}</p>
+        {/* <p className="modal-confirm-action">{t("modal.confirm.action")}</p> */}
+        {/* </div> */}
 
         <div className="modal-buttons-container">
           <button type="button" onClick={onClose} className="cancel-button">

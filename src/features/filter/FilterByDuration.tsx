@@ -3,7 +3,7 @@ import { setDurationMin, setDurationMax } from "../../store/filterSlice";
 import type { RootState } from "../../store/index";
 import { Title } from "./FilterList";
 import { useTranslation } from "react-i18next";
-import { FilterSelect } from "../sort/FilterSelect";
+import { FilterSelect } from "./FilterSelect";
 import "./Filter.css";
 import type { Option } from "../../types/FilterTypes";
 

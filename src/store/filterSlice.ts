@@ -1,6 +1,7 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { TextType, Mode, Language } from "../types/types";
-import type { DateFilter, SortBy, SortOrder } from "../types/SortTypes";
+import type { SortBy, SortOrder } from "../types/SortTypes";
+import type { DateFilter } from "../types/FilterTypes";
 
 type FilterState = {
   dateFilter: DateFilter | "all";

@@ -1,6 +1,6 @@
 import type { TextType, Language, Mode } from "./types";
-import type { DateFilter } from "./SortTypes";
 
+export type DateFilter = "today" | "this-week" | "this-month" | "this-year";
 export type DateListType = { value: DateFilter | string; label: string }[];
 export type TextTypeList = { value: TextType | string; label: string }[];
 export type LanguageListType = { value: Language | string; label: string }[];

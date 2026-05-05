@@ -8,6 +8,7 @@ import { Pagination } from "../../features/history/Pagination";
 import "./HistoryPage.css";
 
 import emptyHistoryIcon from "../../assets/empty-history.svg";
+import { Icon } from "../../shared/Icon";
 
 export const HistoryPage = () => {
   const history = useSelector(selectPaginatedHistory);
@@ -42,9 +43,11 @@ const EmptyHistory = () => {
   const { t } = useTranslation();
   return (
     <div className="empty-history">
-      <svg width={128} height={128}>
+      {/* <svg width={128} height={128}>
         <use href={emptyHistoryIcon} />
-      </svg>
+      </svg> */}
+
+      <Icon width={90} height={90} icon="empty-history-icon" />
 
       <h1 className="empty-history-title">{t("history.title")}</h1>
       <p className="empty-history-action">{t("history.action")}</p>

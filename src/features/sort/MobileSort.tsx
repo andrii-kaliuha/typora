@@ -2,12 +2,13 @@ import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../store";
 import { Modal } from "../../shared/Modal/Modal";
-import { CustomOption } from "./SortSelect";
 import { useSelectKeyboardNavigation } from "../../hooks/useKeyboardNavigation";
 import { setSortBy, setSortOrder } from "../../store/filterSlice";
 import type { MobileSortProps, SortBy, SortOrder } from "../../types/SortTypes";
 import "./MobileSort.css";
 import { useTranslation } from "react-i18next";
+import { CustomOption } from "../../shared/CustomSelect";
+import { Icon } from "../../shared/Icon";
 
 export const MobileSort = ({ open, onClose }: MobileSortProps) => {
   const dispatch = useDispatch();
@@ -45,20 +46,18 @@ export const MobileSort = ({ open, onClose }: MobileSortProps) => {
   return (
     <Modal isOpen={open} onClose={onClose}>
       {open && (
-        <div className="custom-select-mobile-menu" role="listbox" ref={menuRef}>
-          <div className="custom-select-mobile-header">
-            <h3>Сортувати</h3>
-            <button type="button" className="custom-select-close-button" onClick={onClose}>
-              <svg width={24} height={24}>
-                <use href="./src/assets/icons.svg#close-icon" />
-              </svg>
+        <div className="mobile-sort-menu" role="listbox" ref={menuRef}>
+          <div className="mobile-sort-header">
+            <h3>{t("history.sort.title")}</h3>
+            <button type="button" className="mobile-sort-close-button" onClick={onClose}>
+              <Icon width={24} height={24} icon="close-icon" />
             </button>
           </div>
 
           {sortByOptions.map((option) => (
             <CustomOption
               key={option.value}
-              style="custom-select-mobile-option"
+              style="mobile-sort-option"
               option={option}
               currentOption={currentSortBy}
               onChange={handleChangeSortBy}
@@ -71,7 +70,7 @@ export const MobileSort = ({ open, onClose }: MobileSortProps) => {
           {sortOrderOptions.map((option) => (
             <CustomOption
               key={option.value}
-              style="custom-select-mobile-option"
+              style="mobile-sort-option"
               option={option}
               currentOption={currentSortOrder}
               onChange={handleChangeSortOrder}

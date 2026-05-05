@@ -1,16 +1,10 @@
-.sort-container {
-  display: flex;
-  gap: 12px;
-  position: relative;
-}
-
-.custom-select-control {
+.sort-select-control {
   background-color: transparent;
   color: var(--secondary-color);
 
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--spacing-md);
 
   cursor: pointer;
   user-select: none;
@@ -29,9 +23,9 @@
   }
 }
 
-#custom-select-menu {
+#sort-select-menu {
   position: absolute;
-  margin-top: 12px;
+  margin-top: var(--spacing-md);
 
   width: max-content;
 
@@ -41,11 +35,7 @@
   border-radius: 8px;
 }
 
-#custom-select-menu .select-buttons-container .custom-select-mobile-option {
-  padding: 0 12px;
-}
-
-.custom-select-option {
+.sort-select-option {
   background-color: transparent;
   color: var(--secondary-color);
 
@@ -54,20 +44,19 @@
   align-items: center;
 
   width: 100%;
-  height: 32px;
-  padding: 0 24px;
-  padding: 0 12px;
+  height: var(--button-md);
+  padding: 0 var(--spacing-md);
 
   cursor: pointer;
   border: none;
   outline: none;
 
   &:first-child {
-    border-radius: 6px 6px 0 0;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
   }
 
   &:last-child {
-    border-radius: 0 0 6px 6px;
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
   }
 
   &:hover,
@@ -77,30 +66,12 @@
   }
 }
 
-.custom-select-option.selected {
+.sort-select-option.selected {
   color: var(--primary-color);
   font-weight: 600;
 
   &:hover,
   &:focus-visible {
     background-color: var(--surface-hover-color);
-  }
-}
-
-.sort-button-order {
-  background-color: transparent;
-  color: var(--secondary-color);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  cursor: pointer;
-  border: none;
-  outline: none;
-
-  &:hover,
-  &:focus-visible {
-    color: var(--text-color);
   }
 }

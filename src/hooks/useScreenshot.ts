@@ -2,7 +2,7 @@ import { useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import html2canvas from "html2canvas";
 
-export const useScreenshot = (fileName: string = "screenshot", simulateError: boolean) => {
+export const useScreenshot = (fileName: string = "screenshot") => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { t } = useTranslation();
@@ -22,10 +22,6 @@ export const useScreenshot = (fileName: string = "screenshot", simulateError: bo
       targetElement.classList.add(screenshotClass);
 
       try {
-        if (simulateError) {
-          throw new Error("Simulated Screenshot Error");
-        }
-
         const scaleFactor = 3;
 
         const canvas = await html2canvas(targetElement, {
@@ -41,6 +37,8 @@ export const useScreenshot = (fileName: string = "screenshot", simulateError: bo
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+
+        throw new Error();
       } catch (error) {
         setError(t("result.screenshot-error"));
       } finally {
@@ -48,7 +46,7 @@ export const useScreenshot = (fileName: string = "screenshot", simulateError: bo
         setIsLoading(false);
       }
     },
-    [fileName, t, simulateError],
+    [fileName, t],
   );
 
   return { captureAndDownload, isLoading, error, clearError };

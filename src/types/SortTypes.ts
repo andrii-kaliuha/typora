@@ -26,6 +26,5 @@ export type CustomSelectControlProps = {
 
 export type SortBy = "date" | "wpm" | "accuracy" | "duration";
 export type SortOrder = "asc" | "desc";
-export type DateFilter = "today" | "this-week" | "this-month" | "this-year";
 
 export type MobileSortProps = { open: boolean; onClose: () => void };

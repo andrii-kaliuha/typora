@@ -2,8 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import type { RootState } from "../../store/index";
 import { setDateFilter, setTextTypeFilter, setLanguageFilter, setModeFilter } from "../../store/filterSlice";
-import type { DateFilter } from "../../types/SortTypes";
-import type { DateListType, TextTypeList, LanguageListType, ModeListType } from "../../types/FilterTypes";
+import type { DateListType, TextTypeList, LanguageListType, ModeListType, DateFilter } from "../../types/FilterTypes";
 import type { TextType, Language, Mode } from "../../types/types";
 import { FilterList } from "./FilterList";
 import { FilterByDuration } from "./FilterByDuration";
@@ -18,7 +17,7 @@ const dateList: DateListType = [
 ];
 
 const textTypeList: TextTypeList = [
-  { value: "all", label: "history.filter.date.all" },
+  { value: "all", label: "history.filter.text-type.all" },
   { value: "random", label: "history.filter.text-type.random" },
   { value: "custom", label: "history.filter.text-type.custom" },
 ];

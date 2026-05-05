@@ -1,0 +1,23 @@
+.sort-container {
+  display: flex;
+  gap: var(--spacing-md);
+  position: relative;
+}
+
+.sort-button-order {
+  background-color: transparent;
+  color: var(--secondary-color);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+  border: none;
+  outline: none;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--text-color);
+  }
+}

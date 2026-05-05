@@ -71,6 +71,16 @@ body {
   --correct-text-color: var(--text-color);
   --incorrect-text-color: #c1121f;
 
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-md: 20px;
+  --font-size-lg: 32px;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
   --button-sm: 24px;
   --button-md: 32px;
   --button-lg: 48px;

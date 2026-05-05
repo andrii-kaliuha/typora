@@ -32,7 +32,7 @@ export const HistoryControls = () => {
         <div className="buttons-container">
           <HistoryControl action={handleToggleFilter} name={t("history.filter.title")} icon="filter-icon" />
           <Sort />
-          <HistoryControl action={handleToggleMobileSort} name="Сортувати" icon="sort-icon" className="mobile-sort" />
+          <HistoryControl action={handleToggleMobileSort} name={t("history.sort.title")} icon="sort-icon" className="mobile-sort" />
         </div>
         <HistoryControl action={handleClearHistory} name={t("history.clear-all")} icon="delete-icon" className="delete-button" />
       </div>

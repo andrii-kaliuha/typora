@@ -21,7 +21,7 @@ export const HistoryTestResult = ({ textData, stats, id }: HistoryTestResultProp
   const formattedStats = formatStats(stats);
 
   const { isPlaying, cursorIndex, handleTogglePlay } = useWatchReplay(textData);
-  const { captureAndDownload, error, clearError } = useScreenshot(getFileName(stats.date), false);
+  const { captureAndDownload, error, clearError } = useScreenshot(getFileName(stats.date));
 
   const handleCapture = () => captureAndDownload(LiRef.current);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);

@@ -1,15 +1,15 @@
-.cs-wrapper {
+.filter-select-wrapper {
   position: relative;
 }
 
-.cs-control {
+.filter-select-control {
   border: 2px solid var(--secondary-color);
   background-color: transparent;
   color: var(--secondary-color);
 
   border-radius: 6px;
   min-width: 64px;
-  height: 32px;
+  height: var(--button-md);
 
   display: flex;
   justify-content: center;
@@ -29,11 +29,11 @@
   }
 }
 
-.cs-control.open {
+.filter-select-control.open {
   border-radius: 6px 6px 0 0;
 }
 
-#cs-menu {
+.filter-select-menu {
   position: absolute;
   left: 0;
   right: 0;
@@ -47,12 +47,12 @@
   border-radius: 0 0 6px 6px;
 }
 
-.cs-option {
+.filter-select-option {
   display: flex;
   justify-content: center;
   align-items: center;
 
-  height: 24px;
+  height: var(--button-sm);
   cursor: pointer;
   outline: none;
 
@@ -67,7 +67,7 @@
   }
 }
 
-.cs-option.selected {
+.filter-select-option.selected {
   color: var(--primary-color);
   font-weight: 600;
 }

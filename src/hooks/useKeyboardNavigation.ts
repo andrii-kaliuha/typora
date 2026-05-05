@@ -8,25 +8,21 @@ type useSelectKeyboardNavigationProps = {
 };
 
 export const useSelectKeyboardNavigation = ({ wrapperRef, menuRef, isOpen, setOpen }: useSelectKeyboardNavigationProps) => {
-  // 1. Обробка закриття по клавіші Escape та переміщення фокусу
   const handleEscapeKey = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         e.preventDefault();
         setOpen(false);
 
-        // Повернення фокусу на елемент управління після закриття
         if (wrapperRef.current) {
-          // Знаходимо кнопку управління всередині wrapperRef
           const controlButton = wrapperRef.current.querySelector("button");
           controlButton?.focus();
         }
       }
     },
-    [setOpen, wrapperRef]
+    [setOpen, wrapperRef],
   );
 
-  // 2. Обробка навігації стрілками
   const handleArrowKey = useCallback(
     (e: KeyboardEvent) => {
       if (!menuRef.current) return;
@@ -50,7 +46,7 @@ export const useSelectKeyboardNavigation = ({ wrapperRef, menuRef, isOpen, setOp
         options[nextIndex].focus();
       }
     },
-    [menuRef]
+    [menuRef],
   );
 
   useEffect(() => {
