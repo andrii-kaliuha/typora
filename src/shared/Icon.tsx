@@ -8,7 +8,7 @@ type IconProps = {
 
 export const Icon = ({ width, height, icon }: IconProps) => {
   return (
-    <svg width={width} height={height}>
+    <svg width={width} height={height} aria-hidden="true">
       <use href={`${icons}#${icon}`} />
     </svg>
   );

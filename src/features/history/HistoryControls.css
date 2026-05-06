@@ -6,8 +6,8 @@
   justify-content: space-between;
   align-items: center;
 
-  border-radius: 16px;
-  padding: 24px;
+  border-radius: var(--spacing-md);
+  padding: var(--spacing-xl);
 }
 
 @media (max-width: 839px) {
@@ -19,7 +19,7 @@
 .history-header .buttons-container {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--spacing-sm);
 }
 
 .history-controls.filter-open .history-header {
@@ -48,9 +48,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 12px;
+  gap: var(--spacing-sm);
 
-  border-radius: 8px;
+  border-radius: var(--radius-xs);
   border: none;
   outline: none;
 

@@ -26,7 +26,7 @@ export const SortSelect = ({ options, currentOption, onChange }: CustomSelectPro
 
       {open && (
         <FocusLock disabled={!open}>
-          <div id="sort-select-menu" role="listbox" ref={menuRef}>
+          <div className="sort-select-menu" role="listbox" ref={menuRef}>
             {options.map((option) => (
               <CustomOption
                 key={option.value}

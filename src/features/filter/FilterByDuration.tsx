@@ -20,24 +20,24 @@ export const FilterByDuration = () => {
   return (
     <div>
       <Title text={t("history.filter.duration.title")} />
-      <ul className="filter-list">
-        <li className="filter-item duration">
+      <div className="filter-list">
+        <div className="filter-item duration">
           <p>{t("history.filter.duration.less-than")}</p>
           <FilterSelect
             options={maxOptions}
             currentOption={String(durationMax)}
             onChange={(value) => dispatch(setDurationMax(Number(value)))}
           />
-        </li>
-        <li className="filter-item duration">
+        </div>
+        <div className="filter-item duration">
           <p>{t("history.filter.duration.more-than")}</p>
           <FilterSelect
             options={minOptions}
             currentOption={String(durationMin)}
             onChange={(value) => dispatch(setDurationMin(Number(value)))}
           />
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   );
 };

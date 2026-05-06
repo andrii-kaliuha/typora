@@ -23,7 +23,7 @@
   }
 }
 
-#sort-select-menu {
+.sort-select-menu {
   position: absolute;
   margin-top: var(--spacing-md);
 

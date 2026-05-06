@@ -21,7 +21,7 @@ export const Header = () => (
 const Logotype = () => {
   return (
     <div className="logotype-container">
-      <svg id="logotype-icon">
+      <svg id="logotype-icon" aria-hidden="true">
         <use href={`${icons}#logotype-icon`} />
       </svg>
       <p className="logotype-text">Typora</p>
@@ -30,17 +30,18 @@ const Logotype = () => {
 };
 
 const LanguageSelect = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const toggleLanguage = () => {
     const language = i18n.language === "en" ? "uk" : "en";
     i18n.changeLanguage(language);
   };
 
-  return <SettingButton icon="language-icon" action={toggleLanguage} />;
+  return <SettingButton icon="language-icon" action={toggleLanguage} ariaLabel={t("header.toggle-language")} />;
 };
 
 const ThemeToggle = () => {
+  const { t } = useTranslation();
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
 
@@ -57,22 +58,24 @@ const ThemeToggle = () => {
 
   const handleThemeToggle = () => setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
 
-  return <SettingButton icon="theme-icon" action={handleThemeToggle} />;
+  return <SettingButton icon="theme-icon" action={handleThemeToggle} ariaLabel={t("header.toggle-theme")} />;
 };
 
 const MobileMenu = () => {
+  const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const handleToggleMenu = () => setIsMenuOpen((prev) => !prev);
 
   return (
     <>
       <Menu isOpen={isMenuOpen} onClose={handleToggleMenu} />
-      <SettingButton icon="menu-icon" action={handleToggleMenu} style="toggle-menu-button" />
+      <SettingButton icon="menu-icon" action={handleToggleMenu} style="toggle-menu-button" ariaLabel={t("header.open-menu")} />
     </>
   );
 };
 
 const Menu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+  const { t } = useTranslation();
   if (!isOpen) return null;
 
   return (
@@ -83,16 +86,16 @@ const Menu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => 
         <div className="buttons-container">
           <LanguageSelect />
           <ThemeToggle />
-          <SettingButton icon="exit-icon" action={onClose} />
+          <SettingButton icon="exit-icon" action={onClose} ariaLabel={t("header.close-menu")} />
         </div>
       </div>
     </Modal>
   );
 };
 
-const SettingButton = ({ action, style, icon }: { action: () => void; style?: string; icon: string }) => {
+const SettingButton = ({ action, style, icon, ariaLabel }: { action: () => void; style?: string; icon: string; ariaLabel: string }) => {
   return (
-    <button type="button" onClick={action} className={`setting-button ${style ?? ""}`}>
+    <button type="button" onClick={action} className={`setting-button ${style ?? ""}`} aria-label={ariaLabel}>
       <Icon width={32} height={32} icon={icon} />
     </button>
   );

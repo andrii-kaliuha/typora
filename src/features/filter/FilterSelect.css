@@ -48,16 +48,27 @@
 }
 
 .filter-select-option {
+  background-color: transparent;
+  color: var(--secondary-color);
+
   display: flex;
   justify-content: center;
   align-items: center;
 
+  width: 100%;
   height: var(--button-sm);
+  padding: 0 var(--spacing-md);
+
   cursor: pointer;
+  border: none;
   outline: none;
 
+  &:first-child {
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  }
+
   &:last-child {
-    border-radius: 0 0 6px 6px;
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
   }
 
   &:hover,

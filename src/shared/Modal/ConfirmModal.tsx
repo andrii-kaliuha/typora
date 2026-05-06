@@ -16,10 +16,7 @@ export const ConfirmModal = ({ isOpen, message, onClose, onConfirm }: ConfirmMod
         </div>
 
         <h2 className="modal-confirm-title">{t("modal.confirm.title")}</h2>
-        {/* <div> */}
         <p className="modal-confirm-message">{message}</p>
-        {/* <p className="modal-confirm-action">{t("modal.confirm.action")}</p> */}
-        {/* </div> */}
 
         <div className="modal-buttons-container">
           <button type="button" onClick={onClose} className="cancel-button">

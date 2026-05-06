@@ -19,13 +19,11 @@ export const useAutoScroll = ({ textRef, cursorRef, textLength, lineHeight }: us
 
     const cursorRelativeTop = cursorRect.top - containerRect.top;
 
-    // --- Прокручування ВНИЗ ---
     if (cursorRelativeTop > lineHeight * 1) {
       container.scrollTop += lineHeight;
       return;
     }
 
-    // --- Прокручування ВГОРУ ---
     if (cursorRelativeTop < 0) {
       container.scrollTop -= lineHeight;
     }

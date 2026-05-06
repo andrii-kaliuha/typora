@@ -2,21 +2,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 12px;
+  gap: var(--spacing-sm);
 }
 
 .pagination-button {
   background-color: var(--surface-color);
   color: var(--text-color);
 
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   height: 48px;
   min-width: 48px;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: var(--spacing-sm);
 
   border: none;
   cursor: pointer;
@@ -41,7 +41,7 @@
 
 .pagination-button:first-child,
 .pagination-button:last-child {
-  padding: 0 24px;
+  padding: 0 var(--spacing-xl);
 }
 
 .pagination-button.active {

@@ -1,34 +1,33 @@
 .history-page {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding: 0 24px 24px;
+  gap: var(--spacing-xl);
+  padding: 0 var(--spacing-xl) var(--spacing-xl);
 }
 
 @media (max-width: 839px) {
   .history-page {
-    padding: 0 0 24px;
+    padding: 0 0 var(--spacing-xl);
   }
 }
 
 .history-list {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: var(--spacing-xl);
 }
 
 .empty-history {
   text-align: center;
   margin: 10vh 0;
-  padding: 24px;
+  padding: var(--spacing-xl);
 }
 
 .empty-history-title {
   color: var(--primary-color);
-  margin-bottom: 12px;
 }
 
 .empty-history-action {
   color: var(--text-color);
-  font-size: 18px;
+  font-size: var(--font-size-md);
 }

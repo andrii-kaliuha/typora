@@ -1,11 +1,11 @@
 .modal-container {
   background-color: var(--background-color);
-  border-radius: 24px;
-  padding: 24px;
+  border-radius: var(--radius-md);
+  padding: var(--spacing-xl);
 
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--spacing-sm);
 
   max-width: 1024px;
   width: 75%;
@@ -14,7 +14,7 @@
 .modal-title {
   color: var(--primary-color);
   font-size: 20px;
-  padding-left: 12px;
+  padding-left: var(--spacing-sm);
 }
 
 .modal-container form {
@@ -28,8 +28,8 @@
   color: var(--text-color);
   background-color: var(--surface-color);
   border-width: 0;
-  border-radius: 16px;
-  padding: 12px;
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
   resize: none;
 
   caret-color: var(--primary-color);
@@ -48,7 +48,7 @@
 .confirm-button {
   background-color: var(--surface-color);
   border-width: 0;
-  padding: 12px 20px;
+  padding: var(--spacing-sm) var(--radius-lg);
   cursor: pointer;
 
   display: flex;
@@ -67,12 +67,12 @@
 
 .cancel-button {
   color: var(--text-color);
-  border-radius: 12px 0 0 12px;
+  border-radius: var(--radius-ms) 0 0 var(--radius-ms);
 }
 
 .confirm-button {
   color: var(--primary-color);
-  border-radius: 0 12px 12px 0;
+  border-radius: 0 var(--radius-ms) var(--radius-ms) 0;
 }
 
 @media (max-width: 767px) {

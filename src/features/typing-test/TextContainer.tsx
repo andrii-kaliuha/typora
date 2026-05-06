@@ -6,10 +6,12 @@ import { useTypingTest } from "../../hooks/useTypingTest";
 import { useTextStructure } from "../../hooks/useTextStructure";
 import type { TextContainerProps } from "../../types/types";
 import { useTestKeyHandler } from "../../hooks/useTestKeyHandler";
+import { useTranslation } from "react-i18next";
 
 const LINE_HEIGHT = 48;
 
 export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProps) => {
+  const { t } = useTranslation();
   const textContainerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -29,7 +31,6 @@ export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProp
   return (
     <div className="text-container">
       <div className="text-wrapper" ref={textContainerRef} tabIndex={0}>
-        {/* <input ref={inputRef} className="hidden-input" /> */}
         <input
           ref={inputRef}
           className="hidden-input"
@@ -38,6 +39,7 @@ export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProp
           autoCorrect="off"
           autoCapitalize="off"
           spellCheck={false}
+          aria-label={t("test.typing-area")}
         />
         <div className="text" ref={textRef} tabIndex={-1}>
           {textData.map((word, index) => (

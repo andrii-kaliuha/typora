@@ -2,18 +2,18 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px;
+  padding: var(--spacing-xl);
 }
 
 .logotype-container {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--spacing-sm);
 }
 
 #logotype-icon {
   color: var(--primary-color);
-  width: 48px;
+  width: var(--button-lg);
   height: 40px;
 }
 
@@ -21,13 +21,13 @@ header {
   color: var(--text-color);
   text-transform: uppercase;
   letter-spacing: 4px;
-  font-size: 32px;
+  font-size: var(--font-size-lg);
   font-weight: bold;
 }
 
 header .buttons-container {
   display: flex;
-  gap: 12px;
+  gap: var(--spacing-md);
 }
 
 .setting-button {
@@ -36,8 +36,8 @@ header .buttons-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 48px;
-  width: 48px;
+  height: var(--button-lg);
+  width: var(--button-lg);
   border-radius: 50%;
   border: none;
 
@@ -84,14 +84,14 @@ header .buttons-container {
   }
 
   .menu-container .logotype-container {
-    padding: 24px;
+    padding: var(--spacing-xl);
   }
 
   .menu-container .buttons-container {
     display: flex;
     justify-content: space-around;
     align-items: end;
-    padding: 24px;
+    padding: var(--spacing-xl);
     height: 100%;
   }
 }

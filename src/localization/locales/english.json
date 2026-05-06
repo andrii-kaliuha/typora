@@ -1,4 +1,11 @@
 {
+  "header": {
+    "toggle-language": "Toggle language",
+    "toggle-theme": "Toggle theme",
+    "open-menu": "Open menu",
+    "close-menu": "Close menu"
+  },
+
   "navigation": {
     "test": "Test",
     "learning": "Learning",
@@ -122,7 +129,7 @@
 
   "history": {
     "title": "No test history available",
-    "action": "Take a test to save and view your results in this section.",
+    "action": "Take a test to save and view your results in this section",
 
     "clear-all": "Clear all",
     "reset": "Reset filter",

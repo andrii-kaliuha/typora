@@ -2,10 +2,9 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../../store/index";
 import { TextConfig } from "../../features/typing-test/TextConfig";
 import { TextContainer } from "../../features/typing-test/TextContainer";
-// import { TestResult } from "../../features/typing-test/Test/TestResult";
+import { TestResult } from "../../features/typing-test/TestResult";
 import { useLoadingText } from "../../hooks/useLoadingText";
 import "./TestPage.css";
-import { TestResult } from "../../features/typing-test/TestResult";
 
 export const TestPage = () => {
   const { language, duration, mode, currentText } = useSelector((state: RootState) => state.config);

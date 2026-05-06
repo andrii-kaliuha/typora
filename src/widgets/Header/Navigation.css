@@ -5,7 +5,7 @@
 .navigation-item {
   color: var(--text-color);
   background-color: var(--surface-color);
-  padding: 12px 20px;
+  padding: var(--radius-sm) var(--radius-lg);
   cursor: pointer;
 
   &:hover {
@@ -17,11 +17,11 @@
   }
 
   &:first-child {
-    border-radius: 12px 0 0 12px;
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
   }
 
   &:last-child {
-    border-radius: 0 12px 12px 0;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   }
 }
 

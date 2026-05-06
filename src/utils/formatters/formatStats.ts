@@ -11,7 +11,9 @@ export const formatStats = (rawStats: Stats): StatItem[] => {
     { label: "result.mode", value: `result.${mode}` },
   ];
 
-  if (textType !== "custom") stats.push({ label: "result.language", value: `result.${language}` });
+  const languageMap: Record<string, string> = { uk: "result.ukrainian", en: "result.english" };
+
+  if (textType !== "custom") stats.push({ label: "result.language", value: languageMap[language] ?? `result.${language}` });
 
   stats.push({ label: "result.text", value: `result.${textType}-text` }, { label: "result.date", value: date });
 

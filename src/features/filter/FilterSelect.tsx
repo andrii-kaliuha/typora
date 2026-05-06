@@ -22,7 +22,7 @@ export const FilterSelect = ({ options, currentOption, onChange }: CustomSelectP
 
       {open && (
         <FocusLock disabled={!open}>
-          <div id="filter-select-menu" ref={menuRef}>
+          <div className="filter-select-menu" ref={menuRef}>
             {options.map((option) => (
               <CustomOption
                 key={option.value}

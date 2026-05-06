@@ -1,4 +1,7 @@
 import { useTranslation } from "react-i18next";
+import postureForPrint from "../../assets/posture-for-print.svg";
+import keyboardEn from "../../assets/keyboard-english.svg";
+import keyboardUk from "../../assets/keyboard-ukrainian.svg";
 import "./LearningPage.css";
 
 export const LearningPage = () => {
@@ -10,7 +13,7 @@ export const LearningPage = () => {
       <p className="learning-subtitle">{t("learning.subtitle")}</p>
 
       <section className="advice-block">
-        <LearningImage width={515} height={300} source="posture-for-print.svg" style="posture-for-print" />
+        <LearningImage width={515} height={300} icon={postureForPrint} style="posture-for-print" />
         <h2 className="learning-title">{t("learning.posture-for-print.title")}</h2>
         <List
           items={[
@@ -51,6 +54,7 @@ export const LearningPage = () => {
 
 const FingerPosition = ({ language }: { language: string }) => {
   const { t } = useTranslation();
+  const keyboard = language === "uk" ? keyboardUk : keyboardEn;
 
   return (
     <section className="advice-block">
@@ -58,7 +62,7 @@ const FingerPosition = ({ language }: { language: string }) => {
       <p>{t("learning.finger-position.first-advice")}</p>
       <p>{t("learning.finger-position.second-advice")}</p>
 
-      <LearningImage width={712} height={244} source={`keyboard.svg#${language === "ukrainian" ? "ukrainian" : "english"}`} style="keyboard" />
+      <LearningImage width={712} height={244} icon={keyboard} style="keyboard" />
 
       <p>{t("learning.finger-position.third-advice")}</p>
       <List
@@ -88,13 +92,12 @@ const List = ({ items }: { items: string[] }) => {
   );
 };
 
-const LearningImage = ({ width, height, source, style }: { width: number; height: number; source: string; style: string }) => {
+const LearningImage = ({ width, height, icon, style }: { width: number; height: number; style?: string; icon: string }) => {
   const viewBoxValue = `0 0 ${width} ${height}`;
-
   return (
     <div className={`image-container ${style}`}>
       <svg viewBox={viewBoxValue}>
-        <use href={`./src/assets/${source}`}></use>
+        <use href={icon} />
       </svg>
     </div>
   );

@@ -4,7 +4,7 @@ export const TextResult = ({ text, isReplaying, cursorIndex }: TextProps) => {
   let charIndex = 0;
 
   return (
-    <div className="text">
+    <div className="text" aria-hidden="true">
       {text.map((word, index) => (
         <span key={index}>
           {word.letters.map((item, index) => {

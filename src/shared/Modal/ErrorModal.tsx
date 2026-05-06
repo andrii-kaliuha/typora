@@ -12,7 +12,6 @@ export const ErrorModal = ({ isOpen, onClose, message }: ModalProps) => {
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="modal-error" onClick={(e) => e.stopPropagation()}>
         <div className="icon-error">
-          {/* <Icon width={72} height={72} icon="error-icon" /> */}
           <Icon width={90} height={90} icon="error-icon" />
         </div>
 
