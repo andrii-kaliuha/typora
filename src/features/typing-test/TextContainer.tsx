@@ -1,12 +1,13 @@
 import { useRef } from "react";
-import { useAutoScroll } from "../../hooks/useAvtoScroll";
+import { useAutoScroll } from "../../shared/hooks/useAvtoScroll";
 import { TestControls } from "./TestControls";
-import { useTestCompletion } from "../../hooks/useTestCompletion";
-import { useTypingTest } from "../../hooks/useTypingTest";
-import { useTextStructure } from "../../hooks/useTextStructure";
-import type { TextContainerProps } from "../../types/types";
-import { useTestKeyHandler } from "../../hooks/useTestKeyHandler";
+import { useTestCompletion } from "../../shared/hooks/useTestCompletion";
+import { useTypingTest } from "../../shared/hooks/useTypingTest";
+import { useTextStructure } from "../../shared/hooks/useTextStructure";
+import type { TextContainerProps } from "../../shared/types/types";
+import { useTestKeyHandler } from "../../shared/hooks/useTestKeyHandler";
 import { useTranslation } from "react-i18next";
+import "./TextContainer.css";
 
 const LINE_HEIGHT = 48;
 
@@ -34,6 +35,7 @@ export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProp
         <input
           ref={inputRef}
           className="hidden-input"
+          name="hidden-input"
           type="text"
           autoComplete="off"
           autoCorrect="off"
@@ -43,12 +45,12 @@ export const TextContainer = ({ targetText, timeLimit, mode }: TextContainerProp
         />
         <div className="text" ref={textRef} tabIndex={-1}>
           {textData.map((word, index) => (
-            <span key={index} className="word">
+            <span key={index}>
               {word.letters.map((item, index) => {
                 const isCursor = item.status === "cursor";
 
                 return (
-                  <span key={index} ref={isCursor ? cursorRef : null} className={`letter ${item.status}`}>
+                  <span key={index} ref={isCursor ? cursorRef : null} className={item.status}>
                     {item.letter === " " ? "\u00A0" : item.letter}
                   </span>
                 );

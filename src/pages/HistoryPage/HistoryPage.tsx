@@ -1,13 +1,10 @@
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { selectPaginatedHistory } from "../../store/selectors/historySelectors";
-import type { HistoryTestResultProps } from "../../types/types";
 import { HistoryControls } from "../../features/history/HistoryControls";
-import { HistoryTestResult } from "../../features/history/HistoryTestResult";
-import { Pagination } from "../../features/history/Pagination";
+import { HistoryList } from "../../widgets/History/HistoryList";
+import { Icon } from "../../shared/ui/Icon";
 import "./HistoryPage.css";
-
-import { Icon } from "../../shared/Icon";
 
 export const HistoryPage = () => {
   const history = useSelector(selectPaginatedHistory);
@@ -17,24 +14,9 @@ export const HistoryPage = () => {
       <HistoryControls />
 
       {history.length > 0 ?
-        <>
-          <HistoryList history={history} />
-          <Pagination />
-        </>
+        <HistoryList history={history} />
       : <EmptyHistory />}
     </div>
-  );
-};
-
-type HistoryListProps = { history: HistoryTestResultProps[] };
-
-const HistoryList = ({ history }: HistoryListProps) => {
-  return (
-    <ul className="history-list">
-      {history.map((item) => (
-        <HistoryTestResult key={item.id} textData={item.textData} stats={item.stats} id={item.id} />
-      ))}
-    </ul>
   );
 };
 

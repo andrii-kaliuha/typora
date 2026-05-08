@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { TestStatus, TestResultItem } from "../types/types";
+import type { TestStatus, TestResultItem } from "../shared/types/types";
 
 type TestState = { status: TestStatus; results: TestResultItem | null };
 

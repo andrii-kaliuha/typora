@@ -1,9 +1,9 @@
 import { useState, useRef } from "react";
 import FocusLock from "react-focus-lock";
-import { useClickOutside } from "../../hooks/useClickOutside";
-import { useSelectKeyboardNavigation } from "../../hooks/useKeyboardNavigation";
-import { CustomOption, CustomSelectControl } from "../../shared/CustomSelect";
-import type { CustomSelectProps } from "../../types/SortTypes";
+import { useClickOutside } from "../../shared/hooks/useClickOutside";
+import { useSelectKeyboardNavigation } from "../../shared/hooks/useKeyboardNavigation";
+import { CustomOption, CustomSelectControl } from "../../shared/ui/CustomSelect";
+import type { CustomSelectProps } from "../sort/types";
 import "./FilterSelect.css";
 
 export const FilterSelect = ({ options, currentOption, onChange }: CustomSelectProps) => {

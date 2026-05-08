@@ -1,6 +1,6 @@
 import type { RootState } from "../index";
 import { createSelector } from "@reduxjs/toolkit";
-import { isDateMatch } from "../../utils/isDateMatch";
+import { isDateMatch } from "../../shared/utils/isDateMatch";
 
 const selectHistory = (state: RootState) => state.results.history;
 const selectFilters = (state: RootState) => state.filter;

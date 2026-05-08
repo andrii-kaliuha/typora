@@ -41,11 +41,23 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xl);
+  counter-reset: advice-counter;
+  padding: 0;
 }
 
-.advice-list li:first-letter {
+.advice-list li {
+  counter-increment: advice-counter;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+}
+
+.advice-list li::before {
+  content: counter(advice-counter) " — ";
   color: var(--primary-color);
   font-weight: bold;
+  min-width: 24px;
+  flex-shrink: 0;
 }
 
 @media (max-width: 1023px) {

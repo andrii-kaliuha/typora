@@ -1,0 +1,48 @@
+.modal-error {
+  background-color: var(--background-color);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  width: 50%;
+  max-width: 512px;
+}
+
+@media (max-width: 768px) {
+  .modal-error {
+    width: 75%;
+  }
+}
+
+@media (max-width: 475px) {
+  .modal-error {
+    width: 90%;
+  }
+}
+
+.icon-error {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-error-title {
+  color: var(--color-error);
+  text-align: center;
+}
+
+.modal-error-message {
+  color: var(--text-color);
+}
+
+.close-button {
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-sm);
+  border: none;
+
+  &:hover {
+    background-color: var(--surface-hover-color);
+  }
+}

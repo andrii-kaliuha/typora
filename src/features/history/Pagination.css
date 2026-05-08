@@ -10,8 +10,8 @@
   color: var(--text-color);
 
   border-radius: var(--radius-sm);
-  height: 48px;
-  min-width: 48px;
+  height: var(--size-lg);
+  min-width: var(--size-lg);
 
   display: flex;
   align-items: center;

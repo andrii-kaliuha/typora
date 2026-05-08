@@ -1,0 +1,83 @@
+.text-container {
+  width: 100%;
+  min-height: 300px;
+  border-radius: var(--radius-md);
+  background-color: var(--surface-color);
+}
+
+.hidden-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  font-size: var(--font-size-base);
+}
+
+.text-wrapper {
+  border-radius: var(--spacing-xl) var(--spacing-xl) 0 0;
+  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-sm);
+
+  &:focus-within {
+    outline: var(--border-main);
+  }
+}
+
+.text-container .text {
+  position: relative;
+  height: calc(4 * 48px);
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+
+  font-size: var(--font-size-xl);
+  line-height: 1.5;
+  display: flex;
+  flex-wrap: wrap;
+  pointer-events: none;
+}
+
+.untyped {
+  color: var(--untyped-text-color);
+}
+
+.correct {
+  color: var(--correct-text-color);
+}
+
+.incorrect {
+  color: var(--incorrect-text-color);
+}
+
+.cursor {
+  color: var(--secondary-color);
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.text-container .buttons-container {
+  border-top: var(--divider-weight) solid var(--background-color);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-sm);
+
+  padding: var(--spacing-sm) var(--spacing-xl) var(--spacing-xl);
+}
+
+.timer {
+  font-size: var(--font-size-lg);
+  color: var(--primary-color);
+}
+
+@media (max-width: 839px) {
+  .text-container {
+    border-radius: 0;
+  }
+
+  .text-wrapper {
+    border-radius: 0;
+    margin: 0 2px;
+  }
+}

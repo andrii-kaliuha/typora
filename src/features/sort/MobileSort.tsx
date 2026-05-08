@@ -1,14 +1,14 @@
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../store";
-import { Modal } from "../../shared/Modal/Modal";
-import { useSelectKeyboardNavigation } from "../../hooks/useKeyboardNavigation";
+import { Modal } from "../../shared/ui/Modal/Modal";
+import { useSelectKeyboardNavigation } from "../../shared/hooks/useKeyboardNavigation";
 import { setSortBy, setSortOrder } from "../../store/filterSlice";
-import type { MobileSortProps, SortBy, SortOrder } from "../../types/SortTypes";
+import type { MobileSortProps, SortBy, SortOrder } from "./types";
 import "./MobileSort.css";
 import { useTranslation } from "react-i18next";
-import { CustomOption } from "../../shared/CustomSelect";
-import { Icon } from "../../shared/Icon";
+import { CustomOption } from "../../shared/ui/CustomSelect";
+import { Icon } from "../../shared/ui/Icon";
 
 export const MobileSort = ({ open, onClose }: MobileSortProps) => {
   const dispatch = useDispatch();

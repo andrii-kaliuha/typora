@@ -13,7 +13,7 @@
   }
 
   &:focus-visible {
-    outline: 2px solid var(--primary-color);
+    outline: var(--border-main);
   }
 
   &:first-child {
@@ -37,7 +37,7 @@
   .menu-container .navigation-list {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: var(--divider-weight);
   }
 
   .menu-container .navigation-item {

@@ -1,4 +1,4 @@
-import { Icon } from "../../shared/Icon";
+import { Icon } from "../../shared/ui/Icon";
 
 type HistoryControlProps = { className?: string; action: () => void; name: string; icon: string };
 

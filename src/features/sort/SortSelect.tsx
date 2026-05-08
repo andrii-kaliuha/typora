@@ -1,12 +1,12 @@
 import { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import FocusLock from "react-focus-lock";
-import { useClickOutside } from "../../hooks/useClickOutside";
-import { useSelectKeyboardNavigation } from "../../hooks/useKeyboardNavigation";
+import { useClickOutside } from "../../shared/hooks/useClickOutside";
+import { useSelectKeyboardNavigation } from "../../shared/hooks/useKeyboardNavigation";
 import "./SortSelect.css";
-import { Icon } from "../../shared/Icon";
-import { CustomOption, CustomSelectControl } from "../../shared/CustomSelect";
-import type { CustomSelectProps } from "../../types/SortTypes";
+import { Icon } from "../../shared/ui/Icon";
+import { CustomOption, CustomSelectControl } from "../../shared/ui/CustomSelect";
+import type { CustomSelectProps } from "./types";
 
 export const SortSelect = ({ options, currentOption, onChange }: CustomSelectProps) => {
   const { t } = useTranslation();

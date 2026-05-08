@@ -71,20 +71,30 @@ body {
   --correct-text-color: var(--text-color);
   --incorrect-text-color: #c1121f;
 
+  --color-error: #f23d4a;
+  --color-warning: #fcbb1a;
+
+  --divider-weight: 4px;
+  --border-width: 2px;
+  --border-main: var(--border-width) solid var(--primary-color);
+
   --font-size-sm: 14px;
   --font-size-base: 16px;
   --font-size-md: 18px;
-  --font-size-lg: 32px;
+  --font-size-lg: 20px;
+  --font-size-xl: 32px;
 
   --radius-xs: 8px;
   --radius-sm: 12px;
   --radius-md: 16px;
   --radius-lg: 20px;
   --radius-xl: 24px;
+  --radius-full: 50%;
 
-  --button-sm: 24px;
-  --button-md: 32px;
-  --button-lg: 48px;
+  --size-sm: 32px;
+  --size-md: 40px;
+  --size-lg: 48px;
+  --size-xl: 56px;
 
   --spacing-xs: 8px;
   --spacing-sm: 12px;

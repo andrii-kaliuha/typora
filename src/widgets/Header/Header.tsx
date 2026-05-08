@@ -2,8 +2,8 @@ import "./Header.css";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigation } from "./Navigation";
-import { Modal } from "../../shared/Modal/Modal";
-import { Icon } from "../../shared/Icon";
+import { Modal } from "../../shared/ui/Modal/Modal";
+import { Icon } from "../../shared/ui/Icon";
 import icons from "../../assets/icons.svg";
 
 export const Header = () => (

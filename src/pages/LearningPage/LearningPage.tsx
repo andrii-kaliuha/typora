@@ -82,13 +82,11 @@ const FingerPosition = ({ language }: { language: string }) => {
 
 const List = ({ items }: { items: string[] }) => {
   return (
-    <ul className="advice-list">
+    <ol className="advice-list">
       {items.map((item, index) => (
-        <li key={index}>
-          {index + 1} — {item}
-        </li>
+        <li key={index}>{item}</li>
       ))}
-    </ul>
+    </ol>
   );
 };
 

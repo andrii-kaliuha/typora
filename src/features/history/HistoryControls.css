@@ -23,7 +23,7 @@
 }
 
 .history-controls.filter-open .history-header {
-  border-radius: 16px 16px 0 0;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
 }
 
 @media (max-width: 839px) {

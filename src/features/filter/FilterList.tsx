@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import type { FilterItemProps, FilterListProps, FilterValue } from "../../types/FilterTypes";
+import type { FilterItemProps, FilterListProps, FilterValue } from "./types";
 
 export const Title = ({ text }: { text: string }) => {
   return (

@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { clearHistory } from "../../store/resultsSlice";
 import { Filter } from "../filter/Filter";
-import { ConfirmModal } from "../../shared/Modal/ConfirmModal";
+import { ConfirmModal } from "../../shared/ui/Modal/ConfirmModal";
 import { Sort } from "../sort/Sort";
 import { MobileSort } from "../sort/MobileSort";
 import { HistoryControl } from "./HistoryControl";

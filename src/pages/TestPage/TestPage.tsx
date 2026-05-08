@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store/index";
-import { TextConfig } from "../../features/typing-test/TextConfig";
+import { TestConfig } from "../../features/test-config/TestConfig";
 import { TextContainer } from "../../features/typing-test/TextContainer";
-import { TestResult } from "../../features/typing-test/TestResult";
-import { useLoadingText } from "../../hooks/useLoadingText";
+import { TestResult } from "../../features/test-result/TestResult";
+import { useLoadingText } from "../../shared/hooks/useLoadingText";
 import "./TestPage.css";
 
 export const TestPage = () => {
@@ -16,7 +16,7 @@ export const TestPage = () => {
     <div className="test-page">
       {status !== "finished" && (
         <>
-          <TextConfig visibility={status === "idle"} />
+          <TestConfig visibility={status === "idle"} />
           <TextContainer targetText={currentText} timeLimit={duration} mode={mode} />
         </>
       )}

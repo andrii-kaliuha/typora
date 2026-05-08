@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { loadHistory, saveHistory } from "../utils/storage/historyStorage";
-import type { TestResultItem } from "../types/types";
+import { loadHistory, saveHistory } from "../shared/utils/storage/historyStorage";
+import type { TestResultItem } from "../shared/types/types";
 
 type ResultsState = { history: TestResultItem[] };
 

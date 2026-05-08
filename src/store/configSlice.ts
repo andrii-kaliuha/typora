@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { TextType, Language, Mode } from "../types/types";
+import type { TextType, Language, Mode } from "../shared/types/types";
 
 type ConfigState = {
   textType: TextType;

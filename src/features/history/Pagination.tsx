@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { setCurrentPage } from "../../store/filterSlice";
 import { selectPaginationData } from "../../store/selectors/historySelectors";
-import { getVisibleLimit, getVisiblePages } from "../../utils/getVisiblePages";
-import { Icon } from "../../shared/Icon";
+import { getVisibleLimit, getVisiblePages } from "../../shared/utils/getVisiblePages";
+import { Icon } from "../../shared/ui/Icon";
 import "./Pagination.css";
 
 export const Pagination = () => {

@@ -5,7 +5,7 @@ import { Title } from "./FilterList";
 import { useTranslation } from "react-i18next";
 import { FilterSelect } from "./FilterSelect";
 import "./Filter.css";
-import type { Option } from "../../types/FilterTypes";
+import type { Option } from "../../shared/types/types";
 
 const durationList = [0, 30, 60, 90, 120, 150];
 
