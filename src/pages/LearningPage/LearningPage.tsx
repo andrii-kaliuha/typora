@@ -15,38 +15,19 @@ export const LearningPage = () => {
       <section className="advice-block">
         <LearningImage width={515} height={300} icon={postureForPrint} style="posture-for-print" />
         <h2 className="learning-title">{t("learning.posture-for-print.title")}</h2>
-        <List
-          items={[
-            t("learning.posture-for-print.first-advice"),
-            t("learning.posture-for-print.second-advice"),
-            t("learning.posture-for-print.third-advice"),
-            t("learning.posture-for-print.fourth-advice"),
-            t("learning.posture-for-print.fifth-advice"),
-            t("learning.posture-for-print.sixth-advice"),
-            t("learning.posture-for-print.seventh-advice"),
-            t("learning.posture-for-print.eighth-advice"),
-          ]}
-        />
+        <List items={t("learning.posture-for-print.items", { returnObjects: true }) as string[]} />
       </section>
 
       <FingerPosition language={i18n.language} />
 
       <section className="advice-block">
         <h2 className="learning-title">{t("learning.print-speed.title")}</h2>
-        <List
-          items={[t("learning.print-speed.first-advice"), t("learning.print-speed.second-advice"), t("learning.print-speed.third-advice")]}
-        />
+        <List items={t("learning.print-speed.items", { returnObjects: true }) as string[]} />
       </section>
 
       <section className="advice-block">
         <h2 className="learning-title">{t("learning.finger-movement.title")}</h2>
-        <List
-          items={[
-            t("learning.finger-movement.first-advice"),
-            t("learning.finger-movement.second-advice"),
-            t("learning.finger-movement.third-advice"),
-          ]}
-        />
+        <List items={t("learning.finger-movement.items", { returnObjects: true }) as string[]} />
       </section>
     </div>
   );
@@ -61,20 +42,10 @@ const FingerPosition = ({ language }: { language: string }) => {
       <h2 className="learning-title">{t("learning.finger-position.title")}</h2>
       <p>{t("learning.finger-position.first-advice")}</p>
       <p>{t("learning.finger-position.second-advice")}</p>
-
       <LearningImage width={712} height={244} icon={keyboard} style="keyboard" />
-
       <p>{t("learning.finger-position.third-advice")}</p>
-      <List
-        items={[
-          t("learning.list.item-1"),
-          t("learning.list.item-2"),
-          t("learning.list.item-3"),
-          t("learning.list.item-4"),
-          t("learning.list.item-5"),
-          t("learning.list.item-6"),
-        ]}
-      />
+      <List items={t("learning.finger-position.items", { returnObjects: true }) as string[]} />
+
       <p>{t("learning.finger-position.fourth-advice")}</p>
     </section>
   );

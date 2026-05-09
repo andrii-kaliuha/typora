@@ -6,7 +6,7 @@
 
 .sort-button-order {
   background-color: transparent;
-  color: var(--secondary-color);
+  color: var(--text-color);
 
   display: flex;
   justify-content: center;
@@ -18,6 +18,6 @@
 
   &:hover,
   &:focus-visible {
-    color: var(--text-color);
+    color: var(--primary-color);
   }
 }

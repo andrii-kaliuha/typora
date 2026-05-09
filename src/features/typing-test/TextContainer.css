@@ -1,7 +1,7 @@
 .text-container {
   width: 100%;
   min-height: 300px;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background-color: var(--surface-color);
 }
 
@@ -16,7 +16,7 @@
 }
 
 .text-wrapper {
-  border-radius: var(--spacing-xl) var(--spacing-xl) 0 0;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
   padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-sm);
 
   &:focus-within {
@@ -51,8 +51,8 @@
 }
 
 .cursor {
-  color: var(--secondary-color);
-  border-bottom: 2px solid var(--primary-color);
+  color: var(--text-color);
+  border-bottom: 2px solid var(--accent-color);
 }
 
 .text-container .buttons-container {
@@ -68,7 +68,7 @@
 
 .timer {
   font-size: var(--font-size-lg);
-  color: var(--primary-color);
+  color: var(--accent-color);
 }
 
 @media (max-width: 839px) {

@@ -1,5 +1,5 @@
 .result-button {
-  color: var(--secondary-color);
+  color: var(--text-color);
   background-color: transparent;
 
   display: flex;
@@ -14,10 +14,10 @@
 
   &:hover,
   &:focus-visible {
-    color: var(--text-color);
+    color: var(--primary-color);
   }
 
   &:active {
-    color: var(--primary-color);
+    color: var(--accent-color);
   }
 }

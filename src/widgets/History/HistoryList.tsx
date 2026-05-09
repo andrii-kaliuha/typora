@@ -1,6 +1,7 @@
 import type { HistoryTestResultProps } from "../../shared/types/types";
 import { HistoryTestResult } from "../../features/history/HistoryTestResult";
 import { Pagination } from "../../features/history/Pagination";
+import "./HistoryList.css";
 
 type HistoryListProps = { history: HistoryTestResultProps[] };
 

@@ -33,7 +33,7 @@
 
 .modal-confirm-message,
 .modal-confirm-action {
-  color: var(--text-color);
+  color: var(--primary-color);
 }
 
 .modal-confirm .modal-buttons-container {
@@ -61,9 +61,9 @@
 }
 
 .modal-confirm .cancel-button {
-  color: var(--text-color);
+  color: var(--primary-color);
 }
 
 .modal-confirm .confirm-button {
-  color: var(--primary-color);
+  color: var(--accent-color);
 }

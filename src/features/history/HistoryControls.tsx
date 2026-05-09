@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearHistory } from "../../store/resultsSlice";
 import { Filter } from "../filter/Filter";
 import { ConfirmModal } from "../../shared/ui/Modal/ConfirmModal";
@@ -8,6 +8,7 @@ import { Sort } from "../sort/Sort";
 import { MobileSort } from "../sort/MobileSort";
 import { HistoryControl } from "./HistoryControl";
 import "./HistoryControls.css";
+import type { RootState } from "../../store";
 
 export const HistoryControls = () => {
   const { t } = useTranslation();
@@ -26,6 +27,8 @@ export const HistoryControls = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const handleToggleFilter = () => setIsFilterOpen((prev) => !prev);
 
+  const history = useSelector((state: RootState) => state.results.history);
+
   return (
     <div className={`history-controls ${isFilterOpen ? "filter-open" : ""}`}>
       <div className="history-header">
@@ -34,7 +37,13 @@ export const HistoryControls = () => {
           <Sort />
           <HistoryControl action={handleToggleMobileSort} name={t("history.sort.title")} icon="sort-icon" className="mobile-sort" />
         </div>
-        <HistoryControl action={handleClearHistory} name={t("history.clear-all")} icon="delete-icon" className="delete-button" />
+        <HistoryControl
+          action={handleClearHistory}
+          name={t("history.clear-all")}
+          icon="delete-icon"
+          className="delete-button"
+          disabled={history.length === 0}
+        />
       </div>
       <ConfirmModal
         isOpen={isConfirmModalOpen}

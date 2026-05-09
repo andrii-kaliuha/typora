@@ -26,11 +26,11 @@
 }
 
 .test-result .stats dt {
-  color: var(--secondary-color);
+  color: var(--text-color);
 }
 
 .test-result .stats dd {
-  color: var(--primary-color);
+  color: var(--accent-color);
 }
 
 .test-result .buttons-container {

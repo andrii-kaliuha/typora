@@ -85,14 +85,16 @@
 
     "posture-for-print": {
       "title": "Posture for printing text",
-      "first-advice": "Don't try to type at the speed of light right away. Start to speed up only when your fingers get used to pressing the right keys.",
-      "second-advice": "Don't rush when typing to prevent mistakes. Speed will increase gradually.",
-      "third-advice": "Always look at the text one or two words ahead.",
-      "fourth-advice": "Sit up straight and keep your back straight.",
-      "fifth-advice": "Keep your elbows at a right angle.",
-      "sixth-advice": "Your head should be slightly tilted forward.",
-      "seventh-advice": "The distance from your eyes to the monitor should be 45-70 cm.",
-      "eighth-advice": "Relax your shoulder, arm, and wrist muscles. Your wrists can lightly touch the desk at the bottom of the keyboard, but don't rest your body weight on your hands to avoid straining your wrists."
+      "items": [
+        "Don't try to type at the speed of light right away. Start to speed up only when your fingers get used to pressing the right keys.",
+        "Don't rush when typing to prevent mistakes. Speed will increase gradually.",
+        "Always look at the text one or two words ahead.",
+        "Sit up straight and keep your back straight.",
+        "Keep your elbows at a right angle.",
+        "Your head should be slightly tilted forward.",
+        "The distance from your eyes to the monitor should be 45-70 cm.",
+        "Relax your shoulder, arm, and wrist muscles. Your wrists can lightly touch the desk at the bottom of the keyboard, but don't rest your body weight on your hands to avoid straining your wrists."
+      ]
     },
 
     "finger-position": {
@@ -100,30 +102,33 @@
       "first-advice": "Slightly bend your fingers and place them on the ASDF and JKL; keys, which are in the middle row. This row is called the BASE ROW, because you will always start and return to these keys.",
       "second-advice": "On the A and O keys, under your index fingers, there are small bumps. They allow you to navigate the keyboard by touch.",
       "third-advice": "The color of the keys on this keyboard will help you understand and remember which finger to use for which key.",
-      "fourth-advice": "At first, this method may seem inconvenient. But don't give up. With time, everything will become quick, easy, and convenient. To achieve maximum results, choose a touch typing course for your keyboard layout and the language you need."
+      "fourth-advice": "At first, this method may seem inconvenient. But don't give up. With time, everything will become quick, easy, and convenient. To achieve maximum results, choose a touch typing course for your keyboard layout and the language you need.",
+      "items": [
+        "Press keys only with the finger designated for them.",
+        "Always return your fingers to the starting position ASDF – JKL;.",
+        "Set a rhythm and stick to it while typing. Press the keys with a consistent interval.",
+        "While typing, visualize the key layout.",
+        "The SHIFT key is always pressed by the pinky finger on the opposite side of the required letter.",
+        "Press the spacebar with either your left or right thumb, whichever is more comfortable."
+      ]
     },
 
     "print-speed": {
       "title": "Print speed",
-      "first-advice": "Don't try to type at lightning speed right away. Start speeding up only when your fingers get used to pressing the right keys.",
-      "second-advice": "Don't rush when typing to avoid mistakes. Your speed will increase gradually.",
-      "third-advice": "Always look at the text one or two words ahead."
+      "items": [
+        "Don't try to type at lightning speed right away. Start speeding up only when your fingers get used to pressing the right keys.",
+        "Don't rush when typing to avoid mistakes. Your speed will increase gradually.",
+        "Always look at the text one or two words ahead."
+      ]
     },
 
     "finger-movement": {
       "title": "Finger movement",
-      "first-advice": "Don't look at the keyboard while typing. Just slide your fingers over the keys until you find the home row.",
-      "second-advice": "Limit the movement of your hands and fingers to a minimum, only pressing the necessary keys. Keep your hands and fingers as close to the starting position as possible. This will increase your typing speed and reduce the strain on your hands.",
-      "third-advice": "Keep an eye on your ring fingers and pinkies, as they often remain unused."
-    },
-
-    "list": {
-      "item-1": "Press keys only with the finger designated for them.",
-      "item-2": "Always return your fingers to the starting position ASDF – JKL;.",
-      "item-3": "Set a rhythm and stick to it while typing. Press the keys with a consistent interval.",
-      "item-4": "While typing, visualize the key layout.",
-      "item-5": "The SHIFT key is always pressed by the pinky finger on the opposite side of the required letter.",
-      "item-6": "Press the spacebar with either your left or right thumb, whichever is more comfortable."
+      "items": [
+        "Don't look at the keyboard while typing. Just slide your fingers over the keys until you find the home row.",
+        "Limit the movement of your hands and fingers to a minimum, only pressing the necessary keys. Keep your hands and fingers as close to the starting position as possible. This will increase your typing speed and reduce the strain on your hands.",
+        "Keep an eye on your ring fingers and pinkies, as they often remain unused."
+      ]
     }
   },
 

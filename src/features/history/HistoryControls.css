@@ -1,6 +1,6 @@
 .history-header {
   background-color: var(--surface-color);
-  color: var(--text-color);
+  color: var(--primary-color);
 
   display: flex;
   justify-content: space-between;
@@ -43,7 +43,7 @@
 
 .history-control-button {
   background-color: transparent;
-  color: var(--secondary-color);
+  color: var(--text-color);
 
   display: flex;
   justify-content: center;
@@ -58,12 +58,19 @@
 
   &:hover,
   &:focus-visible {
-    color: var(--text-color);
+    color: var(--primary-color);
   }
 
   &:active {
-    color: var(--primary-color);
+    color: var(--accent-color);
   }
+}
+
+.history-control-button:disabled {
+  color: var(--text-color);
+  cursor:
+    url("../../assets/cursor.svg") 16 16,
+    default;
 }
 
 @media (max-width: 475px) {

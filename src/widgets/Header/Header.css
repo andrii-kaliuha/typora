@@ -12,13 +12,13 @@ header {
 }
 
 #logotype-icon {
-  color: var(--primary-color);
+  color: var(--accent-color);
   width: var(--size-lg);
   height: var(--size-md);
 }
 
 .logotype-text {
-  color: var(--text-color);
+  color: var(--primary-color);
   text-transform: uppercase;
   letter-spacing: 4px;
   font-size: var(--font-size-xl);
@@ -32,7 +32,7 @@ header .buttons-container {
 
 .setting-button {
   background-color: transparent;
-  color: var(--primary-color);
+  color: var(--accent-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,7 +46,7 @@ header .buttons-container {
   }
 
   &:active {
-    color: var(--text-color);
+    color: var(--primary-color);
   }
 
   &:focus-visible {

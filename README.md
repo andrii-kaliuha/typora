@@ -82,4 +82,4 @@ npm run build
 
 - **Charts:** Add typing statistics visualization with Chart.js
 - **Offline Support:** PWA support with IndexedDB for local storage
-- **Custom Texts:** Allow users add and manage their own texts for practice
+- **Custom Texts:** Allow users manage their own texts for practice

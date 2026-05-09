@@ -3,9 +3,9 @@
 }
 
 .filter-select-control {
-  border: 2px solid var(--secondary-color);
+  border: 2px solid var(--text-color);
   background-color: transparent;
-  color: var(--secondary-color);
+  color: var(--text-color);
 
   border-radius: 6px;
   min-width: 64px;
@@ -19,13 +19,13 @@
   user-select: none;
 
   &:hover {
-    color: var(--text-color);
+    color: var(--primary-color);
   }
 
   &:focus-visible {
     border: 2px solid transparent;
-    color: var(--text-color);
-    outline: 2px solid var(--text-color);
+    color: var(--primary-color);
+    outline: 2px solid var(--primary-color);
   }
 }
 
@@ -40,16 +40,16 @@
   z-index: 10;
 
   background-color: var(--surface-color);
-  color: var(--secondary-color);
+  color: var(--text-color);
 
-  border: 2px solid var(--secondary-color);
+  border: 2px solid var(--text-color);
   border-top: 0;
   border-radius: 0 0 6px 6px;
 }
 
 .filter-select-option {
   background-color: transparent;
-  color: var(--secondary-color);
+  color: var(--text-color);
 
   display: flex;
   justify-content: center;
@@ -73,12 +73,12 @@
 
   &:hover,
   &:focus-visible {
-    color: var(--text-color);
+    color: var(--primary-color);
     background-color: var(--surface-hover-color);
   }
 }
 
 .filter-select-option.selected {
-  color: var(--primary-color);
+  color: var(--accent-color);
   font-weight: 600;
 }

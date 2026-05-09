@@ -23,7 +23,7 @@ export const calculateMetrics = (typedHistory: TypedHistoryEntry[], targetText: 
   }
 
   const wpm = typedCharsCount / 5 / (timeElapsed / 60);
-  const accuracy = typedCharsCount > 0 ? (correctCharsCount / typedCharsCount) * 100 : 0;
+  const accuracy = reconstructed.length > 0 ? (correctCharsCount / reconstructed.length) * 100 : 0;
 
   return { wpm, accuracy };
 };

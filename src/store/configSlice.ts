@@ -1,5 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { TextType, Language, Mode } from "../shared/types/types";
+import { loadConfig, saveConfig } from "../shared/utils/storage/configStorage";
 
 type ConfigState = {
   textType: TextType;
@@ -11,7 +12,7 @@ type ConfigState = {
   randomText: string;
 };
 
-const initialState: ConfigState = {
+const defaultConfig: ConfigState = {
   textType: "random",
   language: "uk",
   duration: 30,
@@ -21,6 +22,8 @@ const initialState: ConfigState = {
   randomText: "",
 };
 
+const initialState: ConfigState = { ...defaultConfig, ...loadConfig() };
+
 const configSlice = createSlice({
   name: "config",
   initialState,
@@ -28,15 +31,19 @@ const configSlice = createSlice({
     setTextType: (state, action: PayloadAction<TextType>) => {
       state.textType = action.payload;
       state.currentText = action.payload === "custom" ? state.customText : state.randomText;
+      saveConfig(state);
     },
     setLanguage: (state, action: PayloadAction<Language>) => {
       state.language = action.payload;
+      saveConfig(state);
     },
     setDuration: (state, action: PayloadAction<number>) => {
       state.duration = action.payload;
+      saveConfig(state);
     },
     setMode: (state, action: PayloadAction<Mode>) => {
       state.mode = action.payload;
+      saveConfig(state);
     },
     setCustomText: (state, action: PayloadAction<string>) => {
       state.customText = action.payload;

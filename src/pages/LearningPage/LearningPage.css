@@ -2,12 +2,12 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xl);
-  color: var(--text-color);
+  color: var(--primary-color);
   padding: 0 var(--spacing-xl) var(--spacing-xl);
 }
 
 .learning-title {
-  color: var(--primary-color);
+  color: var(--accent-color);
   text-align: center;
 }
 
@@ -54,7 +54,7 @@
 
 .advice-list li::before {
   content: counter(advice-counter) " — ";
-  color: var(--primary-color);
+  color: var(--accent-color);
   font-weight: bold;
   min-width: 24px;
   flex-shrink: 0;

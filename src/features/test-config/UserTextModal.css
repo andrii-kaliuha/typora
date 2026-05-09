@@ -12,7 +12,7 @@
 }
 
 .modal-title {
-  color: var(--primary-color);
+  color: var(--accent-color);
   font-size: var(--font-size-md);
   padding-left: var(--spacing-sm);
 }
@@ -25,14 +25,14 @@
 }
 
 .modal-container textarea {
-  color: var(--text-color);
+  color: var(--primary-color);
   background-color: var(--surface-color);
   border-width: 0;
   border-radius: var(--radius-md);
   padding: var(--spacing-md);
   resize: none;
 
-  caret-color: var(--primary-color);
+  caret-color: var(--accent-color);
 
   &:focus-visible {
     outline: var(--border-main);
@@ -66,12 +66,12 @@
 }
 
 .cancel-button {
-  color: var(--text-color);
+  color: var(--primary-color);
   border-radius: var(--radius-sm) 0 0 var(--radius-sm);
 }
 
 .confirm-button {
-  color: var(--primary-color);
+  color: var(--accent-color);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 

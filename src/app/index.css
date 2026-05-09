@@ -50,16 +50,16 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--primary-color);
+  background-color: var(--accent-color);
 }
 
 ::selection {
-  background-color: var(--primary-color);
+  background-color: var(--accent-color);
   color: var(--background-color);
 }
 
 :root {
-  --primary-color: #49a078;
+  --accent-color: #49a078;
   --secondary-color: #929598;
   --background-color: #ededed;
 
@@ -74,9 +74,11 @@ body {
   --color-error: #f23d4a;
   --color-warning: #fcbb1a;
 
+  --disabled-color: #646669;
+
   --divider-weight: 4px;
   --border-width: 2px;
-  --border-main: var(--border-width) solid var(--primary-color);
+  --border-main: var(--border-width) solid var(--accent-color);
 
   --font-size-sm: 14px;
   --font-size-base: 16px;
@@ -104,15 +106,17 @@ body {
 }
 
 .dark {
-  --primary-color: #49a078;
-  --secondary-color: #646669;
-  --background-color: #323437;
+  --accent-color: #49a078;
+  --primary-color: #e8e8e8;
+  --secondary-color: #929598;
 
+  --background-color: #323437;
   --surface-color: #2c2e31;
   --surface-hover-color: #232527;
-  --text-color: #fafafa;
 
-  --untyped-text-color: var(--secondary-color);
-  --correct-text-color: var(--text-color);
+  --text-color: #646669;
+
+  --untyped-text-color: var(--text-color);
+  --correct-text-color: var(--primary-color);
   --incorrect-text-color: #c1121f;
 }

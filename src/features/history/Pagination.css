@@ -7,7 +7,7 @@
 
 .pagination-button {
   background-color: var(--surface-color);
-  color: var(--text-color);
+  color: var(--primary-color);
 
   border-radius: var(--radius-sm);
   height: var(--size-lg);
@@ -22,7 +22,7 @@
   cursor: pointer;
 
   &:active {
-    color: var(--primary-color);
+    color: var(--accent-color);
   }
 
   &:hover {
@@ -30,12 +30,17 @@
   }
 
   &:focus-visible {
-    outline: 2px solid var(--primary-color);
+    outline: 2px solid var(--accent-color);
   }
 
   &:disabled {
-    cursor: default;
-    opacity: 0.5;
+    cursor:
+      url("../../assets/cursor.svg") 16 16,
+      default;
+    opacity: 0.8;
+
+    color: var(--disabled-color);
+    background-color: var(--surface-color);
   }
 }
 
@@ -45,7 +50,7 @@
 }
 
 .pagination-button.active {
-  color: var(--primary-color);
+  color: var(--accent-color);
 }
 
 .pagination-button-text {
