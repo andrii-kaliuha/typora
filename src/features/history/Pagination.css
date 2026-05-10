@@ -7,7 +7,7 @@
 
 .pagination-button {
   background-color: var(--surface-color);
-  color: var(--primary-color);
+  color: var(--secondary-color);
 
   border-radius: var(--radius-sm);
   height: var(--size-lg);
@@ -27,20 +27,11 @@
 
   &:hover {
     background-color: var(--surface-hover-color);
+    color: var(--primary-color);
   }
 
   &:focus-visible {
     outline: 2px solid var(--accent-color);
-  }
-
-  &:disabled {
-    cursor:
-      url("../../assets/cursor.svg") 16 16,
-      default;
-    opacity: 0.8;
-
-    color: var(--disabled-color);
-    background-color: var(--surface-color);
   }
 }
 

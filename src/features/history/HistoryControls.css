@@ -43,7 +43,7 @@
 
 .history-control-button {
   background-color: transparent;
-  color: var(--text-color);
+  color: var(--secondary-color);
 
   display: flex;
   justify-content: center;
@@ -66,12 +66,11 @@
   }
 }
 
-.history-control-button:disabled {
+/* .history-control-button:disabled {
   color: var(--text-color);
-  cursor:
-    url("../../assets/cursor.svg") 16 16,
-    default;
-}
+
+  cursor: url("../../assets/cursor.svg"), default;
+} */
 
 @media (max-width: 475px) {
   .history-control-button.delete-button > p {

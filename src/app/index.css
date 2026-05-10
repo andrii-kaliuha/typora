@@ -60,6 +60,7 @@ body {
 
 :root {
   --accent-color: #49a078;
+  --primary-color: #333533;
   --secondary-color: #929598;
   --background-color: #ededed;
 
@@ -75,6 +76,10 @@ body {
   --color-warning: #fcbb1a;
 
   --disabled-color: #646669;
+
+  --line-height: 1.5;
+  --visible-lines: 4;
+  --container-height: calc(var(--visible-lines) * var(--font-size-xl) * var(--line-height));
 
   --divider-weight: 4px;
   --border-width: 2px;

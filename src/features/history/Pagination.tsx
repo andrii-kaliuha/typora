@@ -34,6 +34,8 @@ export const Pagination = () => {
     [dispatch, totalPages],
   );
 
+  // if (totalPages <= 1) return null;
+
   return (
     <div className="pagination-controls">
       <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className="pagination-button">

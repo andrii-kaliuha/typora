@@ -1,5 +1,5 @@
 .result-button {
-  color: var(--text-color);
+  color: var(--secondary-color);
   background-color: transparent;
 
   display: flex;

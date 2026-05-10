@@ -4,7 +4,7 @@ import TEXT_POOL_EN from "../../localization/texts/english-texts.json";
 
 const texts = { uk: TEXT_POOL_UA, en: TEXT_POOL_EN };
 
-export const getRandomText = (language: Language = "uk"): string => {
+export const getRandomText = (language: Language = "en"): string => {
   const availableTexts = texts[language];
   if (!availableTexts || availableTexts.length === 0) return "";
 
@@ -12,15 +12,12 @@ export const getRandomText = (language: Language = "uk"): string => {
   return availableTexts[randomIndex];
 };
 
-export const getNewText = (currentText: string, language: Language = "uk"): string => {
+export const getNewText = (currentText: string, language: Language = "en"): string => {
   const availableTexts = texts[language];
   if (!availableTexts || availableTexts.length === 0) return "";
 
-  const currentIndex = availableTexts.indexOf(currentText);
+  const filtered = availableTexts.filter((t) => t !== currentText);
+  if (filtered.length === 0) return currentText;
 
-  if (currentIndex === -1) return getRandomText(language);
-
-  const nextIndex = (currentIndex + 1) % availableTexts.length;
-
-  return availableTexts[nextIndex];
+  return filtered[Math.floor(Math.random() * filtered.length)];
 };

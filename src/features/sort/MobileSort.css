@@ -11,7 +11,7 @@
 }
 
 .mobile-sort-header {
-  color: var(--text-color);
+  color: var(--secondary-color);
 
   display: flex;
   justify-content: space-between;
@@ -22,7 +22,7 @@
 .mobile-sort-close-button {
   background-color: transparent;
   border: none;
-  color: var(--text-color);
+  color: var(--secondary-color);
   height: var(--size-sm);
   width: var(--size-sm);
   display: flex;
@@ -40,7 +40,7 @@
 
 .mobile-sort-option {
   background-color: transparent;
-  color: var(--text-color);
+  color: var(--secondary-color);
 
   display: flex;
   justify-content: center;

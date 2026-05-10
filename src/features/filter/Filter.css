@@ -57,7 +57,7 @@ h4 {
 
 .filter-item {
   background-color: transparent;
-  color: var(--text-color);
+  color: var(--secondary-color);
   font-size: var(--font-size-sm);
   line-height: 1;
   border: none;
@@ -93,6 +93,6 @@ h4 {
   gap: var(--spacing-md);
 
   &:hover {
-    color: var(--text-color);
+    color: var(--secondary-color);
   }
 }

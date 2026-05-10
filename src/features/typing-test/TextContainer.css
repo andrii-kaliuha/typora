@@ -12,7 +12,6 @@
   width: 0;
   height: 0;
   opacity: 0;
-  font-size: var(--font-size-base);
 }
 
 .text-wrapper {
@@ -26,13 +25,13 @@
 
 .text-container .text {
   position: relative;
-  height: calc(4 * 48px);
+  height: var(--container-height);
   overflow-y: auto;
   scroll-behavior: smooth;
   scrollbar-width: none;
 
   font-size: var(--font-size-xl);
-  line-height: 1.5;
+  line-height: var(--line-height);
   display: flex;
   flex-wrap: wrap;
   pointer-events: none;
@@ -51,7 +50,7 @@
 }
 
 .cursor {
-  color: var(--text-color);
+  color: var(--untyped-text-color);
   border-bottom: 2px solid var(--accent-color);
 }
 

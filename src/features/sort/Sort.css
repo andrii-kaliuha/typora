@@ -6,7 +6,7 @@
 
 .sort-button-order {
   background-color: transparent;
-  color: var(--text-color);
+  color: var(--secondary-color);
 
   display: flex;
   justify-content: center;

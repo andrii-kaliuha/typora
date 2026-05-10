@@ -29,6 +29,8 @@ export const HistoryControls = () => {
 
   const history = useSelector((state: RootState) => state.results.history);
 
+  if (history.length === 0) return null;
+
   return (
     <div className={`history-controls ${isFilterOpen ? "filter-open" : ""}`}>
       <div className="history-header">
@@ -37,13 +39,7 @@ export const HistoryControls = () => {
           <Sort />
           <HistoryControl action={handleToggleMobileSort} name={t("history.sort.title")} icon="sort-icon" className="mobile-sort" />
         </div>
-        <HistoryControl
-          action={handleClearHistory}
-          name={t("history.clear-all")}
-          icon="delete-icon"
-          className="delete-button"
-          disabled={history.length === 0}
-        />
+        <HistoryControl action={handleClearHistory} name={t("history.clear-all")} icon="delete-icon" className="delete-button" />
       </div>
       <ConfirmModal
         isOpen={isConfirmModalOpen}

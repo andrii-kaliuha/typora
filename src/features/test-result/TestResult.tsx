@@ -1,5 +1,5 @@
 import "./TestResult.css";
-import { useCallback, useRef } from "react";
+import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import type { TestResultProps } from "../../shared/types/types";
@@ -28,18 +28,13 @@ export const TestResult = ({ text, stats }: TestResultProps) => {
 
   const handleCapture = () => captureAndDownload(DivRef.current);
 
-  const handleRepeatTest = useCallback(() => {
-    dispatch(resetTest());
-  }, [dispatch]);
+  const handleRepeatTest = () => dispatch(resetTest());
 
-  const handleNextTest = useCallback(() => {
+  const handleNextTest = () => {
+    const newText = getNewText(currentText, language);
+    dispatch(setRandomText(newText));
     dispatch(resetTest());
-
-    if (textType === "random") {
-      const newRandomText = getNewText(currentText, language);
-      dispatch(setRandomText(newRandomText));
-    }
-  }, [currentText, language, textType, dispatch]);
+  };
 
   return (
     <div className="test-result" ref={DivRef}>
@@ -49,7 +44,7 @@ export const TestResult = ({ text, stats }: TestResultProps) => {
         <ResultButton action={handleTogglePlay} name={t("result.watch-replay")} icon={isPlaying === false ? "play-icon" : "pause-icon"} />
         <ResultButton action={handleCapture} name={t("result.screenshot")} icon="screenshot-icon" />
         <ResultButton action={handleRepeatTest} name={t("result.repeat-test")} icon="repeat-icon" />
-        <ResultButton action={handleNextTest} name={t("result.next-test")} icon="next-icon" />
+        {textType === "random" && <ResultButton action={handleNextTest} name={t("result.next-test")} icon="next-icon" />}
       </div>
       <ErrorModal isOpen={!!error} onClose={clearError} message={error} />
     </div>
