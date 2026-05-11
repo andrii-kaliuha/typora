@@ -66,12 +66,6 @@
   }
 }
 
-/* .history-control-button:disabled {
-  color: var(--text-color);
-
-  cursor: url("../../assets/cursor.svg"), default;
-} */
-
 @media (max-width: 475px) {
   .history-control-button.delete-button > p {
     display: none;

@@ -7,7 +7,7 @@ type SavedConfig = {
   mode: Mode;
 };
 
-export const loadConfig = (): Partial<SavedConfig> => {
+export const loadConfigStorage = (): Partial<SavedConfig> => {
   try {
     const data = localStorage.getItem("typing_config");
     return data ? JSON.parse(data) : {};
@@ -16,7 +16,7 @@ export const loadConfig = (): Partial<SavedConfig> => {
   }
 };
 
-export const saveConfig = (config: SavedConfig) => {
+export const saveConfigStorage = (config: SavedConfig) => {
   const { textType, language, duration, mode } = config;
   localStorage.setItem("typing_config", JSON.stringify({ textType, language, duration, mode }));
 };

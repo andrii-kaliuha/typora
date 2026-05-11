@@ -1,10 +1,10 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { loadHistory, saveHistory } from "../shared/utils/storage/historyStorage";
+import { loadHistoryStorage, saveHistoryStorage, clearHistoryStorage } from "../shared/utils/storage/historyStorage";
 import type { TestResultItem } from "../shared/types/types";
 
 type ResultsState = { history: TestResultItem[] };
 
-const initialState: ResultsState = { history: loadHistory() };
+const initialState: ResultsState = { history: loadHistoryStorage() };
 
 const resultsSlice = createSlice({
   name: "results",
@@ -12,15 +12,15 @@ const resultsSlice = createSlice({
   reducers: {
     addToHistory: (state, action: PayloadAction<TestResultItem>) => {
       state.history.unshift(action.payload);
-      saveHistory(state.history);
+      saveHistoryStorage(state.history);
     },
     removeFromHistory: (state, action: PayloadAction<string>) => {
       state.history = state.history.filter((result) => result.id !== action.payload);
-      saveHistory(state.history);
+      saveHistoryStorage(state.history);
     },
     clearHistory: (state) => {
       state.history = [];
-      localStorage.removeItem("typing_history");
+      clearHistoryStorage();
     },
   },
 });

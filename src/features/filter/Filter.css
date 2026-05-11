@@ -29,7 +29,7 @@
   align-items: center;
 }
 
-h4 {
+.filter-title {
   display: flex;
   align-items: center;
   height: var(--size-sm);

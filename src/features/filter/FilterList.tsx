@@ -4,7 +4,7 @@ import type { FilterItemProps, FilterListProps, FilterValue } from "./types";
 export const Title = ({ text }: { text: string }) => {
   return (
     <div className="title-container">
-      <h4>{text}</h4>
+      <h4 className="filter-title">{text}</h4>
       <div className="divider"></div>
     </div>
   );

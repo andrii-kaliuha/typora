@@ -51,6 +51,10 @@
     }
   },
 
+  "test": {
+    "typing-area": "Typing area"
+  },
+
   "result": {
     "screenshot-error": "An error occurred while saving the result. Please try again.",
     "watch-replay": "Watch replay",

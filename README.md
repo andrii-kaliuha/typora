@@ -1,6 +1,6 @@
 # About Typora
 
-[**Typora**](https://andrii-kaliuha.github.io/typora/) is a web app for improving typing skills. Users can practice typing in different modes, watch replays of their sessions to see their mistakes, and keep track of their progress with a detailed result history.
+[**Typora**](https://andrii-kaliuha.github.io/typora/) is a web application for improving typing skills. Practice in different modes, watch session replays to analyze mistakes, and track progress with detailed result history.
 
 ## 📷 Screenshots
 
@@ -81,5 +81,5 @@ npm run build
 ## 🚀 Future Improvements
 
 - **Charts:** Add typing statistics visualization with Chart.js
+- **Custom Text Library:** Save and manage a personal collection of practice texts
 - **Offline Support:** PWA support with IndexedDB for local storage
-- **Custom Texts:** Allow users manage their own texts for practice

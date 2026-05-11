@@ -62,10 +62,11 @@ body {
   --accent-color: #49a078;
   --primary-color: #333533;
   --secondary-color: #929598;
-  --background-color: #ededed;
 
+  --background-color: #ededed;
   --surface-color: #f7f7f7;
   --surface-hover-color: #e3e3e3;
+
   --text-color: #212121;
 
   --untyped-text-color: var(--secondary-color);
@@ -123,5 +124,4 @@ body {
 
   --untyped-text-color: var(--text-color);
   --correct-text-color: var(--primary-color);
-  --incorrect-text-color: #c1121f;
 }
