@@ -6,10 +6,10 @@
 
 <div align="center">
   <h3>Test Page</h3>
-  <img src="./src/assets/screenshots/TestPage.png" width="100%" alt="Test Page">
+  <img src="public/screenshots/TestPage.png" width="100%" alt="Test Page">
 
   <h3>History Page</h3>
-  <img src="./src/assets/screenshots/HistoryPage.png" width="100%" alt="History Page">
+  <img src="public/screenshots/HistoryPage.png" width="100%" alt="History Page">
 </div>
 
 ## ✨ Features
